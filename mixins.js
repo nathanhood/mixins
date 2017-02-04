@@ -286,6 +286,23 @@ module.exports = {
 	},
 
 	/**
+	 * Conditionally add min-width property to both html and body elements
+	 *
+	 * @returns {*}
+	 */
+	containerMinWidth() {
+		let minWidth = vars.width.min;
+
+		if (minWidth !== 0) {
+			return new Rule('html, body', [
+				new Decl('min-width', minWidth)
+			]);
+		}
+
+		return false;
+	},
+
+	/**
 	 * Empty content block
 	 *
 	 * @returns {Declaration}

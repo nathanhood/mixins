@@ -1667,3 +1667,25 @@ describe('boxSizing', () => {
 		);
 	});
 });
+
+describe('containerMinWidth', () => {
+	it('should add min-width to html and body if min width not 0', () => {
+		let vars = require('./variables');
+
+		vars.width.min = '100px';
+
+		return process(
+			`containerMinWidth();`,
+			`html, body {\n    min-width: 100px\n}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should not add anything if min width is 0', () => {
+		let vars = require('./variables');
+
+		vars.width.min = 0;
+
+		return process(`containerMinWidth();`, ``, { mixins: mixins });
+	});
+});
