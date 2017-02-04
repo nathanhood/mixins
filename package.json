@@ -1,0 +1,24 @@
+{
+  "name": "postcss-wee-mixins",
+  "version": "1.0.0",
+  "description": "Default mixins for the minimal front-end framework",
+  "main": "mixins.js",
+  "scripts": {
+    "test": "mocha ./tests.js"
+  },
+  "keywords": [
+    "postcss",
+    "wee",
+    "mixins"
+  ],
+  "author": "Lewis Communications",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "postcss": "^5.2.11",
+    "postcss-js-mixins": "^0.1.4",
+    "postcss-wee-syntax": "^1.0.0"
+  }
+}
