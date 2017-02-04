@@ -1667,29 +1667,3 @@ describe('boxSizing', () => {
 		);
 	});
 });
-
-describe('minWidth', () => {
-	it('should output default value', () => {
-		return process(
-			`.block {
-				minWidth();
-			}`,
-			`.block {
-				min-width: 0;
-			}`,
-			{ mixins: mixins }
-		);
-	});
-
-	it('should output entered value', () => {
-		return process(
-			`.block {
-				minWidth(20);
-			}`,
-			`.block {
-				min-width: 20rem;
-			}`,
-			{ mixins: mixins }
-		);
-	});
-});
