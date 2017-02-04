@@ -681,7 +681,7 @@ describe('spaced', () => {
 				spaced();
 			}`,
 			`.block {
-				margin-bottom: 2rem;
+				margin-bottom: 4rem;
 			}`,
 			{ mixins: mixins }
 		);
@@ -745,7 +745,7 @@ describe('spacedBlock', () => {
 				spacedBlock();
 			}`,
 			`.block {
-				margin-bottom: 2rem;
+				margin-bottom: 4rem;
 				display: block;
 			}`,
 			{ mixins: mixins }
@@ -814,7 +814,7 @@ describe('spacedBlock', () => {
 				spacedBlock(width: 10);
 			}`,
 			`.block {
-				margin-bottom: 2rem;
+				margin-bottom: 4rem;
 				width: 10rem;
 				display: block;
 			}`,
@@ -828,7 +828,7 @@ describe('spacedBlock', () => {
 				spacedBlock(width: 10px);
 			}`,
 			`.block {
-				margin-bottom: 2rem;
+				margin-bottom: 4rem;
 				width: 10px;
 				display: block;
 			}`,
@@ -1648,6 +1648,46 @@ describe('column', () => {
 				float: left;
 				width: 50%;
 				margin-left: 10%;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
+
+describe('boxSizing', () => {
+	it('should output default value', () => {
+		return process(
+			`.block {
+				boxSizing();
+			}`,
+			`.block {
+				box-sizing: border-box;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
+
+describe('minWidth', () => {
+	it('should output default value', () => {
+		return process(
+			`.block {
+				minWidth();
+			}`,
+			`.block {
+				min-width: 0;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should output entered value', () => {
+		return process(
+			`.block {
+				minWidth(20);
+			}`,
+			`.block {
+				min-width: 20rem;
 			}`,
 			{ mixins: mixins }
 		);

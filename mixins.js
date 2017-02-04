@@ -191,6 +191,16 @@ module.exports = {
 	},
 
 	/**
+	 * Apply default value to box sizing
+	 *
+	 * @param {string} value
+	 * @returns {Declaration}
+	 */
+	boxSizing(value = 'border-box') {
+		return new Decl('box-sizing', value);
+	},
+
+	/**
 	 * A block level element, centered with margin
 	 *
 	 * @param  {Array} [args] - Reference 'block' function for param details
@@ -475,8 +485,8 @@ module.exports = {
 	/**
 	 * Output min-width and/or min-height
 	 *
-	 * @param {string} width
-	 * @param {string} height
+	 * @param {string|number} width
+	 * @param {string|number} height
 	 * @return {Array}
 	 */
 	minSize(width, height) {

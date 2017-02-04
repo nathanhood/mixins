@@ -7,16 +7,25 @@ let variables = {
 		lineHeight: 'em'
 	},
 	root: {
-		fontSiz: '62.5%'
+		fontSize: '62.5%'
+	},
+	width: {
+		min: 0,
+		max: '1280px'
+	},
+	bumper: {
+		enabled: true,
+		padding: '6%'
 	},
 	block: {
 		margin: {
-			bottom: 2
+			bottom: 4
 		}
 	},
 	grid: {
 		margin: '5%',
-		columns: 8
+		columns: 8,
+		spaceless: false
 	},
 	colors: {
 		default: {
