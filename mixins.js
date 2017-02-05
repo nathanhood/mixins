@@ -470,28 +470,28 @@ module.exports = {
 	/**
 	 * Margin
 	 *
-	 * @param args
-	 * @returns {Array}
+	 * @param {Array} args
+	 * @returns {Array|boolean}
 	 */
 	margin(...args) {
-		let props = [];
+		let keywords = ['horizontal', 'vertical'],
+			result = false;
 
 		if (isObject(args[0])) {
-			props = props.concat(Decl.createManyFromObj(args[0], 'margin'));
-		} else if (! isEmpty(args)) {
-			if (args.length > 1) {
-				props = props.concat(Decl.createMany([
-					'margin-top',
-					'margin-right',
-					'margin-left',
-					'margin-bottom'
-				], args));
-			} else if (isString(args[0])) {
-				props.push(new Decl('margin', args[0]));
+			return Decl.createManyFromObj(args[0], 'margin');
+		}
+
+		if (keywords.includes(args[0])) {
+			let keyword = args.shift();
+
+			if (keyword === 'horizontal') {
+				result = Decl.createMany(['left', 'right'], args, 'margin');
+			} else if (keyword === 'vertical') {
+				result = Decl.createMany(['top', 'bottom'], args, 'margin');
 			}
 		}
 
-		return props;
+		return result;
 	},
 
 	/**
@@ -532,6 +532,33 @@ module.exports = {
 	 */
 	opaque() {
 		return this.opacity(1);
+	},
+
+	/**
+	 * Padding
+	 *
+	 * @param {Array} args
+	 * @returns {Array|boolean}
+	 */
+	padding(...args) {
+		let keywords = ['horizontal', 'vertical'],
+			result = false;
+
+		if (isObject(args[0])) {
+			return Decl.createManyFromObj(args[0], 'padding');
+		}
+
+		if (keywords.includes(args[0])) {
+			let keyword = args.shift();
+
+			if (keyword === 'horizontal') {
+				result = Decl.createMany(['left', 'right'], args, 'padding');
+			} else if (keyword === 'vertical') {
+				result = Decl.createMany(['top', 'bottom'], args, 'padding');
+			}
+		}
+
+		return result;
 	},
 
 	/**

@@ -693,45 +693,6 @@ describe('spaced', () => {
 	});
 });
 
-describe('margin', () => {
-	// TODO: Address these tests
-	// it('specified margin value and direction', () => {
-	// 	return process(
-	// 		`.block {
-	// 			margin(20, bottom);
-	// 		}`,
-	// 		`.block {
-	// 			margin-bottom: 20rem;
-	// 		}`,
-	// 		{ mixins: mixins }
-	// 	);
-	// });
-
-	// it('should output supplied value as margin-bottom', () => {
-	// 	return process(
-	// 		`.block {
-	// 			spaced(10);
-	// 		}`,
-	// 		`.block {
-	// 			margin-bottom: 10rem;
-	// 		}`,
-	// 		{ mixins: mixins }
-	// 	);
-	// });
-
-	it('should output supplied string value as margin', () => {
-		return process(
-			`.block {
-				margin(0 auto);
-			}`,
-			`.block {
-				margin: 0 auto;
-			}`,
-			{ mixins: mixins }
-		);
-	});
-});
-
 describe('spacedBlock', () => {
 	it('should output default value', () => {
 		return process(
@@ -1742,6 +1703,88 @@ describe('rounded', () => {
 				rounded(false);
 			}`,
 			`.block {
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
+
+describe('padding', () => {
+	it('should set horizontal padding', () => {
+		return process(
+			`.block {
+				padding(horizontal, 10, 50px);
+			}`,
+			`.block {
+				padding-left: 10rem;
+				padding-right: 50px;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should set vertical padding', () => {
+		return process(
+			`.block {
+				padding(vertical, 5, 50px);
+			}`,
+			`.block {
+				padding-top: 5rem;
+				padding-bottom: 50px;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should accept key: value pairs', () => {
+		return process(
+			`.block {
+				padding(left: 20px, top: 5);
+			}`,
+			`.block {
+				padding-left: 20px;
+				padding-top: 5rem;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
+
+describe('margin', () => {
+	it('should set horizontal margins', () => {
+		return process(
+			`.block {
+				margin(horizontal, 10, 50px);
+			}`,
+			`.block {
+				margin-left: 10rem;
+				margin-right: 50px;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should set vertical margin', () => {
+		return process(
+			`.block {
+				margin(vertical, 5, 50px);
+			}`,
+			`.block {
+				margin-top: 5rem;
+				margin-bottom: 50px;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should accept key: value pairs', () => {
+		return process(
+			`.block {
+				margin(left: 20px, top: 5);
+			}`,
+			`.block {
+				margin-left: 20px;
+				margin-top: 5rem;
 			}`,
 			{ mixins: mixins }
 		);
