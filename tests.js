@@ -125,7 +125,7 @@ describe('default units', () => {
 				font(Arial, 5, bold, 1.2);
 			}`,
 			`.block {
-				margin-bottom: 4px;
+				margin-bottom: 4rem;
 				display: block;
 				width: 10px;
 				font-family: Arial;
@@ -860,7 +860,7 @@ describe('transparent', () => {
 });
 
 describe('font', () => {
-	it('output handle a font stack', () => {
+	it('should output handle a font stack', () => {
 		return process(
 			`.block {
 				font('Open Sans' Arial Helvetica Banana);
@@ -872,7 +872,7 @@ describe('font', () => {
 		);
 	});
 
-	it('output specified values', () => {
+	it('should output specified values', () => {
 		return process(
 			`.block {
 				font('Open Sans' Arial, 10, 300, 2, italic);
@@ -888,7 +888,7 @@ describe('font', () => {
 		);
 	});
 
-	it('output specified values by property', () => {
+	it('should output specified values by property', () => {
 		return process(
 			`.block {
 				font(style: italic, weight: 300);

@@ -31,7 +31,7 @@ variables.bumper = {
 
 variables.block = {
 	margin: {
-		bottom: 4
+		bottom: '4rem'
 	}
 };
 
@@ -66,7 +66,7 @@ variables.colors.body = {
 variables.font = {
 	color: variables.colors.darkestGray,
 	family: 'Arial Helvetica sans-serif',
-	size: 1.6,
+	size: '1.6rem',
 	weight: {
 		normal: 'normal',
 		bold: 600
@@ -94,7 +94,7 @@ variables.paragraph = {
 	weight: variables.font.weight.normal,
 	lineHeight: '1.7em',
 	margin: {
-		bottom: 2
+		bottom: '2rem'
 	}
 };
 
