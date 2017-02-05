@@ -110,4 +110,23 @@ variables.figCaption = {
 	lineHeight: variables.paragraph.lineHeight
 };
 
+variables.link = {
+	color: variables.colors.primary,
+	decoration: 'none'
+};
+
+variables.link.hover = {
+	color: darken(variables.link.color, 10),
+	decoration: 'none'
+};
+
+variables.link.active = {
+	color: darken(variables.link.color, 20)
+};
+
+variables.selection = {
+	color: variables.colors.white,
+	background: variables.link.color
+};
+
 module.exports = variables;
