@@ -12,6 +12,13 @@ variables.root = {
 	fontSize: '62.5%'
 };
 
+variables.default = {
+	radius: '3px',
+	opacity: 0.2,
+	duration: '0.2s',
+	timing: 'ease-in-out'
+};
+
 variables.width = {
 	min: 0,
 	max: '1280px'
@@ -56,17 +63,20 @@ variables.colors.body = {
 	background: variables.colors.white
 };
 
-variables.base = {
+variables.font = {
 	color: variables.colors.darkestGray,
-	font: {
-		family: 'Arial Helvetica sans-serif',
-		size: 1.6,
-		weight: {
-			normal: 'normal',
-			bold: 600
-		}
+	family: 'Arial Helvetica sans-serif',
+	size: 1.6,
+	weight: {
+		normal: 'normal',
+		bold: 600
 	},
 	lineHeight: '1em'
+};
+
+variables.mark = {
+	color: variables.font.color,
+	background: 'yellow'
 };
 
 variables.abbr = {
@@ -77,6 +87,27 @@ variables.border = {
 	color: variables.colors.lightGray,
 	style: 'solid',
 	width: '1px'
+};
+
+variables.paragraph = {
+	color: variables.font.color,
+	weight: variables.font.weight.normal,
+	lineHeight: '1.7em',
+	margin: {
+		bottom: 2
+	}
+};
+
+variables.figure = {
+	borderColor: false,
+	rounded: false,
+	padding: variables.block.margin.bottom
+};
+
+variables.figCaption = {
+	color: variables.colors.darkGray,
+	fontStyle: 'italic',
+	lineHeight: variables.paragraph.lineHeight
 };
 
 module.exports = variables;

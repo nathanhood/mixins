@@ -117,7 +117,7 @@ module.exports = {
 	 * @returns {Object}
 	 */
 	bold() {
-		return new Decl('font-weight', vars.base.font.weight.bold);
+		return new Decl('font-weight', vars.font.weight.bold);
 	},
 
 	// TODO: Review border mixin
