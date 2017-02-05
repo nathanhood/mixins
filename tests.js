@@ -1621,12 +1621,13 @@ describe('containerMinWidth', () => {
 });
 
 describe('rounded', () => {
-	it('should set border radius to default radius', () => {
+	it('should set border radius to default value', () => {
 		return process(
 			`.block {
 				rounded();
 			}`,
 			`.block {
+				background-clip: border-box;
 				border-radius: 3px;
 			}`,
 			{ mixins: mixins }
@@ -1639,18 +1640,20 @@ describe('rounded', () => {
 				rounded(4px);
 			}`,
 			`.block {
+				background-clip: border-box;
 				border-radius: 4px;
 			}`,
 			{ mixins: mixins }
 		);
 	});
 
-	it('should set top corners to default radius', () => {
+	it('should set top corners to default value', () => {
 		return process(
 			`.block {
 				rounded(top);
 			}`,
 			`.block {
+				background-clip: border-box;
 				border-top-left-radius: 3px;
 				border-top-right-radius: 3px;
 			}`,
@@ -1664,6 +1667,7 @@ describe('rounded', () => {
 				rounded(left, 4px);
 			}`,
 			`.block {
+				background-clip: border-box;
 				border-top-left-radius: 4px;
 				border-bottom-left-radius: 4px;
 			}`,
@@ -1677,6 +1681,7 @@ describe('rounded', () => {
 				rounded(right);
 			}`,
 			`.block {
+				background-clip: border-box;
 				border-top-right-radius: 3px;
 				border-bottom-right-radius: 3px;
 			}`,
@@ -1690,6 +1695,7 @@ describe('rounded', () => {
 				rounded(bottom);
 			}`,
 			`.block {
+				background-clip: border-box;
 				border-bottom-left-radius: 3px;
 				border-bottom-right-radius: 3px;
 			}`,

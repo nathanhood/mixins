@@ -581,30 +581,35 @@ module.exports = {
 	 * @param args
 	 */
 	rounded(...args) {
-		let keywords = ['top', 'right', 'bottom', 'left'],
+		let props = [
+				new Decl('background-clip', 'border-box')
+			],
+			keywords = ['top', 'right', 'bottom', 'left'],
 			radius = vars.default.radius,
 			keyword = args[0],
 			corners = [];
 
 		if (isEmpty(args)) {
-			return new Decl('border-radius', radius);
+			props.push(new Decl('border-radius', radius));
 		} else if (args[0] === 'false') {
 			return false;
 		} else if (! keywords.includes(args[0])) {
-			return new Decl('border-radius', args[0]);
+			props.push(new Decl('border-radius', args[0]));
+		} else {
+			if (keyword === 'top') {
+				corners = ['top-left-radius', 'top-right-radius'];
+			} else if (keyword === 'right') {
+				corners = ['top-right-radius', 'bottom-right-radius'];
+			} else if (keyword === 'bottom') {
+				corners = ['bottom-left-radius', 'bottom-right-radius'];
+			} else if (keyword === 'left') {
+				corners = ['top-left-radius', 'bottom-left-radius'];
+			}
+
+			props = props.concat(Decl.createMany(corners, args[1] || radius, 'border'));
 		}
 
-		if (keyword === 'top') {
-			corners = ['border-top-left-radius', 'border-top-right-radius'];
-		} else if (keyword === 'right') {
-			corners = ['border-top-right-radius', 'border-bottom-right-radius'];
-		} else if (keyword === 'bottom') {
-			corners = ['border-bottom-left-radius', 'border-bottom-right-radius'];
-		} else if (keyword === 'left') {
-			corners = ['border-top-left-radius', 'border-bottom-left-radius'];
-		}
-
-		return Decl.createMany(corners, args[1] || radius);
+		return props;
 	},
 
 	/**
