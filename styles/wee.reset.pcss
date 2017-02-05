@@ -1,0 +1,118 @@
+*,
+*:before,
+*:after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+containerMinWidth();
+html {
+	text-size-adjust: 100%;
+	font-family: '"1"';
+	font-size: $root.fontSize;
+}
+body {
+	color: $base.color;
+	position: relative;
+	background($colors.body.background);
+	font($base.font; $base.fontSize; $base.fontWeight; $base.lineHeight);
+}
+main {
+	display: block;
+}
+embed,
+img,
+object,
+video {
+	max-width: 100%;
+}
+svg {
+	overflow: hidden;
+}
+embed,
+object {
+	height: 100%;
+}
+audio,
+canvas,
+video {
+	display: inline-block;
+}
+abbr[title] {
+	cursor: help;
+	border();
+	border(bottom, 1px, $abbr.underline, $base.color);
+}
+b,
+strong {
+	font-weight: $font.weight.bold;
+}
+mark {
+	color: $mark.color;
+	background($mark.background);
+}
+canvas {
+	-ms-touch-action: double-tap-zoom;
+}
+iframe {
+	border: 0;
+	spaced();
+}
+figure {
+	margin-bottom: $block.margin.bottom;
+	padding: $figure.padding;
+	position: relative;
+	text-align: center;
+	border($figure.borderColor);
+	rounded($figure.rounded);
+	img {
+		margin-bottom: $block.margin.bottom;
+	}
+	figcaption {
+		color: $figCaption.color;
+		font-style: $figCaption.fontStyle;
+		line-height: $figCaption.lineHeight;
+	}
+}
+img {
+	display: inline-block;
+}
+sub,
+sup {
+	font-size: .7em;
+	line-height: 0;
+	margin-left: .2em;
+	position: relative;
+	vertical-align: baseline;
+}
+sub {
+	bottom: -.25em;
+}
+sup {
+	top: -1em;
+}
+::-moz-selection {
+	background: $selection.background;
+	color: $selection.color;
+	text-shadow: none;
+}
+::selection {
+	background: $selection.background;
+	color: $selection.color;
+	text-shadow: none;
+}
+
+/*------------------------------------*\
+	# Typography
+\*------------------------------------*/
+
+.heading () {
+	color: $heading.color;
+	font-family: $heading.family;
+	font-weight: $heading.weight;
+	line-height: $heading.lineHeight;
+	margin-bottom: $heading.margin.bottom;
+	small {
+		font-weight: normal;
+	}
+}
