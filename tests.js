@@ -2,12 +2,19 @@
 
 const expect = require('chai').expect;
 const postcss = require('postcss');
-const plugin = require('postcss-js-mixins');
+const mixinsPlugin = require('postcss-js-mixins');
+const variablesPlugin = require('postcss-variables');
 const syntax = require('postcss-wee-syntax');
 const mixins = require('./mixins');
+const variables = require('./variables');
 
 function process(input, expected, opts = {}, warnings = 0) {
-	return postcss([ plugin(opts) ]).process(input, {
+	return postcss([
+			variablesPlugin({
+				globals: variables
+			}),
+			mixinsPlugin(opts)
+		]).process(input, {
 			syntax: syntax
 		})
 		.then(result => {
@@ -71,20 +78,6 @@ describe('{ mixins: mixins }', () => {
 		);
 	});
 
-	it('should parse unmatched variables as individual parameters', () => {
-		return process(
-			`.block {
-				spacedBlock($margin, 10);
-			}`,
-			`.block {
-				margin-bottom: $margin;
-				display: block;
-				width: 10rem;
-			}`,
-			{ mixins: mixins }
-		);
-	});
-
 	it('should throw a warning if mixin does not exist', () => {
 		return process(
 			`.block {
@@ -128,11 +121,11 @@ describe('default units', () => {
 	it('should be registered in options object', () => {
 		return process(
 			`.block {
-				spacedBlock($margin, 10);
+				spacedBlock($block.margin.bottom, 10);
 				font(Arial, 5, bold, 1.2);
 			}`,
 			`.block {
-				margin-bottom: $margin;
+				margin-bottom: 4px;
 				display: block;
 				width: 10px;
 				font-family: Arial;
@@ -561,11 +554,11 @@ describe('centeredBlock', () => {
 	it('should add width and height with default unit', () => {
 		return process(
 			`.block {
-				centeredBlock(width: 20, height: 20);
+				centeredBlock(width: $width.max, height: 20);
 			}`,
 			`.block {
 				display: block;
-				width: 20rem;
+				width: 1280px;
 				height: 20rem;
 				margin-left: auto;
 				margin-right: auto;
@@ -701,6 +694,7 @@ describe('spaced', () => {
 });
 
 describe('margin', () => {
+	// TODO: Address these tests
 	// it('specified margin value and direction', () => {
 	// 	return process(
 	// 		`.block {
@@ -869,10 +863,10 @@ describe('font', () => {
 	it('output handle a font stack', () => {
 		return process(
 			`.block {
-				font('Open Sans, Arial, Helvetica, Banana');
+				font('Open Sans' Arial Helvetica Banana);
 			}`,
 			`.block {
-				font-family: 'Open Sans, Arial, Helvetica, Banana';
+				font-family: 'Open Sans', Arial, Helvetica, Banana;
 			}`,
 			{ mixins: mixins }
 		);
@@ -881,10 +875,10 @@ describe('font', () => {
 	it('output specified values', () => {
 		return process(
 			`.block {
-				font(Open Sans, 10, 300, 2, italic);
+				font('Open Sans' Arial, 10, 300, 2, italic);
 			}`,
 			`.block {
-				font-family: Open Sans;
+				font-family: 'Open Sans', Arial;
 				font-size: 10rem;
 				font-weight: 300;
 				line-height: 2em;
@@ -1319,20 +1313,6 @@ describe('border', () => {
 		);
 	});
 
-	it('should output border none', () => {
-		return process(
-			`.block {
-				border(0);
-				border(none);
-			}`,
-			`.block {
-				border: none;
-				border: none;
-			}`,
-			{ mixins: mixins }
-		);
-	});
-
 	it('should output default properties with supplied color', () => {
 		return process(
 			`.block {
@@ -1345,10 +1325,10 @@ describe('border', () => {
 		);
 	});
 
-	it('should output supplied string', () => {
+	it('should handle width, style, and color arguments', () => {
 		return process(
 			`.block {
-				border(1px solid black);
+				border(1px, solid, black);
 			}`,
 			`.block {
 				border: 1px solid black;
@@ -1381,10 +1361,10 @@ describe('border', () => {
 		);
 	});
 
-	it('should output vertical borders with default properties', () => {
+	it('should output horizontal borders with default properties', () => {
 		return process(
 			`.block {
-				border(vertical);
+				border(horizontal);
 			}`,
 			`.block {
 				border-left: 1px solid #bfbfbf;
@@ -1394,10 +1374,10 @@ describe('border', () => {
 		);
 	});
 
-	it('should output horizontal borders with default properties', () => {
+	it('should output vertical borders with default properties', () => {
 		return process(
 			`.block {
-				border(horizontal);
+				border(vertical);
 			}`,
 			`.block {
 				border-top: 1px solid #bfbfbf;
@@ -1431,10 +1411,10 @@ describe('border', () => {
 		);
 	});
 
-	it('should output left and right border with supplied color', () => {
+	it('should output horizontal border with supplied color', () => {
 		return process(
 			`.block {
-				border(vertical, #000);
+				border(horizontal, #000);
 			}`,
 			`.block {
 				border-left: 1px solid #000;
@@ -1447,35 +1427,10 @@ describe('border', () => {
 	it('should output top border with supplied parameters', () => {
 		return process(
 			`.block {
-				border(top, 1px solid black);
+				border(top, 1px, solid, black);
 			}`,
 			`.block {
 				border-top: 1px solid black;
-			}`,
-			{ mixins: mixins }
-		);
-	});
-
-	it('should output left border with supplied parameters', () => {
-		return process(
-			`.block {
-				border(left, 1px solid black);
-			}`,
-			`.block {
-				border-left: 1px solid black;
-			}`,
-			{ mixins: mixins }
-		);
-	});
-
-	it('should output left and right border with supplied parameters', () => {
-		return process(
-			`.block {
-				border(vertical, 1px solid black);
-			}`,
-			`.block {
-				border-left: 1px solid black;
-				border-right: 1px solid black;
 			}`,
 			{ mixins: mixins }
 		);
@@ -1484,11 +1439,25 @@ describe('border', () => {
 	it('should output top and bottom border with supplied parameters', () => {
 		return process(
 			`.block {
-				border(horizontal, 1px solid black);
+				border(vertical, 1px, solid, black);
 			}`,
 			`.block {
 				border-top: 1px solid black;
 				border-bottom: 1px solid black;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should output default params not provided', () => {
+		return process(
+			`.block {
+				border(1px);
+				border($border.width, dotted);
+			}`,
+			`.block {
+				border: 1px solid #bfbfbf;
+				border: 1px dotted #bfbfbf;
 			}`,
 			{ mixins: mixins }
 		);

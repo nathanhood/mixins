@@ -1,7 +1,7 @@
 const vars = require('./variables');
 const Decl = require('postcss-js-mixins/lib/Declaration');
 const Rule = require('postcss-js-mixins/lib/Rule');
-const { isObject, isEmpty, isPercentage, isColor, prefix, isNumber, hexToRgba, calcOpacity, isString } = require('postcss-js-mixins/lib/helpers');
+const { isObject, isEmpty, isPercentage, isColor, prefix, isNumber, hexToRgba, calcOpacity, isString, unit } = require('postcss-js-mixins/lib/helpers');
 
 module.exports = {
 	/**
@@ -66,11 +66,9 @@ module.exports = {
 
 		// TODO: Allow for object params? Shorthand needs to be in specific order.
 		if (color) {
-			if (args[1]) {
-				if (isNumber(args[1])) {
-					args[0] = hexToRgba(color, args[1]);
-					args.splice(1, 1);
-				}
+			if (args[1] && isNumber(args[1])) {
+				args[0] = hexToRgba(color, args[1]);
+				args.splice(1, 1);
 			}
 
 			args.forEach(function(arg, i) {
@@ -119,7 +117,7 @@ module.exports = {
 	 * @returns {Object}
 	 */
 	bold() {
-		return new Decl('font-weight', vars.font.weight.bold);
+		return new Decl('font-weight', vars.base.font.weight.bold);
 	},
 
 	// TODO: Review border mixin
@@ -131,63 +129,60 @@ module.exports = {
 	 */
 	border(...args) {
 		let keywords = [
-			'top',
-			'right',
-			'bottom',
-			'left',
-			'vertical',
-			'horizontal'
-		];
+				'top',
+				'right',
+				'bottom',
+				'left',
+				'vertical',
+				'horizontal'
+			],
+			defaultValues = [
+				vars.border.width,
+				vars.border.style,
+				vars.border.color
+			],
+			borders = [],
+			keyword = null,
+			values = [];
 
+		// Default border
 		if (isEmpty(args)) {
-			return new Decl('border', '1px solid ' + vars.colors.default.border)
+			return new Decl('border', defaultValues.join(' '));
 		}
 
-		if (args.length === 1) {
-			let arg = args[0];
-
-			if (! keywords.includes(arg)) {
-				if (arg == '0' || arg == 'none') {
-					return new Decl('border', 'none');
-				}
-
-				if (isColor(arg)) {
-					return new Decl('border', '1px solid ' + arg);
-				}
-
-				return new Decl('border', arg);
-			} else {
-				if (arg == 'vertical') {
-					return Decl.createMany([
-							'border-left',
-							'border-right'
-						], '1px solid ' + vars.colors.default.border);
-				} else if (arg == 'horizontal') {
-					return Decl.createMany([
-							'border-top',
-							'border-bottom'
-						], '1px solid ' + vars.colors.default.border);
-				} else {
-					return new Decl(prefix(arg, 'border'), '1px solid ' + vars.colors.default.border);
-				}
-			}
-		} else {
-			let value = isColor(args[1]) ? '1px solid ' + args[1] : args[1];
-
-			if (args[0] === 'vertical') {
-				return Decl.createMany([
-						'border-left',
-						'border-right'
-					], value);
-			} else if (args[0] == 'horizontal') {
-				return Decl.createMany([
-						'border-top',
-						'border-bottom'
-					], value);
-			} else {
-				return new Decl(prefix(args[0], 'border'), value);
-			}
+		if (keywords.includes(args[0])) {
+			keyword = args[0];
+			args.splice(0, 1);
 		}
+
+		// Allow user to add only color without including width and style
+		if (isColor(args[0])) {
+			args[2] = args.splice(0, 1);
+		}
+
+		values.push(unit(args[0] || defaultValues[0], 'border-width'));
+		values.push(unit(args[1] || defaultValues[1], 'border-style'));
+		values.push(unit(args[2] || defaultValues[2], 'border-color'));
+
+		if (keyword == 'vertical') {
+			borders = [
+				'border-top',
+				'border-bottom'
+			];
+		} else if (keyword == 'horizontal') {
+			borders = [
+				'border-left',
+				'border-right'
+			];
+		} else if (keyword) {
+			borders.push(prefix(keyword, 'border'));
+		}
+
+		if (borders.length) {
+			return Decl.createMany(borders, values.join(' '));
+		}
+
+		return new Decl('border', values.join(' '));
 	},
 
 	/**
