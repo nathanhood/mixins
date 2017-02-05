@@ -549,6 +549,38 @@ module.exports = {
 	},
 
 	/**
+	 * Border radius
+	 *
+	 * @param args
+	 */
+	rounded(...args) {
+		let keywords = ['top', 'right', 'bottom', 'left'],
+			radius = vars.default.radius,
+			keyword = args[0],
+			corners = [];
+
+		if (isEmpty(args)) {
+			return new Decl('border-radius', radius);
+		} else if (! keywords.includes(args[0])) {
+			return new Decl('border-radius', args[0]);
+		} else if (args[0] === false) {
+			return false;
+		}
+
+		if (keyword === 'top') {
+			corners = ['border-top-left-radius', 'border-top-right-radius'];
+		} else if (keyword === 'right') {
+			corners = ['border-top-right-radius', 'border-bottom-right-radius'];
+		} else if (keyword === 'bottom') {
+			corners = ['border-bottom-left-radius', 'border-bottom-right-radius'];
+		} else if (keyword === 'left') {
+			corners = ['border-top-left-radius', 'border-bottom-left-radius'];
+		}
+
+		return Decl.createMany(corners, args[1] || radius);
+	},
+
+	/**
 	 * Grid row
 	 *
 	 * @param  {string|number} margin

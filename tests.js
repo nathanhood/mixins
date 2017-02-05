@@ -1658,3 +1658,81 @@ describe('containerMinWidth', () => {
 		return process(`containerMinWidth();`, ``, { mixins: mixins });
 	});
 });
+
+describe('rounded', () => {
+	it('should set border radius to default radius', () => {
+		return process(
+			`.block {
+				rounded();
+			}`,
+			`.block {
+				border-radius: 3px;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should set border radius', () => {
+		return process(
+			`.block {
+				rounded(4px);
+			}`,
+			`.block {
+				border-radius: 4px;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should set top corners to default radius', () => {
+		return process(
+			`.block {
+				rounded(top);
+			}`,
+			`.block {
+				border-top-left-radius: 3px;
+				border-top-right-radius: 3px;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should set left border radius', () => {
+		return process(
+			`.block {
+				rounded(left, 4px);
+			}`,
+			`.block {
+				border-top-left-radius: 4px;
+				border-bottom-left-radius: 4px;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should set right border radius to default', () => {
+		return process(
+			`.block {
+				rounded(right);
+			}`,
+			`.block {
+				border-top-right-radius: 3px;
+				border-bottom-right-radius: 3px;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should set bottom border radius', () => {
+		return process(
+			`.block {
+				rounded(bottom);
+			}`,
+			`.block {
+				border-bottom-left-radius: 3px;
+				border-bottom-right-radius: 3px;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
