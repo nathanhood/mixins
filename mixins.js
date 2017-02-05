@@ -561,10 +561,10 @@ module.exports = {
 
 		if (isEmpty(args)) {
 			return new Decl('border-radius', radius);
+		} else if (args[0] === 'false') {
+			return false;
 		} else if (! keywords.includes(args[0])) {
 			return new Decl('border-radius', args[0]);
-		} else if (args[0] === false) {
-			return false;
 		}
 
 		if (keyword === 'top') {
