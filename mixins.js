@@ -145,6 +145,10 @@ module.exports = {
 			keyword = null,
 			values = [];
 
+		if (args[0] === 'false') {
+			return false;
+		}
+
 		// Default border
 		if (isEmpty(args)) {
 			return new Decl('border', defaultValues.join(' '));
@@ -502,6 +506,10 @@ module.exports = {
 		if (keywords.includes(args[0])) {
 			let keyword = args.shift();
 
+			if (args.length < 2) {
+				args.push(args[0]);
+			}
+
 			if (keyword === 'horizontal') {
 				result = Decl.createMany(['left', 'right'], args, 'margin');
 			} else if (keyword === 'vertical') {
@@ -568,6 +576,10 @@ module.exports = {
 
 		if (keywords.includes(args[0])) {
 			let keyword = args.shift();
+
+			if (args.length < 2) {
+				args.push(args[0]);
+			}
 
 			if (keyword === 'horizontal') {
 				result = Decl.createMany(['left', 'right'], args, 'padding');

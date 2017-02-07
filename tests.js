@@ -1157,7 +1157,7 @@ describe('bold', () => {
 				bold();
 			}`,
 			`.block {
-				font-weight: 600;
+				font-weight: bold;
 			}`,
 			{ mixins: mixins }
 		);
@@ -1434,6 +1434,17 @@ describe('border', () => {
 			`.block {
 				border: 1px solid #bfbfbf;
 				border: 1px dotted #bfbfbf;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should not return output if first param is false', () => {
+		return process(
+			`.block {
+				border(false);
+			}`,
+			`.block {
 			}`,
 			{ mixins: mixins }
 		);
@@ -1744,6 +1755,19 @@ describe('padding', () => {
 		);
 	});
 
+	it('should set horizontal padding with single value provided', () => {
+		return process(
+			`.block {
+				padding(horizontal, 10);
+			}`,
+			`.block {
+				padding-left: 10rem;
+				padding-right: 10rem;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
 	it('should set vertical padding', () => {
 		return process(
 			`.block {
@@ -1785,6 +1809,19 @@ describe('margin', () => {
 		);
 	});
 
+	it('should set horizontal margins with single value provided', () => {
+		return process(
+			`.block {
+				margin(horizontal, 10);
+			}`,
+			`.block {
+				margin-left: 10rem;
+				margin-right: 10rem;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
 	it('should set vertical margin', () => {
 		return process(
 			`.block {
@@ -1821,7 +1858,7 @@ describe('heading', () => {
 			`.block {
 				color: #404040;
 				font-family: Tahoma, Geneva, sans-serif;
-				font-weight: 600;
+				font-weight: bold;
 				line-height: 1.4em;
 				margin-bottom: 2rem;
 				small {

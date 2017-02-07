@@ -69,7 +69,7 @@ variables.font = {
 	size: '1.6rem',
 	weight: {
 		normal: 'normal',
-		bold: 600
+		bold: 'bold'
 	},
 	lineHeight: '1em'
 };
@@ -147,7 +147,7 @@ variables.selection = {
 };
 
 variables.small = {
-	size: '.8em'
+	size: '0.8em'
 };
 
 variables.quote = {
@@ -173,7 +173,7 @@ variables.cite = {
 	margin: {
 		top: '1.4rem'
 	},
-	indicator: '\2014\00a0'
+	indicator: "'\\2014\\00a0'"
 };
 
 variables.rule = {
@@ -215,7 +215,7 @@ variables.nestedList = {
 
 variables.li = {
 	margin: {
-		bottom: '.2rem'
+		bottom: '0.2rem'
 	}
 };
 
@@ -230,7 +230,7 @@ variables.dt = {
 	family: variables.heading.family,
 	size: '2rem',
 	margin: {
-		bottom: '.2rem'
+		bottom: '0.2rem'
 	}
 };
 

@@ -12,10 +12,10 @@ html {
 	font-size: $root.fontSize;
 }
 body {
-	color: $base.color;
+	color: $font.color;
 	position: relative;
 	background($colors.body.background);
-	font($base.font; $base.fontSize; $base.fontWeight; $base.lineHeight);
+	font($font.family, $font.size, $font.weight.normal, $font.lineHeight);
 }
 main {
 	display: block;
@@ -40,8 +40,7 @@ video {
 }
 abbr[title] {
 	cursor: help;
-	border();
-	border(bottom, 1px, $abbr.underline, $base.color);
+	border(bottom, 1px, $abbr.underline, $font.color);
 }
 b,
 strong {
@@ -110,16 +109,6 @@ sup {
 	# Typography
 \*------------------------------------*/
 
-.heading () {
-	color: $heading.color;
-	font-family: $heading.family;
-	font-weight: $heading.weight;
-	line-height: $heading.lineHeight;
-	margin-bottom: $heading.margin.bottom;
-	small {
-		font-weight: normal;
-	}
-}
 h1,
 h2,
 h3,
@@ -170,11 +159,11 @@ var {
 blockquote,
 q {
 	color: $quote.color;
-	font($quote.family; $quote.size; $quote.weight; $quote.lineHeight; $quote.style);
+	font($quote.family, $quote.size, $quote.weight, $quote.lineHeight, $quote.style);
 	cite {
 		color: $cite.color;
 		margin-top: $cite.margin.top;
-		font($cite.family; $cite.size; $cite.weight; $cite.lineHeight; $cite.style);
+		font($cite.family, $cite.size, $cite.weight, $cite.lineHeight, $cite.style);
 		&:before {
 			content: $cite.indicator;
 		}
@@ -183,15 +172,12 @@ q {
 		color: $quote.color;
 	}
 }
-.blockquote () {
-.padding(@quotePaddingVertical; @quotePaddingHorizontal);
-.spaced();
-cite {
-	display: block;
-}
 blockquote {
 	padding: $quote.padding.vertical $quote.padding.horizontal;
 	spaced();
+	cite {
+		display: block;
+	}
 }
 del,
 s,
@@ -224,7 +210,7 @@ hr {
 }
 address {
 	color: $address.color;
-	font($address.family; $address.size; $address.weight; $address.lineHeight; $address.style);
+	font($address.family, $address.size, $address.weight, $address.lineHeight, $address.style);
 	spaced();
 }
 
@@ -284,10 +270,10 @@ dl {
 dt {
 	color: $dt.color;
 	margin-bottom: $dt.margin.bottom;
-	font($dt.family; $dt.size);
+	font($dt.family, $dt.size);
 }
 dd {
 	color: $dd.color;
-	font($dd.family; $dd.size);
+	font($dd.family, $dd.size);
 	spaced($dd.margin.bottom);
 }
