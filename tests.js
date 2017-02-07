@@ -8,10 +8,10 @@ const syntax = require('postcss-wee-syntax');
 const mixins = require('./mixins');
 const variables = require('./variables');
 
-function process(input, expected, opts = {}, warnings = 0) {
+function process(input, expected, opts = {}, warnings = 0, vars) {
 	return postcss([
 			variablesPlugin({
-				globals: variables
+				globals: vars || variables
 			}),
 			mixinsPlugin(opts)
 		]).process(input, {
@@ -106,7 +106,7 @@ describe('default units', () => {
 	it('should fallback to rem and em (line-height only)', () => {
 		return process(
 			`.block {
-				font('Open Sans' Arial sans-serif, 5, bold, 1.2);
+				font(['Open Sans', Arial, sans-serif], 5, bold, 1.2);
 			}`,
 			`.block {
 				font-family: 'Open Sans', Arial, sans-serif;
@@ -821,10 +821,10 @@ describe('transparent', () => {
 });
 
 describe('font', () => {
-	it('should output handle a font stack', () => {
+	it('should handle a font stack', () => {
 		return process(
 			`.block {
-				font('Open Sans' Arial Helvetica Banana);
+				font(['Open Sans', Arial, Helvetica, Banana]);
 			}`,
 			`.block {
 				font-family: 'Open Sans', Arial, Helvetica, Banana;
@@ -836,7 +836,7 @@ describe('font', () => {
 	it('should output specified values', () => {
 		return process(
 			`.block {
-				font('Open Sans' Arial, 10, 300, 2, italic);
+				font(['Open Sans', Arial], 10, 300, 2, italic);
 			}`,
 			`.block {
 				font-family: 'Open Sans', Arial;
@@ -859,6 +859,21 @@ describe('font', () => {
 				font-weight: 300;
 			}`,
 			{ mixins: mixins }
+		);
+	});
+
+	it('should output font family when passed in as variable', () => {
+		return process(
+			`.block {
+				font($font.family, 10);
+			}`,
+			`.block {
+				font-family: 'Open Sans', Arial, sans-serif;
+				font-size: 10rem;
+			}`,
+			{ mixins: mixins },
+			0,
+			{ font: { family: "'Open Sans', Arial, sans-serif" } }
 		);
 	});
 });
@@ -1791,6 +1806,27 @@ describe('margin', () => {
 			`.block {
 				margin-left: 20px;
 				margin-top: 5rem;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
+
+describe('heading', () => {
+	it('should generate base styling for headings', () => {
+		return process(
+			`.block {
+				heading();
+			}`,
+			`.block {
+				color: #404040;
+				font-family: Tahoma, Geneva, sans-serif;
+				font-weight: 600;
+				line-height: 1.4em;
+				margin-bottom: 2rem;
+				small {
+								font-weight: normal
+				}
 			}`,
 			{ mixins: mixins }
 		);

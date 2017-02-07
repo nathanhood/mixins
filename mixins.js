@@ -393,6 +393,24 @@ module.exports = {
 	},
 
 	/**
+	 * Default styling for headings
+	 *
+	 * @returns {Array}
+	 */
+	heading() {
+		return [
+			new Decl('color', vars.heading.color),
+			new Decl('font-family', vars.heading.family),
+			new Decl('font-weight', vars.heading.weight),
+			new Decl('line-height', vars.heading.lineHeight),
+			new Decl('margin-bottom', vars.heading.margin.bottom),
+			new Rule('small', [
+				new Decl('font-weight', 'normal')
+			])
+		];
+	},
+
+	/**
 	 * Display inline
 	 *
 	 * @return {Object}
