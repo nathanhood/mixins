@@ -59,18 +59,18 @@ iframe {
 	spaced();
 }
 figure {
-	margin-bottom: $block.margin.bottom;
 	padding: $figure.padding;
 	position: relative;
 	text-align: center;
 	border($figure.borderColor);
 	rounded($figure.rounded);
+	spaced();
 	img {
-		margin-bottom: $block.margin.bottom;
+		spaced();
 	}
 	figcaption {
 		color: $figCaption.color;
-		font-style: $figCaption.fontStyle;
+		font-style: $figCaption.style;
 		line-height: $figCaption.lineHeight;
 	}
 }
@@ -115,4 +115,111 @@ sup {
 	small {
 		font-weight: normal;
 	}
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	heading();
+}
+h1 {
+	font-size: $h1;
+	heading();
+}
+h2 {
+	font-size: $h2;
+	heading();
+}
+h3 {
+	font-size: $h3;
+	heading();
+}
+h4 {
+	font-size: $h4;
+	heading();
+}
+h5 {
+	font-size: $h5;
+	heading();
+}
+h6 {
+	font-size: $h6;
+	heading();
+}
+p {
+	color: $paragraph.color;
+	font-weight: $paragraph.weight;
+	line-height: $paragraph.lineHeight;
+	margin-bottom: $paragraph.margin.bottom;
+}
+small {
+	font-size: $small.size;
+}
+dfn,
+em,
+i,
+var {
+	font-style: italic;
+}
+blockquote,
+q {
+	color: $quote.color;
+	font($quote.family; $quote.size; $quote.weight; $quote.lineHeight; $quote.style);
+	cite {
+		color: $cite.color;
+		margin-top: $cite.margin.top;
+		font($cite.family; $cite.size; $cite.weight; $cite.lineHeight; $cite.style);
+		&:before {
+			content: $cite.indicator;
+		}
+	}
+	p {
+		color: $quote.color;
+	}
+}
+.blockquote () {
+.padding(@quotePaddingVertical; @quotePaddingHorizontal);
+.spaced();
+cite {
+	display: block;
+}
+blockquote {
+	padding: $quote.padding.vertical $quote.padding.horizontal;
+	spaced();
+}
+del,
+s,
+strike {
+	text-decoration: line-through;
+}
+a {
+	color: $link.color;
+	text-decoration: $link.decoration;
+	&:focus {
+		outline: thin dotted;
+	}
+	&:hover {
+		color: $link.hover.color;
+		text-decoration: $link.hover.decoration;
+	}
+	&:active {
+		color: $link.active.color;
+	}
+	img {
+		border: 0;
+	}
+}
+hr {
+	border: 0;
+	display: block;
+	height: 1px;
+	border(top, $rule.height, $rule.style, $rule.color);
+	margin(vertical, $rule.margin.vertical);
+}
+address {
+	color: $address.color;
+	font($address.family; $address.size; $address.weight; $address.lineHeight; $address.style);
+	spaced();
 }

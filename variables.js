@@ -65,7 +65,7 @@ variables.colors.body = {
 
 variables.font = {
 	color: variables.colors.darkestGray,
-	family: 'Arial Helvetica sans-serif',
+	family: 'Arial, Helvetica, sans-serif',
 	size: '1.6rem',
 	weight: {
 		normal: 'normal',
@@ -73,6 +73,23 @@ variables.font = {
 	},
 	lineHeight: '1em'
 };
+
+variables.heading = {
+	color: variables.font.color,
+	family: 'Tahoma, Geneva, sans-serif',
+	weight: variables.font.weight.bold,
+	lineHeight: '1.4em',
+	margin: {
+		bottom: '2rem'
+	}
+};
+
+variables.h1 = '3.6rem';
+variables.h2 = '3.2rem';
+variables.h3 = '2.8rem';
+variables.h4 = '2.4rem';
+variables.h5 = '2rem';
+variables.h6 = '1.6rem';
 
 variables.mark = {
 	color: variables.font.color,
@@ -106,7 +123,7 @@ variables.figure = {
 
 variables.figCaption = {
 	color: variables.colors.darkGray,
-	fontStyle: 'italic',
+	style: 'italic',
 	lineHeight: variables.paragraph.lineHeight
 };
 
@@ -127,6 +144,54 @@ variables.link.active = {
 variables.selection = {
 	color: variables.colors.white,
 	background: variables.link.color
+};
+
+variables.small = {
+	size: '.8em'
+};
+
+variables.quote = {
+	color: variables.colors.darkestGray,
+	family: 'Georgia, Times, serif',
+	size: '2rem',
+	style: 'italic',
+	weight: 'normal',
+	lineHeight: '1.4em',
+	padding: {
+		horizontal: '2em',
+		vertical: '1em'
+	}
+};
+
+variables.cite = {
+	color: variables.colors.gray,
+	family: variables.font.family,
+	size: '1.8rem',
+	style: 'normal',
+	weight: 'normal',
+	lineHeight: '1.2em',
+	margin: {
+		top: '1.4rem'
+	},
+	indicator: '\2014\00a0'
+};
+
+variables.rule = {
+	color: variables.colors.lightGray,
+	height: '1px',
+	style: 'solid',
+	margin: {
+		vertical: variables.block.margin.bottom
+	}
+};
+
+variables.address = {
+	color: variables.colors.darkestGray,
+	family: variables.font.family,
+	size: variables.font.size,
+	weight: 'normal',
+	style: 'normal',
+	lineHeight: variables.paragraph.lineHeight
 };
 
 module.exports = variables;
