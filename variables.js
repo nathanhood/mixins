@@ -194,4 +194,53 @@ variables.address = {
 	lineHeight: variables.paragraph.lineHeight
 };
 
+variables.list = {
+	color: variables.paragraph.color,
+	lineHeight: variables.paragraph.lineHeight,
+	margin: {
+		bottom: variables.paragraph.margin.bottom,
+		left: false
+	},
+	bullet: {
+		style: 'disc',
+		position: 'inside'
+	}
+};
+
+variables.nestedList = {
+	margin: {
+		left: '2rem'
+	}
+};
+
+variables.li = {
+	margin: {
+		bottom: '.2rem'
+	}
+};
+
+variables.dl = {
+	margin: {
+		bottom: variables.block.margin.bottom
+	}
+};
+
+variables.dt = {
+	color: variables.colors.darkerGray,
+	family: variables.heading.family,
+	size: '2rem',
+	margin: {
+		bottom: '.2rem'
+	}
+};
+
+variables.dd = {
+	color: variables.colors.gray,
+	family: variables.font.family,
+	size: variables.font.size,
+	margin: {
+		bottom: '1rem'
+	}
+};
+
 module.exports = variables;

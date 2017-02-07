@@ -102,6 +102,10 @@ sup {
 	text-shadow: none;
 }
 
+
+
+
+
 /*------------------------------------*\
 	# Typography
 \*------------------------------------*/
@@ -222,4 +226,68 @@ address {
 	color: $address.color;
 	font($address.family; $address.size; $address.weight; $address.lineHeight; $address.style);
 	spaced();
+}
+
+
+
+
+
+/*------------------------------------*\
+	# Lists
+\*------------------------------------*/
+
+dl,
+ol,
+ul {
+	color: $list.color;
+	list-style-position: $list.bullet.position;
+	line-height: $list.lineHeight;
+	margin-bottom: $list.margin.bottom;
+	li {
+		margin-bottom: $li.margin.bottom;
+	}
+}
+ol,
+ul {
+	margin-left: $list.margin.left;
+	ol,
+	ul {
+		margin-bottom: 0;
+		margin-left: $nestedList.margin.left;
+	}
+}
+ul {
+	list-style-type: $list.bullet.style;
+	ul {
+		list-style-type: circle;
+		ul {
+			list-style-type: square;
+		}
+	}
+}
+ol {
+	list-style-type: decimal;
+}
+nav {
+	ol,
+	ul {
+		list-style: none;
+		margin: 0;
+		li {
+			margin-bottom: 0;
+		}
+	}
+}
+dl {
+	margin-bottom: $dl.margin.bottom;
+}
+dt {
+	color: $dt.color;
+	margin-bottom: $dt.margin.bottom;
+	font($dt.family; $dt.size);
+}
+dd {
+	color: $dd.color;
+	font($dd.family; $dd.size);
+	spaced($dd.margin.bottom);
 }
