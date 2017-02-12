@@ -1439,12 +1439,17 @@ describe('border', () => {
 		);
 	});
 
-	it('should not return output if first param is false', () => {
+	it('should return border: none if first param is false, 0, none', () => {
 		return process(
 			`.block {
 				border(false);
+				border(0);
+				border(none);
 			}`,
 			`.block {
+				border: none;
+				border: none;
+				border: none;
 			}`,
 			{ mixins: mixins }
 		);

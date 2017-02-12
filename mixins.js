@@ -144,8 +144,8 @@ module.exports = {
 			keyword = null,
 			values = [];
 
-		if (args[0] === 'false') {
-			return false;
+		if (args[0] === 'false' || args[0] === 0 || args[0] === 'none') {
+			return new Decl('border', 'none');
 		}
 
 		// Default border
