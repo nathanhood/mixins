@@ -316,6 +316,41 @@ variables.button.disabled = {
 	cursor: 'not-allowed'
 };
 
+variables.code = {
+	color: variables.colors.darkestGray,
+	family: 'monospace',
+	size: variables.font.size,
+	lineHeight: '1.4em',
+	background: variables.colors.lighterGray,
+	border: {
+		color: false,
+		radius: false
+	},
+	padding: {
+		horizontal: '0.5em',
+		vertical: '0.2em'
+	}
+};
 
+variables.code.block = {
+	color: variables.colors.lightestGray,
+	family: variables.code.family,
+	size: '1.3rem',
+	lineHeight: variables.paragraph.lineHeight,
+	tabSize: 4,
+	wrap: false,
+	margin: {
+		bottom: variables.block.margin.bottom
+	},
+	background: variables.colors.darkestGray,
+	border: {
+		color: variables.code.border.color,
+		radius: false
+	},
+	padding: {
+		horizontal: '2rem',
+		vertical: '1.4rem'
+	}
+};
 
 module.exports = variables;
