@@ -753,6 +753,43 @@ module.exports = {
 	},
 
 	/**
+	 * Transition shorthand declaration
+	 *
+	 * @param {Array} [args]
+	 * @param {string|Object} [args[]] - transition property or object
+	 *	 @param {string} [args[].property]
+	 *	 @param {string} [args[].duration]
+	 *	 @param {string} [args[].timing]
+	 *	 @param {string} [args[].delay]
+	 * @param {string} [args[]] - transition duration
+	 * @param {string} [args[]] - transition timing
+	 * @param {string} [args[]] - transition delay
+	 * @returns {Declaration}
+	 */
+	transition(...args) {
+		let defaults = {
+				property: 'all',
+				duration: vars.default.duration,
+				timing: vars.default.timing,
+				delay: vars.default.delay
+			},
+			property, duration, timing, delay;
+
+		if (isObject(args[0])) {
+			let config = Object.assign(defaults, args[0]);
+
+			return new Decl('transition', `${config.property} ${config.duration} ${config.timing} ${config.delay}`);
+		}
+
+		property = args[0] || defaults.property;
+		duration = args[1] || defaults.duration;
+		timing = args[2] || defaults.timing;
+		delay = args[3] || defaults.delay;
+
+		return new Decl('transition', `${property} ${duration} ${timing} ${delay}`);
+	},
+
+	/**
 	 * Set opacity to 0
 	 *
 	 * @return {Object}

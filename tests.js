@@ -1869,3 +1869,53 @@ describe('heading', () => {
 		);
 	});
 });
+
+describe('transition', () => {
+	it('should output declaration with default values', () => {
+		return process(
+			`.block {
+				transition();
+			}`,
+			`.block {
+				transition: all 0.2s ease-in-out 0s;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should handle ordered input [property, duration, timing, delay]', () => {
+		return process(
+			`.block {
+				transition(background-color, 0.1s, ease-in, 1s);
+			}`,
+			`.block {
+				transition: background-color 0.1s ease-in 1s;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should use default values when partial ordered input is provided', () => {
+		return process(
+			`.block {
+				transition(background-color);
+			}`,
+			`.block {
+				transition: background-color 0.2s ease-in-out 0s;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should handle key: value pairs', () => {
+		return process(
+			`.block {
+				transition(timing: linear, duration: 0.3s);
+			}`,
+			`.block {
+				transition: all 0.3s linear 0s;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
