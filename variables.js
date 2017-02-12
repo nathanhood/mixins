@@ -16,7 +16,8 @@ variables.default = {
 	radius: '3px',
 	opacity: 0.2,
 	duration: '0.2s',
-	timing: 'ease-in-out'
+	timing: 'ease-in-out',
+	delay: '0s'
 };
 
 variables.width = {
@@ -250,5 +251,71 @@ variables.print = {
 		margin: '2cm .5cm'
 	}
 };
+
+variables.button = {
+	color: variables.colors.white,
+	family: variables.font.family,
+	size: variables.font.size,
+	weight: 'normal',
+	padding: {
+		horizontal: '3rem',
+		vertical: '1.3rem'
+	},
+	margin: {
+		bottom: 0
+	},
+	transition: {
+		property: 'background-color',
+		duration: '0.2s'
+	},
+	background: variables.colors.darkGray,
+	border: {
+		color: false,
+		radius: variables.default.radius,
+		width: 0
+	}
+};
+
+variables.button.hover = {
+	background: darken(variables.button.background, 5)
+};
+
+variables.button.active = {
+	background: darken(variables.button.background, 10),
+	transition: {
+		property: 'none'
+	}
+};
+
+variables.coloredButton = {
+	class: '.colored-button',
+	color: variables.colors.white,
+	background: variables.link.color,
+	border: {
+		color: false,
+		radius: variables.button.border.radius,
+		width: variables.button.border.width
+	}
+};
+
+variables.coloredButton.hover = {
+	background: darken(variables.coloredButton.background, 5)
+};
+
+variables.coloredButton.active = {
+	background: darken(variables.coloredButton.background, 10)
+};
+
+variables.button.disabled = {
+	modifier: '.-is-disabled',
+	color: variables.colors.darkGray,
+	background: variables.colors.lightGray,
+	border: {
+		color: false
+	},
+	cursor: 'not-allowed'
+};
+
+
 
 module.exports = variables;
