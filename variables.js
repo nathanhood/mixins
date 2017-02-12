@@ -116,8 +116,10 @@ variables.paragraph = {
 };
 
 variables.figure = {
-	borderColor: false,
-	rounded: false,
+	border: {
+		color: false,
+		radius: false
+	},
 	padding: variables.block.margin.bottom
 };
 
