@@ -1918,4 +1918,27 @@ describe('transition', () => {
 			{ mixins: mixins }
 		);
 	});
+
+	it('should not output when first argument is false', () => {
+		return process(
+			`.block {
+				transition(false);
+			}`,
+			`.block {
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should output transition: none when first argument is none', () => {
+		return process(
+			`.block {
+				transition(none);
+			}`,
+			`.block {
+				transition: none;
+			}`,
+			{ mixins: mixins }
+		);
+	});
 });

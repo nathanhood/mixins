@@ -775,6 +775,14 @@ module.exports = {
 			},
 			property, duration, timing, delay;
 
+		if (args[0] === 'false') {
+			return false;
+		}
+
+		if (args[0] === 'none') {
+			return new Decl('transition', 'none');
+		}
+
 		if (isObject(args[0])) {
 			let config = Object.assign(defaults, args[0]);
 
