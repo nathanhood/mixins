@@ -243,4 +243,10 @@ variables.dd = {
 	}
 };
 
+variables.print = {
+	page: {
+		margin: '2cm .5cm'
+	}
+};
+
 module.exports = variables;
