@@ -842,5 +842,31 @@ module.exports = {
 	 */
 	visibility(value) {
 		return new Decl('visibility', value);
+	},
+
+	/**
+	 * Code block defaults
+	 *
+	 * @param {string|boolean} borderColor
+	 * @param {boolean} blockWrap
+	 * @returns {Array}
+	 * @private
+	 */
+	_codeBlockDefaults(borderColor, blockWrap) {
+		let props = [];
+
+		if (borderColor) {
+			props.push(this.border('none'));
+		}
+
+		if (blockWrap) {
+			props.push(new Decl('white-space', 'pre-wrap'));
+			props.push(new Decl('word-wrap', 'break-word'));
+		} else {
+			props.push(new Decl('overflow', 'auto'));
+			props.push(new Decl('white-space', 'pre'));
+		}
+
+		return props;
 	}
 };

@@ -1947,3 +1947,18 @@ describe('transition', () => {
 		);
 	});
 });
+
+describe('_codeBlockDefaults', () => {
+	it('should output declaration with default values', () => {
+		return process(
+			`.block {
+				_codeBlockDefaults();
+			}`,
+			`.block {
+				overflow: auto;
+				white-space: pre;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
