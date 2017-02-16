@@ -329,7 +329,8 @@ variables.code = {
 	padding: {
 		horizontal: '0.5em',
 		vertical: '0.2em'
-	}
+	},
+	rounded: false
 };
 
 variables.code.block = {
@@ -350,7 +351,8 @@ variables.code.block = {
 	padding: {
 		horizontal: '2rem',
 		vertical: '1.4rem'
-	}
+	},
+	rounded: false
 };
 
 module.exports = variables;
