@@ -356,13 +356,10 @@ variables.code.block = {
 };
 
 variables.input = {
+	background: variables.colors.white,
 	cursorDisabled: 'not-allowed',
-	background: {
-		disabled: variables.colors.lightestGray
-	},
-	color: {
-		disabled: variables.colors.darkerGray
-	},
+	color: variables.colors.darkerGray,
+	spacing: '2rem',
 	font: {
 		family: variables.font.family,
 		size: variables.font.size,
@@ -373,6 +370,42 @@ variables.input = {
 		vertical: '1rem'
 	}
 };
+
+variables.disabledInput = {
+	background: variables.colors.lightestGray,
+	color: variables.colors.darkerGray
+};
+
+variables.invalidInput = {
+	background: variables.colors.white,
+	border: {
+		color: '#a41818',
+		width: '1px' // false to disable
+	}
+};
+
+variables.invalidInput.color = darken($invalidInput.border.color, 10%);
+
+variables.invalidInput.focus = {
+	border: {
+		color: darken($invalidInput.border.color, 10%)
+	}
+};
+
+variables.invalidInput.hover = {
+	border: {
+		color: darken($invalidInput.border.color, 20%)
+	}
+};
+
+variables.requiredInput = {
+	border: {
+		color: variables.colors.darkerGray,
+		width: '1px' // false to disable
+	}
+};
+
+variables.requiredInput.color = darken($requiredInput.border.color, 10%);
 
 variables.legend = {
 	color: variables.colors.darkerGray,
