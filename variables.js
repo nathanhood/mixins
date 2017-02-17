@@ -355,4 +355,28 @@ variables.code.block = {
 	rounded: false
 };
 
+variables.table = {
+	size: variables.font.size,
+	cell: {
+		borderColor: variables.color.lighterGray,
+		lineHeight: variables.paragraph.lineHeight,
+		padding: {
+			horizontal: '1.6rem',
+			vertical: '.6rem'
+		}
+	},
+	caption: {
+		background: variables.color.lightestGray,
+		style: 'italic',
+		padding: {
+			horizontal: variables.table.cell.padding.horizontal,
+			vertical: '1.2rem'
+		}
+	},
+	striped: {
+		background: variables.colors.lightestGray,
+		position: 'odd'
+	}
+};
+
 module.exports = variables;
