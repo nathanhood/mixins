@@ -355,6 +355,62 @@ variables.code.block = {
 	rounded: false
 };
 
+variables.input = {
+	cursorDisabled: 'not-allowed',
+	background: {
+		disabled: variables.colors.lightestGray
+	},
+	color: {
+		disabled: variables.colors.darkerGray
+	},
+	font: {
+		family: variables.font.family,
+		size: variables.font.size,
+		weight: variables.font.weight
+	},
+	padding: {
+		horizontal: '1.6rem',
+		vertical: '1rem'
+	}
+};
+
+variables.legend = {
+	color: variables.colors.darkerGray,
+	family: variables.font.family,
+	size: '1.8rem',
+	spacing: '1.4rem'
+};
+
+variables.label = {
+	weight: 'normal',
+	lineHeight: '1.3em',
+	margin: {
+		bottom: '.4rem',
+		right: '1rem'
+	}
+};
+
+variables.checkbox = {
+	margin: {
+		bottom: '1rem',
+		right: '.5rem'
+	}
+};
+
+variables.multiSelect = {
+	minHeight: '8rem'
+};
+
+variables.textarea = {
+	lineHeight: '1.3em',
+	minHeight: '8rem',
+	resize: 'vertical',
+	padding: {
+		horizontal: '1.6rem',
+		vertical: '1rem'
+	}
+};
+
 variables.table = {
 	size: variables.font.size,
 	cell: {
