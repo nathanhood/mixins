@@ -39,7 +39,7 @@ module.exports = {
 	/**
 	 * Text align
 	 *
-	 * @param value
+	 * @param {string} value
 	 * @returns {Object}
 	 */
 	align(value) {
@@ -588,6 +588,18 @@ module.exports = {
 		}
 
 		return result;
+	},
+
+	/**
+	 *
+	 * @param {string} value
+	 * @returns {array}
+	 */
+	resizable(value = 'both') {
+		return [
+			new Decl('overflow', 'hidden'),
+			new Decl('resize', value)
+		];
 	},
 
 	/**

@@ -1875,6 +1875,34 @@ describe('heading', () => {
 	});
 });
 
+describe('resizable', () => {
+	it('should output declaration with default values', () => {
+		return process(
+			`.block {
+				resizable();
+			}`,
+			`.block {
+				overflow: hidden;
+				resize: both;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should set resize to value provided', () => {
+		return process(
+			`.block {
+				resizable(vertical);
+			}`,
+			`.block {
+				overflow: hidden;
+				resize: vertical;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
+
 describe('transition', () => {
 	it('should output declaration with default values', () => {
 		return process(
