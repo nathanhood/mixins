@@ -1,9 +1,11 @@
 .button,
 $(coloredButton.class) {
+	-webkit-appearance: button;
 	cursor: pointer;
 	display: inline-block;
 	line-height: 1em;
-	margin-bottom: $button.margin.bottom;
+	margin: 0 0 $button.margin.bottom 0;
+	outline: 0;
 	padding: $button.padding.vertical $button.padding.horizontal;
 	text-align: center;
 	text-shadow: none;
@@ -11,6 +13,10 @@ $(coloredButton.class) {
 	transition($button.transition.property, $button.transition.duration);
 	&:active {
 		transition($button.active.transition.property);
+	}
+	&::-moz-focus-inner {
+		border: 0;
+		padding: 0;
 	}
 }
 .button {
