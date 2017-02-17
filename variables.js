@@ -358,24 +358,25 @@ variables.code.block = {
 variables.table = {
 	size: variables.font.size,
 	cell: {
-		borderColor: variables.color.lighterGray,
+		borderColor: variables.colors.lighterGray,
 		lineHeight: variables.paragraph.lineHeight,
 		padding: {
 			horizontal: '1.6rem',
 			vertical: '.6rem'
 		}
 	},
-	caption: {
-		background: variables.color.lightestGray,
-		style: 'italic',
-		padding: {
-			horizontal: variables.table.cell.padding.horizontal,
-			vertical: '1.2rem'
-		}
-	},
 	striped: {
 		background: variables.colors.lightestGray,
 		position: 'odd'
+	}
+};
+
+variables.table.caption = {
+	background: variables.colors.lightestGray,
+	style: 'italic',
+	padding: {
+		horizontal: variables.table.cell.padding.horizontal,
+		vertical: '1.2rem'
 	}
 };
 
