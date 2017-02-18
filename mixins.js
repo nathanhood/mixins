@@ -37,16 +37,6 @@ module.exports = {
 	},
 
 	/**
-	 * Text align
-	 *
-	 * @param {string} value
-	 * @returns {Object}
-	 */
-	align(value) {
-		return new Decl('text-align', value);
-	},
-
-	/**
 	 * Background
 	 *
 	 * @param  {Array} args
@@ -825,16 +815,6 @@ module.exports = {
 	 */
 	unstyled() {
 		return new Decl('list-style', 'none');
-	},
-
-	/**
-	 * Vertical align
-	 *
-	 * @param  {string} [value]
-	 * @return {Object}
-	 */
-	vAlign(value) {
-		return new Decl('vertical-align', value);
 	},
 
 	/**
