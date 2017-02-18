@@ -12,8 +12,8 @@
 	th {
 		line-height: $table.cell.lineHeight;
 		padding: $table.cell.padding.vertical $table.cell.padding.horizontal;
-		align(left);
-		vAlign(top);
+		text-align: left;
+		vertical-align: top;
 	}
 
 	thead,
@@ -22,44 +22,44 @@
 
 		th {
 			color: $colors.darkestGray;
-			vAlign(bottom);
+			vertical-align: bottom;
 		}
 	}
 
 	caption {
 		font-style: $table.caption.style;
 		padding: $table.caption.padding.vertical $table.caption.padding.horizontal;
-		.background($table.caption.background);
+		background($table.caption.background);
 	}
 
 	img {
-		vAlign(top);
+		vertical-align: top;
 	}
 
-	&.-bordered {
-		border-bottom-color: $table.cell.borderColor;
+	&.-is-bordered {
+		border-bottom-color: $table.cell.border.color;
 
 		caption {
 			border-bottom: 0;
-			border-color: $table.cell.borderColor;
+			border-color: $table.cell.border.color;
 		}
 
 		td,
 		th {
-			border-right-color: $table.cell.borderColor;
-			border-top-color: $table.cell.borderColor;
+			border-right-color: $table.cell.border.color;
+			border-top-color: $table.cell.border.color;
 
 			&:first-child {
-				border-left-color: $table.cell.borderColor;
+				border-left-color: $table.cell.border.color;
 			}
 		}
 	}
 
-	&.-striped {
+	&.-is-striped {
 		tbody tr:nth-child($(table.striped.position)) {
 			td,
 			th {
-				.background($table.striped.background);
+				background($table.striped.background);
 			}
 		}
 	}

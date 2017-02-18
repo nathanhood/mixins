@@ -329,8 +329,7 @@ variables.code = {
 	padding: {
 		horizontal: '0.5em',
 		vertical: '0.2em'
-	},
-	rounded: false
+	}
 };
 
 variables.code.block = {
@@ -351,19 +350,17 @@ variables.code.block = {
 	padding: {
 		horizontal: '2rem',
 		vertical: '1.4rem'
-	},
-	rounded: false
+	}
 };
 
 variables.input = {
 	background: variables.colors.white,
-	cursorDisabled: 'not-allowed',
 	color: variables.colors.darkerGray,
-	spacing: '2rem',
-	font: {
-		family: variables.font.family,
-		size: variables.font.size,
-		weight: variables.font.weight
+	family: variables.font.family,
+	size: variables.font.size,
+	weight: variables.font.weight,
+	margin: {
+		bottom: '2rem'
 	},
 	padding: {
 		horizontal: '1.6rem',
@@ -371,12 +368,13 @@ variables.input = {
 	}
 };
 
-variables.disabledInput = {
+variables.input.disabled = {
 	background: variables.colors.lightestGray,
-	color: variables.colors.darkerGray
+	color: variables.colors.darkerGray,
+	cursor: 'not-allowed'
 };
 
-variables.invalidInput = {
+variables.input.invalid = {
 	background: variables.colors.white,
 	border: {
 		color: '#a41818',
@@ -384,34 +382,36 @@ variables.invalidInput = {
 	}
 };
 
-variables.invalidInput.color = darken($invalidInput.border.color, 10%);
+variables.input.invalid.color = darken(variables.input.invalid.border.color, 10);
 
-variables.invalidInput.focus = {
+variables.input.invalid.focus = {
 	border: {
-		color: darken($invalidInput.border.color, 10%)
+		color: darken(variables.input.invalid.border.color, 10)
 	}
 };
 
-variables.invalidInput.hover = {
+variables.input.invalid.hover = {
 	border: {
-		color: darken($invalidInput.border.color, 20%)
+		color: darken(variables.input.invalid.border.color, 20)
 	}
 };
 
-variables.requiredInput = {
+variables.input.required = {
 	border: {
 		color: variables.colors.darkerGray,
 		width: '1px' // false to disable
 	}
 };
 
-variables.requiredInput.color = darken($requiredInput.border.color, 10%);
+variables.input.required.color = darken(variables.input.required.border.color, 10);
 
 variables.legend = {
 	color: variables.colors.darkerGray,
 	family: variables.font.family,
 	size: '1.8rem',
-	spacing: '1.4rem'
+	margin: {
+		bottom: '1.4rem'
+	}
 };
 
 variables.label = {
@@ -447,7 +447,9 @@ variables.textarea = {
 variables.table = {
 	size: variables.font.size,
 	cell: {
-		borderColor: variables.colors.lighterGray,
+		border: {
+			color: variables.colors.lighterGray
+		},
 		lineHeight: variables.paragraph.lineHeight,
 		padding: {
 			horizontal: '1.6rem',
