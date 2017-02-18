@@ -1412,9 +1412,7 @@ describe('row', () => {
 			{ mixins: mixins }
 		);
 	});
-});
 
-describe('row', () => {
 	it('should output margins with clearfix with override value', () => {
 		return process(
 			`.block { row(10%); }`,
