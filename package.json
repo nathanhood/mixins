@@ -21,7 +21,7 @@
     "postcss": "^5.2.11",
     "postcss-js-mixins": "^0.2.0",
     "postcss-nested": "^1.0.0",
-    "postcss-variables": "^0.1.1",
+    "postcss-variables": "^0.2.0",
     "postcss-wee-syntax": "^1.1.0"
   }
 }
