@@ -4,7 +4,8 @@
   "description": "Default mixins for the minimal front-end framework",
   "main": "mixins.js",
   "scripts": {
-    "test": "mocha ./tests.js"
+    "test": "mocha ./tests.js",
+  	"test:parser": "mocha ./tests-parser.js"
   },
   "keywords": [
     "postcss",

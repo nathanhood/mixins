@@ -2,8 +2,13 @@ let vars;
 
 function getProp(keys) {
 	let segs = keys.toString().split('.'),
-		key = segs.shift(),
+		key = segs.shift().replace(/^\$/, ''),
 		value = null;
+
+	// Confirm that string is variable reference
+	if (! /^\$/.test(keys)) {
+		return keys;
+	}
 
 	if (vars[key]) {
 		value = vars[key];
@@ -17,6 +22,25 @@ function getProp(keys) {
 	return value;
 }
 
+/**
+ * Execute deferred function to calculate variable value
+ *
+ * @param {Function} fn
+ * @param {Array} args
+ * @returns {*}
+ */
+function evalFn(fn, args) {
+	return fn.apply(null, args.map(arg => {
+		let result = arg;
+
+		if (typeof arg === 'string') {
+			result = getProp(arg);
+		}
+
+		return result;
+	}));
+}
+
 function traverse(obj) {
 	let props = Object.keys(obj),
 		i;
@@ -26,9 +50,13 @@ function traverse(obj) {
 			type = typeof value;
 
 		if (type === 'object') {
-			traverse(value);
-		} else if (type === 'string' && /^\$/.test(value)) {
-			obj[props[i]] = getProp(value.replace(/^\$/, ''));
+			if (value.type === 'deferredFunction') {
+				obj[props[i]] = evalFn(value.fn, value.args);
+			} else {
+				traverse(value);
+			}
+		} else if (type === 'string') {
+			obj[props[i]] = getProp(value);
 		}
 	}
 }
