@@ -2,6 +2,14 @@ const { darken } = require('postcss-js-mixins/lib/colorHelpers');
 
 let variables = {};
 
+function defer(fn, args) {
+	return {
+		type: 'deferredFunction',
+		fn: fn,
+		args: args
+	};
+}
+
 variables.unit = {
 	default: 'rem',
 	fontSize: 'rem',
@@ -50,22 +58,23 @@ variables.colors = {
 	success: '#008000',
 	warning: '#f00',
 	white: '#fff',
-	lightestGray: darken('#fff', 4),
-	lighterGray: darken('#fff', 10),
-	lightGray: darken('#fff', 25),
-	gray: darken('#fff', 35),
-	darkGray: darken('#fff', 55),
-	darkerGray: darken('#fff', 65),
-	darkestGray: darken('#fff', 75),
 	black: '#000'
 };
 
+variables.colors.lightestGray = defer(darken, ['$colors.white', 4]);
+variables.colors.lighterGray = defer(darken, ['$colors.white', 10]);
+variables.colors.lightGray = defer(darken, ['$colors.white', 25]);
+variables.colors.gray = defer(darken, ['$colors.white', 35]);
+variables.colors.darkGray = defer(darken, ['$colors.white', 55]);
+variables.colors.darkerGray = defer(darken, ['$colors.white', 65]);
+variables.colors.darkestGray = defer(darken, ['$colors.white', 75]);
+
 variables.colors.body = {
-	background: variables.colors.white
+	background: '$colors.white'
 };
 
 variables.font = {
-	color: variables.colors.darkestGray,
+	color: '$colors.darkestGray',
 	family: 'Arial, Helvetica, sans-serif',
 	size: '1.6rem',
 	weight: {
@@ -76,9 +85,9 @@ variables.font = {
 };
 
 variables.heading = {
-	color: variables.font.color,
+	color: '$font.color',
 	family: 'Tahoma, Geneva, sans-serif',
-	weight: variables.font.weight.bold,
+	weight: '$font.weight.bold',
 	lineHeight: '1.4em',
 	margin: {
 		bottom: '2rem'
@@ -93,7 +102,7 @@ variables.h5 = '2rem';
 variables.h6 = '1.6rem';
 
 variables.mark = {
-	color: variables.font.color,
+	color: '$font.color',
 	background: 'yellow'
 };
 
@@ -102,14 +111,14 @@ variables.abbr = {
 };
 
 variables.border = {
-	color: variables.colors.lightGray,
+	color: '$colors.lightGray',
 	style: 'solid',
 	width: '1px'
 };
 
 variables.paragraph = {
-	color: variables.font.color,
-	weight: variables.font.weight.normal,
+	color: '$font.color',
+	weight: '$font.weight.normal',
 	lineHeight: '1.7em',
 	margin: {
 		bottom: '2rem'
@@ -121,32 +130,32 @@ variables.figure = {
 		color: false,
 		radius: false
 	},
-	padding: variables.block.margin.bottom
+	padding: '$block.margin.bottom'
 };
 
 variables.figCaption = {
-	color: variables.colors.darkGray,
+	color: '$colors.darkGray',
 	style: 'italic',
-	lineHeight: variables.paragraph.lineHeight
+	lineHeight: '$paragraph.lineHeight'
 };
 
 variables.link = {
-	color: variables.colors.primary,
+	color: '$colors.primary',
 	decoration: 'none'
 };
 
 variables.link.hover = {
-	color: darken(variables.link.color, 10),
+	color: defer(darken, [variables.link.color, 10]),
 	decoration: 'none'
 };
 
 variables.link.active = {
-	color: darken(variables.link.color, 20)
+	color: defer(darken, [variables.link.color, 20])
 };
 
 variables.selection = {
-	color: variables.colors.white,
-	background: variables.link.color
+	color: '$colors.white',
+	background: '$link.color'
 };
 
 variables.small = {
@@ -154,7 +163,7 @@ variables.small = {
 };
 
 variables.quote = {
-	color: variables.colors.darkestGray,
+	color: '$colors.darkestGray',
 	family: 'Georgia, Times, serif',
 	size: '2rem',
 	style: 'italic',
@@ -167,8 +176,8 @@ variables.quote = {
 };
 
 variables.cite = {
-	color: variables.colors.gray,
-	family: variables.font.family,
+	color: '$colors.gray',
+	family: '$font.family',
 	size: '1.8rem',
 	style: 'normal',
 	weight: 'normal',
@@ -180,28 +189,28 @@ variables.cite = {
 };
 
 variables.rule = {
-	color: variables.colors.lightGray,
+	color: '$colors.lightGray',
 	height: '1px',
 	style: 'solid',
 	margin: {
-		vertical: variables.block.margin.bottom
+		vertical: '$block.margin.bottom'
 	}
 };
 
 variables.address = {
-	color: variables.colors.darkestGray,
-	family: variables.font.family,
-	size: variables.font.size,
+	color: '$colors.darkestGray',
+	family: '$font.family',
+	size: '$font.size',
 	weight: 'normal',
 	style: 'normal',
-	lineHeight: variables.paragraph.lineHeight
+	lineHeight: '$paragraph.lineHeight'
 };
 
 variables.list = {
-	color: variables.paragraph.color,
-	lineHeight: variables.paragraph.lineHeight,
+	color: '$paragraph.color',
+	lineHeight: '$paragraph.lineHeight',
 	margin: {
-		bottom: variables.paragraph.margin.bottom,
+		bottom: '$paragraph.margin.bottom',
 		left: false
 	},
 	bullet: {
@@ -224,13 +233,13 @@ variables.li = {
 
 variables.dl = {
 	margin: {
-		bottom: variables.block.margin.bottom
+		bottom: '$block.margin.bottom'
 	}
 };
 
 variables.dt = {
-	color: variables.colors.darkerGray,
-	family: variables.heading.family,
+	color: '$colors.darkerGray',
+	family: '$heading.family',
 	size: '2rem',
 	margin: {
 		bottom: '0.2rem'
@@ -238,9 +247,9 @@ variables.dt = {
 };
 
 variables.dd = {
-	color: variables.colors.gray,
-	family: variables.font.family,
-	size: variables.font.size,
+	color: '$colors.gray',
+	family: '$font.family',
+	size: '$font.size',
 	margin: {
 		bottom: '1rem'
 	}
@@ -253,9 +262,9 @@ variables.print = {
 };
 
 variables.button = {
-	color: variables.colors.white,
-	family: variables.font.family,
-	size: variables.font.size,
+	color: '$colors.white',
+	family: '$font.family',
+	size: '$font.size',
 	weight: 'normal',
 	padding: {
 		horizontal: '3rem',
@@ -268,20 +277,20 @@ variables.button = {
 		property: 'background-color',
 		duration: '0.2s'
 	},
-	background: variables.colors.darkGray,
+	background: '$colors.darkGray',
 	border: {
 		color: false,
-		radius: variables.default.radius,
+		radius: '$default.radius',
 		width: 0
 	}
 };
 
 variables.button.hover = {
-	background: darken(variables.button.background, 5)
+	background: defer(darken, [variables.button.background, 5])
 };
 
 variables.button.active = {
-	background: darken(variables.button.background, 10),
+	background: defer(darken, [variables.button.background, 10]),
 	transition: {
 		property: 'none'
 	}
@@ -289,27 +298,27 @@ variables.button.active = {
 
 variables.coloredButton = {
 	class: '.colored-button',
-	color: variables.colors.white,
-	background: variables.link.color,
+	color: '$colors.white',
+	background: '$link.color',
 	border: {
 		color: false,
-		radius: variables.button.border.radius,
-		width: variables.button.border.width
+		radius: '$button.border.radius',
+		width: '$button.border.width'
 	}
 };
 
 variables.coloredButton.hover = {
-	background: darken(variables.coloredButton.background, 5)
+	background: defer(darken, [variables.coloredButton.background, 5])
 };
 
 variables.coloredButton.active = {
-	background: darken(variables.coloredButton.background, 10)
+	background: defer(darken, [variables.coloredButton.background, 10])
 };
 
 variables.button.disabled = {
 	modifier: '.-is-disabled',
-	color: variables.colors.darkGray,
-	background: variables.colors.lightGray,
+	color: '$colors.darkGray',
+	background: '$colors.lightGray',
 	border: {
 		color: false
 	},
@@ -317,11 +326,11 @@ variables.button.disabled = {
 };
 
 variables.code = {
-	color: variables.colors.darkestGray,
+	color: '$colors.darkestGray',
 	family: 'monospace',
-	size: variables.font.size,
+	size: '$font.size',
 	lineHeight: '1.4em',
-	background: variables.colors.lighterGray,
+	background: '$colors.lighterGray',
 	border: {
 		color: false,
 		radius: false
@@ -333,18 +342,18 @@ variables.code = {
 };
 
 variables.code.block = {
-	color: variables.colors.lightestGray,
-	family: variables.code.family,
+	color: '$colors.lightestGray',
+	family: '$code.family',
 	size: '1.3rem',
-	lineHeight: variables.paragraph.lineHeight,
+	lineHeight: '$paragraph.lineHeight',
 	tabSize: 4,
 	wrap: false,
 	margin: {
-		bottom: variables.block.margin.bottom
+		bottom: '$block.margin.bottom'
 	},
-	background: variables.colors.darkestGray,
+	background: '$colors.darkestGray',
 	border: {
-		color: variables.code.border.color,
+		color: '$code.border.color',
 		radius: false
 	},
 	padding: {
@@ -354,11 +363,11 @@ variables.code.block = {
 };
 
 variables.input = {
-	background: variables.colors.white,
-	color: variables.colors.darkerGray,
-	family: variables.font.family,
-	size: variables.font.size,
-	weight: variables.font.weight,
+	background: '$colors.white',
+	color: '$colors.darkerGray',
+	family: '$font.family',
+	size: '$font.size',
+	weight: '$font.weight',
 	margin: {
 		bottom: '2rem'
 	},
@@ -369,45 +378,45 @@ variables.input = {
 };
 
 variables.input.disabled = {
-	background: variables.colors.lightestGray,
-	color: variables.colors.darkerGray,
+	background: '$colors.lightestGray',
+	color: '$colors.darkerGray',
 	cursor: 'not-allowed'
 };
 
 variables.input.invalid = {
-	background: variables.colors.white,
+	background: '$colors.white',
 	border: {
 		color: '#a41818',
 		width: '1px' // false to disable
 	}
 };
 
-variables.input.invalid.color = darken(variables.input.invalid.border.color, 10);
+variables.input.invalid.color = defer(darken, [variables.input.invalid.border.color, 10]);
 
 variables.input.invalid.focus = {
 	border: {
-		color: darken(variables.input.invalid.border.color, 10)
+		color: defer(darken, [variables.input.invalid.border.color, 10])
 	}
 };
 
 variables.input.invalid.hover = {
 	border: {
-		color: darken(variables.input.invalid.border.color, 20)
+		color: defer(darken, [variables.input.invalid.border.color, 20])
 	}
 };
 
 variables.input.required = {
 	border: {
-		color: variables.colors.darkerGray,
+		color: '$colors.darkerGray',
 		width: '1px' // false to disable
 	}
 };
 
-variables.input.required.color = darken(variables.input.required.border.color, 10);
+variables.input.required.color = defer(darken, [variables.input.required.border.color, 10]);
 
 variables.legend = {
-	color: variables.colors.darkerGray,
-	family: variables.font.family,
+	color: '$colors.darkerGray',
+	family: '$font.family',
 	size: '1.8rem',
 	margin: {
 		bottom: '1.4rem'
@@ -445,28 +454,28 @@ variables.textarea = {
 };
 
 variables.table = {
-	size: variables.font.size,
+	size: '$font.size',
 	cell: {
 		border: {
-			color: variables.colors.lighterGray
+			color: '$colors.lighterGray'
 		},
-		lineHeight: variables.paragraph.lineHeight,
+		lineHeight: '$paragraph.lineHeight',
 		padding: {
 			horizontal: '1.6rem',
 			vertical: '.6rem'
 		}
 	},
 	striped: {
-		background: variables.colors.lightestGray,
+		background: '$colors.lightestGray',
 		position: 'odd'
 	}
 };
 
 variables.table.caption = {
-	background: variables.colors.lightestGray,
+	background: '$colors.lightestGray',
 	style: 'italic',
 	padding: {
-		horizontal: variables.table.cell.padding.horizontal,
+		horizontal: '$table.cell.padding.horizontal',
 		vertical: '1.2rem'
 	}
 };

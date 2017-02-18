@@ -11,6 +11,6 @@ describe('parser', () => {
 
 		fs.writeFileSync('./cases/variablesParsed.json', JSON.stringify(result));
 
-		expect(JSON.stringify(result)).to.equal(variablesJSON);
+		expect(fs.readFileSync('./cases/variablesParsed.json', 'utf-8')).to.equal(variablesJSON);
 	});
 });
