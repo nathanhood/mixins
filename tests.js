@@ -5,8 +5,10 @@ const postcss = require('postcss');
 const mixinsPlugin = require('postcss-js-mixins');
 const variablesPlugin = require('postcss-variables');
 const syntax = require('postcss-wee-syntax');
-const mixins = require('./mixins');
-const variables = require('./variables');
+const vars = require('./variables');
+const variables = vars();
+const mix = require('./mixins');
+const mixins = mix(variables);
 
 function process(input, expected, opts = {}, warnings = 0, vars) {
 	return postcss([
@@ -1565,23 +1567,23 @@ describe('boxSizing', () => {
 
 describe('containerMinWidth', () => {
 	it('should add min-width to html and body if min width not 0', () => {
-		let vars = require('./variables');
+		let newVars = vars();
 
-		vars.width.min = '100px';
+		newVars.width.min = '100px';
 
 		return process(
 			`containerMinWidth();`,
 			`html, body {\n    min-width: 100px\n}`,
-			{ mixins: mixins }
+			{ mixins: mix(newVars) }
 		);
 	});
 
 	it('should not add anything if min width is 0', () => {
-		let vars = require('./variables');
+		let newVars = vars();
 
-		vars.width.min = 0;
+		newVars.width.min = 0;
 
-		return process(`containerMinWidth();`, ``, { mixins: mixins });
+		return process(`containerMinWidth();`, ``, { mixins: mix(newVars) });
 	});
 });
 

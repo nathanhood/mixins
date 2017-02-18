@@ -1,5 +1,11 @@
 let vars;
 
+/**
+ * Retrieve property value from vars object
+ *
+ * @param {string} keys
+ * @returns {*}
+ */
 function getProp(keys) {
 	let segs = keys.toString().split('.'),
 		key = segs.shift().replace(/^\$/, ''),
@@ -41,6 +47,11 @@ function evalFn(fn, args) {
 	}));
 }
 
+/**
+ * Traverse entire object structure recursively
+ *
+ * @param {Object|Array} obj
+ */
 function traverse(obj) {
 	let props = Object.keys(obj),
 		i;

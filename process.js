@@ -3,17 +3,18 @@ const fs = require('fs');
 const variables = require('postcss-variables');
 const mixins = require('postcss-js-mixins');
 const nested = require('postcss-nested');
+const globalVars = require('./variables')();
 const plugins = [
 	variables({
-		globals: require('./variables')
+		globals: globalVars
 	}),
 	mixins({
-		mixins: require('./mixins')
+		mixins: require('./mixins')(globalVars)
 	}),
 	nested()
 ];
 
-const css = fs.readFileSync('./styles/components/buttons.pcss');
+const css = fs.readFileSync('./styles/components/tables.pcss');
 
 postcss(plugins).process(css, {
 		syntax: require('postcss-wee-syntax')

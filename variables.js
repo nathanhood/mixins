@@ -1,14 +1,8 @@
 const { darken } = require('postcss-js-mixins/lib/colorHelpers');
+const { defer } = require('postcss-variables/lib/helpers');
+const register = require('postcss-variables/lib/register');
 
 let variables = {};
-
-function defer(fn, args) {
-	return {
-		type: 'deferredFunction',
-		fn: fn,
-		args: args
-	};
-}
 
 variables.unit = {
 	default: 'rem',
@@ -480,4 +474,4 @@ variables.table.caption = {
 	}
 };
 
-module.exports = variables;
+module.exports = register(variables);
