@@ -449,6 +449,9 @@ variables.textarea = {
 
 variables.table = {
 	size: '$font.size',
+	bordered : {
+		modifier: '.-is-bordered'
+	},
 	cell: {
 		border: {
 			color: '$colors.lighterGray'
@@ -461,6 +464,7 @@ variables.table = {
 	},
 	striped: {
 		background: '$colors.lightestGray',
+		modifier: '.-is-striped',
 		position: 'odd'
 	}
 };
