@@ -1811,6 +1811,54 @@ describe('heading', () => {
 	});
 });
 
+describe('placeholder', () => {
+	it('should output declaration with default value', () => {
+		return process(
+			`.block {
+				placeholder();
+			}`,
+			`.block {
+				&:-moz-placeholder {
+								color: #bfbfbf
+				}
+				&::-moz-placeholder {
+								color: #bfbfbf
+				}
+				&:-ms-input-placeholder {
+								color: #bfbfbf
+				}
+				&::-webkit-input-placeholder {
+								color: #bfbfbf
+				}
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should set placeholder color to value', () => {
+		return process(
+			`.block {
+				placeholder(#fff);
+			}`,
+			`.block {
+				&:-moz-placeholder {
+								color: #fff
+				}
+				&::-moz-placeholder {
+								color: #fff
+				}
+				&:-ms-input-placeholder {
+								color: #fff
+				}
+				&::-webkit-input-placeholder {
+								color: #fff
+				}
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
+
 describe('resizable', () => {
 	it('should output declaration with default values', () => {
 		return process(
