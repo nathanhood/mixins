@@ -139,12 +139,12 @@ variables.link = {
 };
 
 variables.link.hover = {
-	color: defer(darken, [variables.link.color, 10]),
+	color: defer(darken, ['$link.color', 10]),
 	decoration: 'none'
 };
 
 variables.link.active = {
-	color: defer(darken, [variables.link.color, 20])
+	color: defer(darken, ['$link.color', 20])
 };
 
 variables.selection = {
@@ -280,11 +280,11 @@ variables.button = {
 };
 
 variables.button.hover = {
-	background: defer(darken, [variables.button.background, 5])
+	background: defer(darken, ['$button.background', 5])
 };
 
 variables.button.active = {
-	background: defer(darken, [variables.button.background, 10]),
+	background: defer(darken, ['$button.background', 10]),
 	transition: {
 		property: 'none'
 	}
@@ -302,11 +302,11 @@ variables.coloredButton = {
 };
 
 variables.coloredButton.hover = {
-	background: defer(darken, [variables.coloredButton.background, 5])
+	background: defer(darken, ['$coloredButton.background', 5])
 };
 
 variables.coloredButton.active = {
-	background: defer(darken, [variables.coloredButton.background, 10])
+	background: defer(darken, ['$coloredButton.background', 10])
 };
 
 variables.button.disabled = {
@@ -379,34 +379,32 @@ variables.input.disabled = {
 
 variables.input.invalid = {
 	background: '$colors.white',
+	color: defer(darken, ['$input.invalid.border.color', 10]),
 	border: {
 		color: '#a41818',
 		width: '1px' // false to disable
 	}
 };
 
-variables.input.invalid.color = defer(darken, [variables.input.invalid.border.color, 10]);
-
 variables.input.invalid.focus = {
 	border: {
-		color: defer(darken, [variables.input.invalid.border.color, 10])
+		color: defer(darken, ['$input.invalid.border.color', 10])
 	}
 };
 
 variables.input.invalid.hover = {
 	border: {
-		color: defer(darken, [variables.input.invalid.border.color, 20])
+		color: defer(darken, ['$input.invalid.border.color', 20])
 	}
 };
 
 variables.input.required = {
+	color: defer(darken, ['$input.required.border.color', 10]),
 	border: {
 		color: '$colors.darkerGray',
 		width: '1px' // false to disable
 	}
 };
-
-variables.input.required.color = defer(darken, [variables.input.required.border.color, 10]);
 
 variables.legend = {
 	color: '$colors.darkerGray',
@@ -452,6 +450,14 @@ variables.table = {
 	bordered : {
 		modifier: '.-is-bordered'
 	},
+	caption: {
+		background: '$colors.lightestGray',
+		style: 'italic',
+		padding: {
+			horizontal: '$table.cell.padding.horizontal',
+			vertical: '1.2rem'
+		}
+	},
 	cell: {
 		border: {
 			color: '$colors.lighterGray'
@@ -466,15 +472,6 @@ variables.table = {
 		background: '$colors.lightestGray',
 		modifier: '.-is-striped',
 		position: 'odd'
-	}
-};
-
-variables.table.caption = {
-	background: '$colors.lightestGray',
-	style: 'italic',
-	padding: {
-		horizontal: '$table.cell.padding.horizontal',
-		vertical: '1.2rem'
 	}
 };
 
