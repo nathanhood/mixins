@@ -36,7 +36,7 @@
 		vertical-align: top;
 	}
 
-	&.-is-bordered {
+	&$(table.bordered.modifier) {
 		border-bottom-color: $table.cell.border.color;
 
 		caption {
@@ -55,7 +55,7 @@
 		}
 	}
 
-	&.-is-striped {
+	&$(table.striped.modifier) {
 		tbody tr:nth-child($(table.striped.position)) {
 			td,
 			th {

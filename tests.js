@@ -1925,4 +1925,32 @@ describe('_codeBlockDefaults', () => {
 			{ mixins: mixins }
 		);
 	});
+
+	it('should output border: none when first argument is not false', () => {
+		return process(
+			`.block {
+				_codeBlockDefaults('#fff');
+			}`,
+			`.block {
+				border: none;
+				overflow: auto;
+				white-space: pre;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should output alternative properties when second argument is true', () => {
+		return process(
+			`.block {
+				_codeBlockDefaults('#fff', true);
+			}`,
+			`.block {
+				border: none;
+				white-space: pre-wrap;
+				word-wrap: break-word;
+			}`,
+			{ mixins: mixins }
+		);
+	});
 });
