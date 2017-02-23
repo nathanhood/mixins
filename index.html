@@ -14,20 +14,9 @@
 <body>
 
 <div class="container">
-	<button class="button">Default button</button>
-	<button class="colored-button">Colored button</button>
-	<button class="button" disabled>Disabled button</button>
-	<button class="button -disabled">Disabled button (class)</button>
-</div>
-
-<div class="container">
-	<pre>
-		<code>
-			.selector {
-				prop: value;
-			}
-		</code>
-	</pre>
+	<pre><code>.selector {
+	prop: value;
+}</code></pre>
 </div>
 
 <div class="container">
@@ -161,6 +150,13 @@
 	</table>
 </div>
 
+<div class="container">
+	<button class="button">Default button</button>
+	<button class="colored-button">Colored button</button>
+	<button class="button" disabled>Disabled button</button>
+	<button class="button -disabled">Disabled button (class)</button>
+</div>
+
 <form class="form">
 	<fieldset class="fieldset">
 		<legend class="legend">This is the legend of a fieldset</legend>
@@ -200,13 +196,88 @@
 
 	<label for="multi-select">Multi-select</label>
 	<select class="select" id="multi-select" multiple>
-		<option value="3">Three</option>
-		<option value="4">Four</option>
+		<optgroup label="Grouping">
+			<option value="1">One</option>
+			<option value="2">Two</option>
+		</optgroup>
 	</select>
 
 	<label for="textarea">Textarea</label>
 	<textarea class="textarea" id="textarea"></textarea>
 </form>
+
+<div class="container">
+	<h3>Definition list</h3>
+	<dl>
+		<dt>Lorem ipsum dolor</dt>
+		<dd>Sit amet, consectetur adipiscing elit.</dd>
+		<dt>Lorem ipsum dolor</dt>
+		<dd>Sit amet, consectetur adipiscing elit.</dd>
+	</dl>
+</div>
+
+<div class="container">
+	<h3>Ordered list</h3>
+	<ol>
+		<li>Lorem</li>
+		<li>
+			ipsum
+			<ol>
+				<li>dolor</li>
+				<li>sit</li>
+			</ol>
+		</li>
+		<li>amet</li>
+	</ol>
+</div>
+
+<div class="container">
+	<h3>Unordered list</h3>
+	<ul>
+		<li>Lorem</li>
+		<li>
+			ipsum
+			<ul>
+				<li>dolor</li>
+				<li>sit</li>
+			</ul>
+		</li>
+		<li>amet</li>
+	</ul>
+</div>
+
+<div class="container">
+	<h1>Heading</h1>
+	<h2>Heading</h2>
+	<h3>Heading</h3>
+	<h4>Heading</h4>
+	<h5>Heading</h5>
+	<h6>Heading</h6>
+</div>
+
+<div class="container">
+	<p>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquid
+		aperiam aut blanditiis cum, distinctio dolore earum eius enim ex
+		exercitationem facere fugit, hic in iure laborum magni maiores nesciunt
+		nisi nostrum numquam omnis optio perspiciatis praesentium quia quibusdam
+		reprehenderit, saepe similique totam voluptates. Animi aperiam cumque
+		cupiditate dolore, ducimus iure iusto necessitatibus non pariatur
+		perferendis soluta ut veniam! Nemo?
+	</p>
+</div>
+
+<div class="container">
+	<h3>Blockquote</h3>
+	<blockquote>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis
+			dignissimos dolor eos illo, ipsam laudantium pariatur rem
+			reprehenderit vitae voluptatem.</p>
+		<cite>
+			<a href="#">John Doe</a>
+		</cite>
+	</blockquote>
+</div>
 
 </body>
 </html>
