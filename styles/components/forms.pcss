@@ -49,7 +49,7 @@
 	&:invalid {
 		color: $input.invalid.color;
 		background($input.invalid.background);
-		borde($input.invalid.border.color $input.invalid.border.width);
+		border: $input.invalid.border.width $border.style $input.invalid.border.color;
 		&:hover {
 			border-color: $input.invalid.hover.border.color;
 		}
@@ -60,7 +60,7 @@
 	&:required {
 		color: $input.required.color;
 		background($input.required.background);
-		border($input.required.border.color, $input.required.border.width);
+		border: $input.required.border.width $border.style $input.required.border.color;
 		&:hover {
 			border-color: $input.required.hover.border.color;
 		}
