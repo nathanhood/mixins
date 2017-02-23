@@ -78,7 +78,7 @@ variables.font = {
 };
 
 variables.heading = {
-	color: '$font.color',
+	color: 'inherit',
 	family: 'Tahoma, Geneva, sans-serif',
 	weight: '$font.weight.bold',
 	lineHeight: '1.4em',
@@ -403,13 +403,13 @@ variables.input.invalid = {
 
 variables.input.invalid.hover = {
 	border: {
-		color: defer(darken, ['$input.invalid.border.color', 20])
+		color: defer(darken, ['$input.invalid.border.color', 10])
 	}
 };
 
 variables.input.invalid.focus = {
 	border: {
-		color: defer(darken, ['$input.invalid.border.color', 10])
+		color: defer(darken, ['$input.invalid.border.color', 20])
 	}
 };
 
@@ -417,26 +417,26 @@ variables.input.required = {
 	background: '$colors.white',
 	color: defer(darken, ['$input.required.border.color', 10]),
 	border: {
-		color: '$colors.darkerGray',
+		color: '$colors.darkGray',
 		width: '1px' // false to disable
 	}
 };
 
 variables.input.required.hover = {
 	border: {
-		color: defer(darken, ['$input.required.border.color', 20])
+		color: defer(darken, ['$input.required.border.color', 10])
 	}
 };
 
 variables.input.required.focus = {
 	border: {
-		color: defer(darken, ['$input.required.border.color', 10])
+		color: defer(darken, ['$input.required.border.color', 20])
 	}
 };
 
 variables.input.disabled = {
 	background: '$colors.lightestGray',
-	color: '$colors.darkerGray',
+	color: '$colors.darkGray',
 	cursor: 'not-allowed',
 	border: {
 		width: false // false to disable
@@ -450,7 +450,7 @@ variables.multiSelect = {
 variables.checkbox = {
 	margin: {
 		bottom: '1rem',
-		right: '.5rem'
+		right: '0.5rem'
 	}
 };
 
@@ -477,7 +477,7 @@ variables.label = {
 	weight: 'normal',
 	lineHeight: '1.3em',
 	margin: {
-		bottom: '.4rem',
+		bottom: '0.4rem',
 		right: '1rem'
 	}
 };
@@ -502,7 +502,7 @@ variables.table = {
 		lineHeight: '$paragraph.lineHeight',
 		padding: {
 			horizontal: '1.6rem',
-			vertical: '.6rem'
+			vertical: '0.6rem'
 		}
 	},
 	striped: {
