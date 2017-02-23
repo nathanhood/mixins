@@ -1,0 +1,212 @@
+<html>
+<head>
+	<title>Test</title>
+	<link rel="stylesheet" href="output.css">
+	<style>
+		body {
+			padding: 5rem;
+		}
+		.container {
+			margin-bottom: 4rem;
+		}
+	</style>
+</head>
+<body>
+
+<div class="container">
+	<button class="button">Default button</button>
+	<button class="colored-button">Colored button</button>
+	<button class="button" disabled>Disabled button</button>
+	<button class="button -disabled">Disabled button (class)</button>
+</div>
+
+<div class="container">
+	<pre>
+		<code>
+			.selector {
+				prop: value;
+			}
+		</code>
+	</pre>
+</div>
+
+<div class="container">
+	<figure>
+		<img src="https://placehold.it/1600x800">
+		<figcaption>
+			<b>Fig. 3.2</b>
+			Lorem ipsum dolor sit amet by
+			<a href="#">eiusmod tempor</a>
+		</figcaption>
+	</figure>
+</div>
+
+<div class="responsive-table">
+	<table class="table">
+		<caption>Basic table</caption>
+		<thead>
+			<tr>
+				<th>Heading</th>
+				<th>Heading</th>
+				<th>Heading</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Lorem ipsum dolor</td>
+				<td>Lorem ipsum dolor</td>
+				<td>Lorem ipsum dolor sit amet</td>
+			</tr>
+			<tr>
+				<td>Lorem ipsum dolor</td>
+				<td>Lorem ipsum dolor</td>
+				<td>Lorem ipsum dolor sit amet</td>
+			</tr>
+			<tr>
+				<td>Lorem ipsum dolor</td>
+				<td>Lorem ipsum dolor</td>
+				<td>Lorem ipsum dolor sit amet</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="responsive-table">
+	<table class="table -bordered">
+		<caption>Bordered table</caption>
+		<thead>
+		<tr>
+			<th>Heading</th>
+			<th>Heading</th>
+			<th>Heading</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor sit amet</td>
+		</tr>
+		<tr>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor sit amet</td>
+		</tr>
+		<tr>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor sit amet</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="responsive-table">
+	<table class="table -striped">
+		<caption>Striped table</caption>
+		<thead>
+		<tr>
+			<th>Heading</th>
+			<th>Heading</th>
+			<th>Heading</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor sit amet</td>
+		</tr>
+		<tr>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor sit amet</td>
+		</tr>
+		<tr>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor sit amet</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="responsive-table">
+	<table class="table -bordered -striped">
+		<caption>Bordered and striped table</caption>
+		<thead>
+		<tr>
+			<th>Heading</th>
+			<th>Heading</th>
+			<th>Heading</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor sit amet</td>
+		</tr>
+		<tr>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor sit amet</td>
+		</tr>
+		<tr>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor sit amet</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+<form class="form">
+	<fieldset class="fieldset">
+		<legend class="legend">This is the legend of a fieldset</legend>
+
+		<label for="requiredInput" class="label">Required input</label>
+		<input type="text" class="input" id="requiredInput" required>
+
+		<label for="searchInput">Search input</label>
+		<input placeholder="Search for &hellip;" type="search" class="input -search" id="searchInput">
+
+		<label for="disabledInput">Disabled input</label>
+		<input type="text" placeholder="This is disabled" class="input" id="disabledInput" disabled>
+
+		<label for="disabledInput2">Disabled input (class)</label>
+		<input type="text" placeholder="This is using the -disabled modifer" class="input -disabled" id="disabledInput2">
+	</fieldset>
+
+	<label for="checkbox">Checkbox input</label>
+	<input type="checkbox" class="input -checkbox" id="checkbox">
+
+	<label for="radio1">Radio input #1</label>
+	<input name="radio" type="radio" class="input -radio" id="radio1">
+	<label for="radio2">Radio input #2</label>
+	<input name="radio" type="radio" class="input -radio" id="radio2">
+
+	<label for="submit">Submit input</label>
+	<input type="submit" value="Submit" class="input -submit">
+
+	<label for="reset">Reset input</label>
+	<input type="reset" value="Reset" class="input -reset" id="reset">
+
+	<label for="select">Select</label>
+	<select class="select" id="select">
+		<option value="One">One</option>
+		<option value="Two">Two</option>
+	</select>
+
+	<label for="multi-select">Multi-select</label>
+	<select class="select" id="multi-select" multiple>
+		<option value="3">Three</option>
+		<option value="4">Four</option>
+	</select>
+
+	<label for="textarea">Textarea</label>
+	<textarea class="textarea" id="textarea"></textarea>
+</form>
+
+</body>
+</html>
