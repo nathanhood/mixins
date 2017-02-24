@@ -1988,7 +1988,20 @@ describe('_codeBlockDefaults', () => {
 		);
 	});
 
-	it('should output alternative properties when second argument is true', () => {
+	it('should not output border: none when first argument is false', () => {
+		return process(
+			`.block {
+				_codeBlockDefaults(false);
+			}`,
+			`.block {
+				overflow: auto;
+				white-space: pre;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should output alternate properties when second argument is true', () => {
 		return process(
 			`.block {
 				_codeBlockDefaults('#fff', true);
