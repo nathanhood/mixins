@@ -5,7 +5,7 @@
   "main": "mixins.js",
   "scripts": {
     "test": "mocha ./tests.js",
-  	"test:parser": "mocha ./tests-parser.js"
+    "test:parser": "mocha ./tests-parser.js"
   },
   "keywords": [
     "postcss",
