@@ -149,14 +149,9 @@ module.exports = (vars = {}) => {
 				args.splice(0, 1);
 			}
 
-			// Allow user to add only color without including width and style
-			if (isColor(args[0])) {
-				args[2] = args.splice(0, 1);
-			}
-
-			values.push(unit(args[0] || defaultValues[0], 'border-width'));
-			values.push(unit(args[1] || defaultValues[1], 'border-style'));
-			values.push(unit(args[2] || defaultValues[2], 'border-color'));
+			values.push(unit(args[1] || defaultValues[0], 'border-width'));
+			values.push(unit(args[2] || defaultValues[1], 'border-style'));
+			values.push(unit(args[0] || defaultValues[2], 'border-color'));
 
 			if (keyword == 'vertical') {
 				borders = [
