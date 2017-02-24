@@ -438,6 +438,7 @@ variables.input.disabled = {
 	background: '$colors.lightestGray',
 	color: '$colors.darkGray',
 	cursor: 'not-allowed',
+	modifier: '.-disabled',
 	border: {
 		width: false // false to disable
 	}
