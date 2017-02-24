@@ -867,7 +867,7 @@ module.exports = (vars = {}) => {
 		_codeBlockDefaults(borderColor, blockWrap) {
 			let props = [];
 
-			if (borderColor) {
+			if (borderColor && borderColor !== 'false') {
 				props.push(this.border('none'));
 			}
 
