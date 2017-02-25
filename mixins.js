@@ -135,7 +135,7 @@ module.exports = (vars = {}) => {
 				keyword = null,
 				values = [];
 
-			if (args[0] === 'false' || args[0] === 0 || args[0] === 'none') {
+			if (args[0] === false || args[0] === 0 || args[0] === 'none') {
 				return decl('border', 'none');
 			}
 
@@ -637,7 +637,7 @@ module.exports = (vars = {}) => {
 
 			if (isEmpty(args)) {
 				props.push(decl('border-radius', radius));
-			} else if (args[0] === 'false') {
+			} else if (args[0] === false) {
 				return false;
 			} else if (! keywords.includes(args[0])) {
 				props.push(decl('border-radius', args[0]));
@@ -792,7 +792,7 @@ module.exports = (vars = {}) => {
 				},
 				property, duration, timing, delay;
 
-			if (args[0] === 'false') {
+			if (args[0] === false) {
 				return false;
 			}
 
@@ -862,7 +862,7 @@ module.exports = (vars = {}) => {
 		_codeBlockDefaults(borderColor, blockWrap) {
 			let props = [];
 
-			if (borderColor && borderColor !== 'false') {
+			if (borderColor && borderColor !== false) {
 				props.push(this.border('none'));
 			}
 
