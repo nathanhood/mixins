@@ -270,6 +270,43 @@ module.exports = (vars = {}) => {
 		},
 
 		/**
+		 * Columns
+		 *
+		 * @param {Array} [args]
+		 * @param {Array} [args[]] - count
+		 * @param {Array} [args[]] - gap
+		 * @param {Array} [args[]] - rule style
+		 * @param {Array} [args[]] - rule width
+		 * @returns {Array}
+		 */
+		columns(...args) {
+			let props = [
+				decl('column-count', 2),
+				decl('column-rule-width', '1px')
+			];
+
+			if (isEmpty(args)) {
+				return props;
+			}
+
+			props[0] = decl('column-count', args[0]);
+
+			if (args[1]) {
+				props.push(decl('column-gap', args[1]));
+			}
+
+			if (args[2]) {
+				props.push(decl('column-rule-style', args[2]));
+			}
+
+			if (args[3]) {
+				props[1] = decl('column-rule-width', args[3]);
+			}
+
+			return props;
+		},
+
+		/**
 		 * Conditionally add min-width property to both html and body elements
 		 *
 		 * @returns {*}
