@@ -2029,3 +2029,32 @@ describe('_codeBlockDefaults', () => {
 		);
 	});
 });
+
+describe('_containerPadding', () => {
+	it('should output declaration with default values', () => {
+		return process(
+			`.block {
+				_containerPadding();
+			}`,
+			`.block {
+				padding-left: 6%;
+				padding-right: 6%;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should not output when bumper.enabled is false', () => {
+		let newVars = vars();
+		newVars.bumper.enabled = false;
+
+		return process(
+			`.block {
+				_containerPadding();
+			}`,
+			`.block {
+			}`,
+			{ mixins: mix(newVars) }
+		);
+	});
+});

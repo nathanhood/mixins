@@ -852,6 +852,20 @@ module.exports = (vars = {}) => {
 		},
 
 		/**
+		 * Container padding
+		 *
+		 * @returns {Array|boolean}
+		 * @private
+		 */
+		_containerPadding() {
+			if (vars.bumper.enabled) {
+				return this.padding('horizontal', vars.bumper.padding);
+			}
+
+			return false;
+		},
+
+		/**
 		 * Code block defaults
 		 *
 		 * @param {string|boolean} borderColor
