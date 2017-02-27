@@ -375,6 +375,54 @@ module.exports = (vars = {}) => {
 		},
 
 		/**
+		 * Flex
+		 *
+		 * @param {Array|Object} [args]
+		 * 	 @param {number} [args[].grow]
+		 * 	 @param {number} [args[].shrink]
+		 * 	 @param {string} [args[].basis]
+		 * @returns {Array}
+		 */
+		flex(...args) {
+			// TODO: Need to set defaults even when passing parameters as an
+			// object
+			if (isObject(args)) {
+				return decl.createManyFromObj(args, 'flex');
+			}
+
+			return [
+				decl('flex-grow', args[0] || 0),
+				decl('flex-shrink', args[1] || 0),
+				decl('flex-basis', args[2] || 'auto')
+			];
+		},
+
+		/**
+		 * Flex container
+		 *
+		 * @param {Array|Object} [args]
+		 * 	 @param {string} [args[].direction]
+		 * 	 @param {string} [args[].wrap]
+		 * 	 @param {string} [args[].justify-content]
+		 * 	 @param {string} [args[].align-items]
+		 * 	 @param {string} [args[].align-content]
+		 * @returns {Array}
+		 */
+		flexContainer(...args) {
+			// TODO: Need to figure out how to handle passing parameters as
+			// object with defaults
+
+			return [
+				this.display(args[0] || 'flex'),
+				decl('flex-direction', args[1] || 'row'),
+				decl('flex-wrap', args[2] || 'nowrap'),
+				decl('justify-content', args[3] || 'flex-start'),
+				decl('align-items', args[4] || 'stretch'),
+				decl('align-content', args[5] || 'stretch')
+			];
+		},
+
+		/**
 		 * Font
 		 *
 		 * @param {Array} [args]
