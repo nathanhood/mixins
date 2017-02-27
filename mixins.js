@@ -135,7 +135,7 @@ module.exports = (vars = {}) => {
 				keyword = null,
 				values = [];
 
-			if (args[0] === 'false' || args[0] === 0 || args[0] === 'none') {
+			if (args[0] === false || args[0] === 0 || args[0] === 'none') {
 				return decl('border', 'none');
 			}
 
@@ -149,14 +149,9 @@ module.exports = (vars = {}) => {
 				args.splice(0, 1);
 			}
 
-			// Allow user to add only color without including width and style
-			if (isColor(args[0])) {
-				args[2] = args.splice(0, 1);
-			}
-
-			values.push(unit(args[0] || defaultValues[0], 'border-width'));
-			values.push(unit(args[1] || defaultValues[1], 'border-style'));
-			values.push(unit(args[2] || defaultValues[2], 'border-color'));
+			values.push(unit(args[1] || defaultValues[0], 'border-width'));
+			values.push(unit(args[2] || defaultValues[1], 'border-style'));
+			values.push(unit(args[0] || defaultValues[2], 'border-color'));
 
 			if (keyword == 'vertical') {
 				borders = [
@@ -642,7 +637,7 @@ module.exports = (vars = {}) => {
 
 			if (isEmpty(args)) {
 				props.push(decl('border-radius', radius));
-			} else if (args[0] === 'false') {
+			} else if (args[0] === false) {
 				return false;
 			} else if (! keywords.includes(args[0])) {
 				props.push(decl('border-radius', args[0]));
@@ -797,7 +792,7 @@ module.exports = (vars = {}) => {
 				},
 				property, duration, timing, delay;
 
-			if (args[0] === 'false') {
+			if (args[0] === false) {
 				return false;
 			}
 
@@ -867,7 +862,7 @@ module.exports = (vars = {}) => {
 		_codeBlockDefaults(borderColor, blockWrap) {
 			let props = [];
 
-			if (borderColor) {
+			if (borderColor && borderColor !== false) {
 				props.push(this.border('none'));
 			}
 

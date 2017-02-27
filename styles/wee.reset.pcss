@@ -40,7 +40,7 @@ video {
 }
 abbr[title] {
 	cursor: help;
-	border(bottom, 1px, $abbr.underline, $font.color);
+	border(bottom, $font.color, 1px, $abbr.underline);
 }
 b,
 strong {
@@ -205,7 +205,7 @@ hr {
 	border: 0;
 	display: block;
 	height: 1px;
-	border(top, $rule.height, $rule.style, $rule.color);
+	border(top, $rule.color, $rule.height, $rule.style);
 	margin(vertical, $rule.margin.vertical);
 }
 address {

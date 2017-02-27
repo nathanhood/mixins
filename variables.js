@@ -69,12 +69,13 @@ variables.colors.body = {
 variables.font = {
 	color: '$colors.darkestGray',
 	family: 'Arial, Helvetica, sans-serif',
+	lineHeight: '1em',
+	path: '../fonts/',
 	size: '1.6rem',
 	weight: {
 		normal: 'normal',
 		bold: 'bold'
-	},
-	lineHeight: '1em'
+	}
 };
 
 variables.heading = {
@@ -93,6 +94,18 @@ variables.h3 = '2.8rem';
 variables.h4 = '2.4rem';
 variables.h5 = '2rem';
 variables.h6 = '1.6rem';
+
+variables.image = {
+	path: '../images/',
+	class: {
+		left: 'img-left',
+		right: 'img-right'
+	},
+	margin: {
+		bottom: '2rem',
+		side: '2rem'
+	}
+};
 
 variables.mark = {
 	color: '$font.color',
@@ -438,6 +451,7 @@ variables.input.disabled = {
 	background: '$colors.lightestGray',
 	color: '$colors.darkGray',
 	cursor: 'not-allowed',
+	modifier: '.-disabled',
 	border: {
 		width: false // false to disable
 	}
