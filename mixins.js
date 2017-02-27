@@ -737,6 +737,41 @@ module.exports = (vars = {}) => {
 		},
 
 		/**
+		 * Shadow
+		 *
+		 * @param args
+		 * @returns {*}
+		 */
+		shadow(...args) {
+			let keywords = ['dark', 'light'];
+
+			if (isEmpty(args)) {
+				return decl('box-shadow', `1px 1px 0 0 rgba(0, 0, 0, ${vars.default.opacity})`);
+			}
+
+			if (keywords.includes(args[0])) {
+				let keyword = args.shift(),
+					rgb = keyword === 'dark' ?
+						'0, 0, 0' :
+						'255, 255, 255',
+					opacity = args[0] || vars.default.opacity;
+
+				return decl('box-shadow', `1px 1px 0 0 rgba(${rgb}, ${opacity})`)
+			}
+
+			return false;
+		},
+
+		/**
+		 * Show element
+		 *
+		 * @return {Object}
+		 */
+		show() {
+			return this.display('inherit');
+		},
+
+		/**
 		 * Output width and/or height
 		 *
 		 * @param  {string} width
@@ -755,15 +790,6 @@ module.exports = (vars = {}) => {
 			}
 
 			return props;
-		},
-
-		/**
-		 * Show element
-		 *
-		 * @return {Object}
-		 */
-		show() {
-			return this.display('inherit');
 		},
 
 		/**
