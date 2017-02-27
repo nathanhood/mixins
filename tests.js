@@ -2029,3 +2029,91 @@ describe('_codeBlockDefaults', () => {
 		);
 	});
 });
+
+describe('columns', () => {
+	it('should output declaration with default values', () => {
+		return process(
+			`.block {
+				columns();
+			}`,
+			`.block {
+				column-count: 2rem;
+				column-rule-width: 1px;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
+
+describe('shadow', () => {
+	it('should output declaration with default values', () => {
+		return process(
+			`.block {
+				shadow();
+			}`,
+			`.block {
+				box-shadow: 1px 1px 0 0 rgba(0, 0, 0, 0.2);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should output a dark shadow using the provided opacity when using the dark keyword', () => {
+		return process(
+			`.block {
+				shadow(dark, 0.5);
+			}`,
+			`.block {
+				box-shadow: 1px 1px 0 0 rgba(0, 0, 0, 0.5);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should output a light shadow using the provided opacity when using the light keyword', () => {
+		return process(
+			`.block {
+				shadow(light, 0.5);
+			}`,
+			`.block {
+				box-shadow: 1px 1px 0 0 rgba(255, 255, 255, 0.5);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
+
+describe('flex', () => {
+	it('should output declaration with default values', () => {
+		return process(
+			`.block {
+				flex();
+			}`,
+			`.block {
+				flex-grow: 0;
+				flex-shrink: 0;
+				flex-basis: auto;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
+
+describe('flexContainer', () => {
+	it('should output declaration with default values', () => {
+		return process(
+			`.block {
+				flexContainer();
+			}`,
+			`.block {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: nowrap;
+				justify-content: flex-start;
+				align-items: stretch;
+				align-content: stretch;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
