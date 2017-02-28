@@ -2117,3 +2117,286 @@ describe('flexContainer', () => {
 		);
 	});
 });
+
+describe('filter', () => {
+	it('should output declaration with provided value', () => {
+		return process(
+			`.block {
+				filter(blur(2px));
+			}`,
+			`.block {
+				filter: blur(2px);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
+
+describe('blur', () => {
+	it('should output declaration with default value', () => {
+		return process(
+			`.block {
+				blur();
+			}`,
+			`.block {
+				filter: blur(2px);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should output declaration with provided value', () => {
+		return process(
+			`.block {
+				blur(5px);
+			}`,
+			`.block {
+				filter: blur(5px);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
+
+describe('brightness', () => {
+	it('should output declaration with default value', () => {
+		return process(
+			`.block {
+				brightness();
+			}`,
+			`.block {
+				filter: brightness(0.5);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should output declaration with provided value', () => {
+		return process(
+			`.block {
+				brightness(0.2);
+			}`,
+			`.block {
+				filter: brightness(0.2);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
+
+describe('contrast', () => {
+	it('should output declaration with default value', () => {
+		return process(
+			`.block {
+				contrast();
+			}`,
+			`.block {
+				filter: contrast(1.5);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should output declaration with provided value', () => {
+		return process(
+			`.block {
+				contrast(1.25);
+			}`,
+			`.block {
+				filter: contrast(1.25);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
+
+describe('grayscale', () => {
+	it('should output declaration with default value', () => {
+		return process(
+			`.block {
+				grayscale();
+			}`,
+			`.block {
+				filter: grayscale(1);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should output declaration with provided value', () => {
+		return process(
+			`.block {
+				grayscale(0.6);
+			}`,
+			`.block {
+				filter: grayscale(0.6);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
+
+describe('hueRotate', () => {
+	it('should output declaration with default value', () => {
+		return process(
+			`.block {
+				hueRotate();
+			}`,
+			`.block {
+				filter: hue-rotate(180deg);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should output declaration with provided value', () => {
+		return process(
+			`.block {
+				hueRotate(90deg);
+			}`,
+			`.block {
+				filter: hue-rotate(90deg);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
+
+describe('invert', () => {
+	it('should output declaration with default value', () => {
+		return process(
+			`.block {
+				invert();
+			}`,
+			`.block {
+				filter: invert(1);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should output declaration with provided value', () => {
+		return process(
+			`.block {
+				invert(0.8);
+			}`,
+			`.block {
+				filter: invert(0.8);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
+
+describe('saturate', () => {
+	it('should output declaration with default value', () => {
+		return process(
+			`.block {
+				saturate();
+			}`,
+			`.block {
+				filter: saturate(0.5);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should output declaration with provided value', () => {
+		return process(
+			`.block {
+				saturate(0.8);
+			}`,
+			`.block {
+				filter: saturate(0.8);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
+
+describe('sepia', () => {
+	it('should output declaration with default value', () => {
+		return process(
+			`.block {
+				sepia();
+			}`,
+			`.block {
+				filter: sepia(0.5);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should output declaration with provided value', () => {
+		return process(
+			`.block {
+				sepia(0.8);
+			}`,
+			`.block {
+				filter: sepia(0.8);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
+
+describe('dropShadow', () => {
+	it('should output declaration with default value', () => {
+		return process(
+			`.block {
+				dropShadow();
+			}`,
+			`.block {
+				filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.2));
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should output declaration with provided value', () => {
+		return process(
+			`.block {
+				dropShadow(2px 2px 0 black);
+			}`,
+			`.block {
+				filter: drop-shadow(2px 2px 0 black);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should output declaration with provided object values', () => {
+		return process(
+			`.block {
+				dropShadow(color: blue, x: 2px, blur: 1px);
+			}`,
+			`.block {
+				filter: drop-shadow(2px 1px 1px blue);
+			}`,
+			{ mixins: mixins }
+		);
+	});
+});
+
+describe('loadFont', () => {
+	it('should output declaration with provided object values', () => {
+		return process(
+			stripIndent`
+				.block {
+					loadFont(name: foo);
+				}
+			`,
+			stripIndent`
+				.block {
+					@font-face {
+						font-family: foo;
+						font-weight: normal;
+						font-style: normal;
+						src: url('../fonts/foo.woff2'), url('../fonts/foo.woff'), url('../fonts/foo.ttf')
+					}
+				}
+			`,
+			{ mixins: mixins }
+		);
+	});
+});
