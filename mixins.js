@@ -343,6 +343,140 @@ module.exports = (vars = {}) => {
 		},
 
 		/**
+		 * Filter
+		 *
+		 * @param {string} value
+		 * @returns {Object}
+		 */
+		filter(value) {
+			return decl('filter', value);
+		},
+
+		/**
+		 * Blur
+		 *
+		 * @param {string} value
+		 * @returns {Object}
+		 */
+		blur(value = '2px') {
+			return this.filter(`blur(${value})`);
+		},
+
+		/**
+		 * Brightness
+		 *
+		 * @param {number} value
+		 * @returns {Object}
+		 */
+		brightness(value = 0.5) {
+			return this.filter(`brightness(${value})`);
+		},
+
+		/**
+		 * Contrast
+		 *
+		 * @param {number} value
+		 * @returns {Object}
+		 */
+		contrast(value = 1.5) {
+			return this.filter(`contrast(${value})`);
+		},
+
+		/**
+		 * Grayscale
+		 *
+		 * @param {number} value
+		 * @returns {Object}
+		 */
+		grayscale(value = 1) {
+			return this.filter(`grayscale(${value})`);
+		},
+
+		/**
+		 * Hue rotate
+		 *
+		 * @param {string} value
+		 * @returns {Object}
+		 */
+		hueRotate(value = '180deg') {
+			return this.filter(`hue-rotate(${value})`);
+		},
+
+		/**
+		 * Invert
+		 *
+		 * @param {number} value
+		 * @returns {Object}
+		 */
+		invert(value = 1) {
+			return this.filter(`invert(${value})`);
+		},
+
+		/**
+		 * Saturate
+		 * @param {number} value
+		 * @returns {Object}
+		 */
+		saturate(value = 0.5) {
+			return this.filter(`saturate(${value})`);
+		},
+
+		/**
+		 * Sepai
+		 *
+		 * @param {number} value
+		 * @returns {Object}
+		 */
+		sepia(value = 0.5) {
+			return this.filter(`sepia(${value})`);
+		},
+
+		/**
+		 * Drop shadow
+		 *
+		 * @param {Array|Object} args
+		 * @returns {Array}
+		 */
+		dropShadow(...args) {
+			let keywords = [ 'light', 'dark' ],
+				defaults = {
+					opacity: vars.default.opacity,
+					x: '1px',
+					y: '1px',
+					blur: 0
+				};
+
+			if (isEmpty(args)) {
+				let { opacity, x, y, blur } = defaults;
+
+				return this.filter(`drop-shadow(${x} ${y} ${blur} rgba(0, 0, 0, ${opacity}))`);
+			}
+
+			if (isString(args[0])) {
+				if (args.length === 1) {
+					return this.filter(`drop-shadow(${args[0]})`);
+				}
+				
+				// TODO: Can't pass single values with key value pairs
+				// else if (args.length > 1) {
+				// 	let { x, y } = Object.assign(defaults, args[1]);
+				//
+				// 	return this.filter(`drop-shadow(${x} ${y})`);
+				// }
+
+				return false;
+			}
+
+			if (isObject(args[0]) && args[0].hasOwnProperty('color')) {
+				let { x, y, blur, color } = Object.assign(defaults, args[0]);
+
+				return this.filter(`drop-shadow(${x} ${y} ${blur} ${color})`);
+			}
+
+			return false;
+		},
+
+		/**
 		 * Fixed positioning
 		 *
 		 * @param {string|number|Object} [args[]] - top or object of positions
@@ -557,6 +691,33 @@ module.exports = (vars = {}) => {
 		 */
 		hide() {
 			return this.display('none');
+		},
+
+		/**
+		 * Load font
+		 *
+		 * @param {Array} args
+		 * @returns {Array}
+		 */
+		loadFont(...args) {
+			let defaults = {
+				style: 'normal',
+				weight: 'normal'
+			};
+
+			if (isObject(args[0])) {
+				let props = this.font({
+						family: args[0].name,
+						weight: args[0].weight || 'normal',
+						style: args[0].style || 'normal'
+					}),
+					file = args[0].file || args[0].name,
+					filePath = `${vars.font.path}${file}`;
+
+				props.push(decl('src', `url('${filePath}.woff2'), url('${filePath}.woff'), url('${filePath}.ttf')`));
+
+				return rule('@font-face', props);
+			}
 		},
 
 		/**
