@@ -2037,7 +2037,7 @@ describe('columns', () => {
 				columns();
 			}`,
 			`.block {
-				column-count: 2rem;
+				column-count: 2;
 				column-rule-width: 1px;
 			}`,
 			{ mixins: mixins }
