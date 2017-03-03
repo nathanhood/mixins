@@ -1049,36 +1049,30 @@ module.exports = (vars = {}) => {
 		 *
 		 * @return {Array}
 		 */
-		spaced(value) {
-			if (isEmpty(value) || isObject(value)) {
-				value = vars.block.margin.bottom;
-			}
-
-			return this.margin({ bottom: value });
+		spaced(value = vars.block.margin.bottom) {
+			return decl('margin-bottom', value);
 		},
 
 		/**
-		 * Add a specified margin bottom, width, height, and display block
+		 * Spaced block
 		 *
-		 * @param {Array} [args]
-		 * @param {string|number|Object} [args[]] - spaced value or object of width/height
-		 *	 @param {string|number} [args[].width]
-		 *	 @param {string|number} [args[].height]
-		 * @param {string|number} [args[]] - width
-		 * @param {string|number} [args[]] - height
-		 * @return {Array}
+		 * @param {number|string} [margin]
+		 * @param {number|string} [width]
+		 * @param {number|string} [height]
+		 * @returns {Array}
 		 */
-		spacedBlock(...args) {
-			let props = this.spaced(...args);
+		spacedBlock(margin = vars.block.margin.bottom, width, height) {
+			let props = [
+				decl('display', 'block'),
+				this.spaced(margin)
+			];
 
-			if (isObject(args[0])) {
-				props = props.concat(decl.createManyFromObj(args[0]));
-				props = props.concat(this.block());
-			} else if (args.length > 1) {
-				args.shift();
-				props = props.concat(this.block(...args));
-			} else {
-				props = props.concat(this.block());
+			if (width) {
+				props.push(decl('width', width));
+			}
+
+			if (height) {
+				props.push(decl('height', height));
 			}
 
 			return props;
