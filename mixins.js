@@ -249,35 +249,44 @@ module.exports = (vars = {}) => {
 		/**
 		 * Grid column
 		 *
-		 * @param {Array} args
-		 * @param {Array} [args[]] - spaced key word or column share
-		 * @param {Array} [args[]] - column share or grid columns
-		 * @param {Array} [args[]] - grid columns
-		 * @return {Array}
+		 * @param {number|string} [keyword]
+		 * @param {number} [share]
+		 * @param {number} [columns]
+		 * @param {string} [margin]
+		 * @returns {Array}
 		 */
-		column(...args) {
+		column(keyword, share, columns = vars.grid.columns, margin = vars.grid.margin) {
 			let props = [
-				decl('float', 'left')
-			];
+					decl('float', 'left')
+				],
+				width = (1 / parseInt(columns)) * parseInt(share);
 
-			if (! isEmpty(args)) {
-				if (isPercentage(args[0])) {
-					props.push(decl('width', args[0]));
-				} else if (args[0] === 'spaced') {
-					let columns = isEmpty(args[2]) ? vars.grid.columns : args[2],
-						margin = isEmpty(args[3]) ? vars.grid.margin : args[3];
-
-					props.push(decl('width', (100 / columns) * args[1] + '%'));
-
-					props = props.concat(this.margin({ left: margin }));
-				} else {
-					let columns = isEmpty(args[1]) ? vars.grid.columns : args[1];
-
-					props.push(decl('width', (100 / columns) * args[0] + '%'));
-				}
-			} else {
+			if (! keyword) {
 				props.push(decl('width', '100%'));
+
+				return props;
 			}
+
+			if (isPercentage(keyword)) {
+				props.push(decl('width', keyword));
+
+				return props;
+			}
+
+			if (keyword === 'spaced') {
+				return props.concat([
+					decl('margin-left', margin),
+					decl('width', toPercentage((width) - toNumber(margin)))
+				]);
+			}
+
+			// If not 'spaced', arguments are shifted
+			if (isNumber(keyword)) {
+				columns = share || columns;
+				share = keyword;
+			}
+
+			props.push(decl('width', toPercentage((1 / parseInt(columns)) * parseInt(share))));
 
 			return props;
 		},
