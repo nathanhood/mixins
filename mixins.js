@@ -1074,46 +1074,18 @@ module.exports = (vars = {}) => {
 		/**
 		 * Transition shorthand declaration
 		 *
-		 * @param {Array} [args]
-		 * @param {string|Object} [args[]] - transition property or object
-		 *	 @param {string} [args[].property]
-		 *	 @param {string} [args[].duration]
-		 *	 @param {string} [args[].timing]
-		 *	 @param {string} [args[].delay]
-		 * @param {string} [args[]] - transition duration
-		 * @param {string} [args[]] - transition timing
-		 * @param {string} [args[]] - transition delay
-		 * @returns {Declaration}
+		 * @param {string} [property]
+		 * @param {string} [duration]
+		 * @param {string} [easing]
+		 * @param {string} [delay]
+		 * @returns {Object}
 		 */
-		transition(...args) {
-			let defaults = {
-					property: 'all',
-					duration: vars.default.duration,
-					timing: vars.default.timing,
-					delay: vars.default.delay
-				},
-				property, duration, timing, delay;
-
-			if (args[0] === false) {
-				return false;
-			}
-
-			if (args[0] === 'none') {
+		transition(property = 'all', duration = vars.default.duration, easing = vars.default.timing, delay = '0s') {
+			if (property === 'none') {
 				return decl('transition', 'none');
 			}
 
-			if (isObject(args[0])) {
-				let config = Object.assign(defaults, args[0]);
-
-				return decl('transition', `${config.property} ${config.duration} ${config.timing} ${config.delay}`);
-			}
-
-			property = args[0] || defaults.property;
-			duration = args[1] || defaults.duration;
-			timing = args[2] || defaults.timing;
-			delay = args[3] || defaults.delay;
-
-			return decl('transition', `${property} ${duration} ${timing} ${delay}`);
+			return decl('transition', `${property} ${duration} ${easing} ${delay}`);
 		},
 
 		/**
