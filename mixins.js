@@ -584,42 +584,32 @@ module.exports = (vars = {}) => {
 		/**
 		 * Font
 		 *
-		 * @param {Array} [args]
-		 * @param {string|number|Object} [args[]] - font-family or object of properties
-		 *	 @param {string|number} [args[].family]
-		 *	 @param {string|number} [args[].size]
-		 *	 @param {string|number} [args[].weight]
-		 *	 @param {string|number} [args[].lineHeight]
-		 *	 @param {string|number} [args[].style]
-		 * @param {string|number} [args[]] - font-size
-		 * @param {string|number} [args[]] - font-weight
-		 * @param {string|number} [args[]] - line-height
-		 * @param {string|number} [args[]] - font-style
-		 * @return {Array}
+		 * @param {string} [family]
+		 * @param {number} size
+		 * @param {number|string} weight
+		 * @param {string} lineHeight
+		 * @param {string} style
+		 * @returns {Array}
 		 */
-		font(...args) {
-			props = [];
+		font(family = vars.font.family, size, weight, lineHeight, style) {
+			let props = [
+				decl('font-family', family)
+			];
 
-			if (isObject(args[0])) {
-				props = props.concat(decl.createManyFromObj(args[0], 'font', ['lineHeight']));
-			} else if (! isEmpty(args)) {
-				props.push(decl('font-family', args[0]));
+			if (size) {
+				props.push(decl('font-size', size));
+			}
 
-				if (args[1]) {
-					props.push(decl('font-size', args[1]));
-				}
+			if (weight) {
+				props.push(decl('font-weight', weight));
+			}
 
-				if (args[2]) {
-					props.push(decl('font-weight', args[2]));
-				}
+			if (lineHeight) {
+				props.push(decl('line-height', lineHeight));
+			}
 
-				if (args[3]) {
-					props.push(decl('line-height', args[3]));
-				}
-
-				if (args[4]) {
-					props.push(decl('font-style', args[4]));
-				}
+			if (style) {
+				props.push(decl('font-style', style));
 			}
 
 			return props;
