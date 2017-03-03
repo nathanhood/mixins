@@ -8,30 +8,31 @@ module.exports = (vars = {}) => {
 		/**
 		 * Absolute positioning
 		 *
-		 * @param {string|number|Object} [args[]] - top or object of positions
-		 *	 @param {string|number} [args[].top]
-		 *	 @param {string|number} [args[].right]
-		 *	 @param {string|number} [args[].bottom]
-		 *	 @param {string|number} [args[].left]
-		 * @param {string|number} [args[]] - right
-		 * @param {string|number} [args[]] - bottom
-		 * @param {string|number} [args[]] - left
-		 * @return {Array}
+		 * @param {string|number} [top]
+		 * @param {string|number} [right]
+		 * @param {string|number} [bottom]
+		 * @param {string|number} [left]
+		 * @returns {Array}
 		 */
-		absolute(...args) {
+		absolute(top, right, bottom, left) {
 			let props = [
 				decl('position', 'absolute')
 			];
 
-			if (isObject(args[0])) {
-				props = props.concat(decl.createManyFromObj(args[0]));
-			} else if (! isEmpty(args)) {
-				props = props.concat(decl.createMany([
-					'top',
-					'right',
-					'left',
-					'bottom'
-				], args));
+			if (top) {
+				props.push(decl('top', top));
+			}
+
+			if (right) {
+				props.push(decl('right', right));
+			}``
+
+			if (bottom) {
+				props.push(decl('bottom', bottom));
+			}
+
+			if (left) {
+				props.push(decl('left', left));
 			}
 
 			return props;
