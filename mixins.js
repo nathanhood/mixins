@@ -709,59 +709,74 @@ module.exports = (vars = {}) => {
 		/**
 		 * Load font
 		 *
-		 * @param {Array} args
-		 * @returns {Array}
+		 * @param {string} name
+		 * @param {string} [file]
+		 * @param {string} [weight]
+		 * @param {string} [style]
+		 * @returns {*}
 		 */
-		loadFont(...args) {
-			let defaults = {
-				style: 'normal',
-				weight: 'normal'
-			};
-
-			if (isObject(args[0])) {
-				let props = this.font({
-						family: args[0].name,
-						weight: args[0].weight || 'normal',
-						style: args[0].style || 'normal'
-					}),
-					file = args[0].file || args[0].name,
-					filePath = `${vars.font.path}${file}`;
-
-				props.push(decl('src', `url('${filePath}.woff2'), url('${filePath}.woff'), url('${filePath}.ttf')`));
-
-				return rule('@font-face', props);
+		loadFont(name, file = name, weight = 'normal', style = 'normal') {
+			if (! name) {
+				return false;
 			}
+
+			let props = [],
+				filePath = `${vars.font.path}${file}`;
+
+			props = props.concat(this.font(name, null, weight, null, style));
+			props.push(decl('src', `url('${filePath}.woff2'), url('${filePath}.woff'), url('${filePath}.ttf')`));
+
+			return rule('@font-face', props);
 		},
 
 		/**
 		 * Margin
 		 *
-		 * @param {Array} args
-		 * @returns {Array|boolean}
+		 * @param {string} keyword
+		 * @param {number|string} top
+		 * @param {number|string} right
+		 * @param {number|string} bottom
+		 * @param {number|string} left
+		 * @returns {Array|Object}
 		 */
-		margin(...args) {
-			let keywords = ['horizontal', 'vertical'],
-				result = false;
+		margin(keyword, top, right, bottom, left) {
+			let keywords = ['none', 'horizontal', 'vertical'],
+				props = [];
 
-			if (isObject(args[0])) {
-				return decl.createManyFromObj(args[0], 'margin');
-			}
+			if (keywords.includes(keyword)) {
+				let bottom = right || top,
+					args = [top, bottom];
 
-			if (keywords.includes(args[0])) {
-				let keyword = args.shift();
-
-				if (args.length < 2) {
-					args.push(args[0]);
+				if (keyword === 'none') {
+					return decl('transition', 'none');
 				}
 
 				if (keyword === 'horizontal') {
-					result = decl.createMany(['left', 'right'], args, 'margin');
-				} else if (keyword === 'vertical') {
-					result = decl.createMany(['top', 'bottom'], args, 'margin');
+					return decl.createMany(['left', 'right'], args, 'margin');
+				}
+
+				if (keyword === 'vertical') {
+					return decl.createMany(['top', 'bottom'], args, 'margin');
 				}
 			}
 
-			return result;
+			if (top) {
+				props.push(decl('margin-top', top));
+			}
+
+			if (right) {
+				props.push(decl('margin-right', right));
+			}
+
+			if (bottom) {
+				props.push(this.spaced(bottom));
+			}
+
+			if (left) {
+				props.push(decl('margin-left', left));
+			}
+
+			return props;
 		},
 
 		/**
