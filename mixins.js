@@ -41,38 +41,46 @@ module.exports = (vars = {}) => {
 		/**
 		 * Background
 		 *
-		 * @param  {Array} args
-		 *	 @param {string} [args[]] - color
-		 *	 @param {string} [args[]] - opacity or URL
-		 *	 @param {number|string} [args[]] - repeat or attachment
-		 *	 @param {number|string} [args[]] - attachment or position x
-		 *	 @param {number|string} [args[]] - position x or position y
-		 *	 @param {number|string} [args[]] - position y
-		 * @return {Array}
+		 * @param {number|string} [color]
+		 * @param {number|string} [opacity] - Opacity or filename
+		 * @param {string} [repeat] - Repeat or attachment
+		 * @param {number|string} [attachment] - Attachment or x
+		 * @param {number|string} [x] - X or y
+		 * @param {number|string} [y]
+		 * @returns {Object}
 		 */
-		background(...args) {
-			let props = [
-					decl('background', '')
-				],
-				color = args[0];
+		background(color = vars.colors.body.background, opacity, repeat, attachment, x, y) {
+			let prop = color;
 
-			// TODO: Allow for object params? Shorthand needs to be in specific order.
-			if (color) {
-				if (args[1] && isNumber(args[1])) {
-					args[0] = hexToRgba(color, args[1]);
-					args.splice(1, 1);
-				}
-
-				args.forEach(function(arg, i) {
-					if (i) {
-						arg = ' ' + arg;
-					}
-
-					props[0].value += arg;
-				});
+			if (prop === 0) {
+				return decl('background', 'transparent');
 			}
 
-			return props;
+			if (opacity) {
+				if (isNumber(opacity)) {
+					prop = hexToRgba(prop, opacity);
+				} else {
+					prop += ` ${opacity}`;
+				}
+			}
+
+			if (repeat) {
+				prop += ` ${repeat}`;
+			}
+
+			if (attachment) {
+				prop += ` ${attachment}`;
+			}
+
+			if (x) {
+				prop += ` ${x}`;
+			}
+
+			if (y) {
+				prop += ` ${y}`;
+			}
+
+			return decl('background', prop);
 		},
 
 		/**
