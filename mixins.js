@@ -825,29 +825,40 @@ module.exports = (vars = {}) => {
 		 * @param {Array} args
 		 * @returns {Array|boolean}
 		 */
-		padding(...args) {
+		padding(keyword, top, right, bottom, left) {
 			let keywords = ['horizontal', 'vertical'],
-				result = false;
+				props = [];
 
-			if (isObject(args[0])) {
-				return decl.createManyFromObj(args[0], 'padding');
-			}
-
-			if (keywords.includes(args[0])) {
-				let keyword = args.shift();
-
-				if (args.length < 2) {
-					args.push(args[0]);
-				}
+			if (keywords.includes(keyword)) {
+				let bottom = right || top,
+					args = [top, bottom];
 
 				if (keyword === 'horizontal') {
-					result = decl.createMany(['left', 'right'], args, 'padding');
-				} else if (keyword === 'vertical') {
-					result = decl.createMany(['top', 'bottom'], args, 'padding');
+					return decl.createMany(['left', 'right'], args, 'padding');
+				}
+
+				if (keyword === 'vertical') {
+					return decl.createMany(['top', 'bottom'], args, 'padding');
 				}
 			}
 
-			return result;
+			if (top) {
+				props.push(decl('padding-top', top));
+			}
+
+			if (right) {
+				props.push(decl('padding-right', right));
+			}
+
+			if (bottom) {
+				props.push(decl('padding-bottom', bottom));
+			}
+
+			if (left) {
+				props.push(decl('padding-left', left));
+			}
+
+			return props;
 		},
 
 		/**
