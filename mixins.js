@@ -645,23 +645,21 @@ module.exports = (vars = {}) => {
 		/**
 		 * Display inline block
 		 *
-		 * @param  {Array} [args[]] - width
-		 * @param  {Array} [args[]] - height
-		 * @return {Array}
+		 * @param {number|string} [width]
+		 * @param {number|string} [height]
+		 * @returns {Array}
 		 */
-		inlineBlock(...args) {
+		inlineBlock(width, height) {
 			let props = [
-				this.display('inline-block')
+				decl('display', 'inline-block')
 			];
 
-			if (isObject(args[0])) {
-				props = props.concat(decl.createManyFromObj(args[0]));
-			} else if (! isEmpty(args)) {
-				props.push(decl('width', args[0]));
+			if (width) {
+				props.push(decl('width', width));
+			}
 
-				if (args[1]) {
-					props.push(decl('height', args[1]));
-				}
+			if (height) {
+				props.push(decl('height', height));
 			}
 
 			return props;
