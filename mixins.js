@@ -191,15 +191,24 @@ module.exports = (vars = {}) => {
 		/**
 		 * A block level element, centered with margin
 		 *
-		 * @param  {Array} [args] - Reference 'block' function for param details
-		 * @return {Array}
+		 * @param {number|string} [maxWidth]
+		 * @param {number|string} [margin]
+		 * @returns {Array}
 		 */
-		centeredBlock(...args) {
-			let props = this.block(...args);
+		centeredBlock(maxWidth, margin) {
+			let props = [
+				decl('display', 'block'),
+				decl('margin-left', 'auto'),
+				decl('margin-right', 'auto')
+			];
 
-			props = props.concat(this.margin(
-				{ left: 'auto', right: 'auto' }
-			));
+			if (maxWidth) {
+				props.push(decl('max-width', maxWidth));
+			}
+
+			if (margin) {
+				props.push(decl('margin-bottom', margin));
+			}
 
 			return props;
 		},
