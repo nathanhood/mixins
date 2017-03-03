@@ -292,37 +292,58 @@ module.exports = (vars = {}) => {
 		},
 
 		/**
+		 * Modify grid column
+		 *
+		 * @param {number|string} keyword
+		 * @param {number} [share]
+		 * @param {number} [columns]
+		 * @param {string} [margin]
+		 * @returns {Array|Object}
+		 */
+		columnModify(keyword, share, columns = vars.grid.columns, margin = vars.grid.margin) {
+			let width = (1 / parseInt(columns)) * parseInt(share);
+
+			if (isPercentage(keyword)) {
+				return decl('width', keyword);
+			}
+
+			if (keyword === 'spaced') {
+				return [
+					decl('margin-left', margin),
+					decl('width', toPercentage((width) - toNumber(margin)))
+				];
+			}
+
+			// If not 'spaced', arguments are shifted
+			if (isNumber(keyword)) {
+				columns = share || columns;
+				share = keyword;
+			}
+
+			return decl('width', toPercentage((1 / parseInt(columns)) * parseInt(share)));
+		},
+
+		/**
 		 * Columns
 		 *
-		 * @param {Array} [args]
-		 * @param {Array} [args[]] - count
-		 * @param {Array} [args[]] - gap
-		 * @param {Array} [args[]] - rule style
-		 * @param {Array} [args[]] - rule width
+		 * @param {number} count
+		 * @param {number} gap
+		 * @param {string} style
+		 * @param {number|string} width
 		 * @returns {Array}
 		 */
-		columns(...args) {
+		columns(count = 2, gap, style, width = '1px') {
 			let props = [
-				decl('column-count', 2),
-				decl('column-rule-width', '1px')
+				decl('column-count', count),
+				decl('column-rule-width', width)
 			];
 
-			if (isEmpty(args)) {
-				return props;
+			if (gap) {
+				props.push(decl('column-gap', gap));
 			}
 
-			props[0] = decl('column-count', args[0]);
-
-			if (args[1]) {
-				props.push(decl('column-gap', args[1]));
-			}
-
-			if (args[2]) {
-				props.push(decl('column-rule-style', args[2]));
-			}
-
-			if (args[3]) {
-				props[1] = decl('column-rule-width', args[3]);
+			if (style) {
+				props.push(decl('column-rule-style', style));
 			}
 
 			return props;
