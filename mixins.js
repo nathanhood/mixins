@@ -954,10 +954,10 @@ module.exports = (vars = {}) => {
 			margin = parseInt(margin);
 
 			return [
-				this.margin({ left: (margin * -1) + '%' })[0],
-				decl('max-width', (100 + margin) + '%'),
+				decl('margin-left', `${margin * -1}%`),
+				decl('max-width', `${margin + 100}%`),
 				this.clearfix()
-			]
+			];
 		},
 
 		/**
@@ -970,8 +970,10 @@ module.exports = (vars = {}) => {
 			margin = margin || vars.grid.margin.replace('%', '');
 			margin = parseInt(margin);
 
-			return this.margin({ left: (margin * -1) + '%' })
-				.concat(decl('max-width', (100 + margin) + '%'));
+			return [
+				decl('margin-left', `${margin * -1}%`),
+				decl('max-width', `${margin + 100}%`)
+			];
 		},
 
 		/**
@@ -980,8 +982,10 @@ module.exports = (vars = {}) => {
 		 * @return {Array}
 		 */
 		rowReset() {
-			return this.margin({ left: 0 })
-				.concat(decl('max-width', 'none'));
+			return [
+				decl('margin-left', 0),
+				decl('max-width', 'none')
+			];
 		},
 
 		/**
