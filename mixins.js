@@ -536,23 +536,16 @@ module.exports = (vars = {}) => {
 		/**
 		 * Flex
 		 *
-		 * @param {Array|Object} [args]
-		 * 	 @param {number} [args[].grow]
-		 * 	 @param {number} [args[].shrink]
-		 * 	 @param {string} [args[].basis]
+		 * @param {number} grow
+		 * @param {number} shrink
+		 * @param {string} basis
 		 * @returns {Array}
 		 */
-		flex(...args) {
-			// TODO: Need to set defaults even when passing parameters as an
-			// object
-			if (isObject(args)) {
-				return decl.createManyFromObj(args, 'flex');
-			}
-
+		flex(grow = 0, shrink = 0, basis = 'auto') {
 			return [
-				decl('flex-grow', args[0] || 0),
-				decl('flex-shrink', args[1] || 0),
-				decl('flex-basis', args[2] || 'auto')
+				decl('flex-grow', grow),
+				decl('flex-shrink', shrink),
+				decl('flex-basis', basis)
 			];
 		},
 
