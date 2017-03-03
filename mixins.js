@@ -1172,7 +1172,7 @@ module.exports = (vars = {}) => {
 			let props = [];
 
 			if (borderColor && borderColor !== false) {
-				props.push(this.border('none'));
+				props = props.concat(this.border('none'));
 			}
 
 			if (blockWrap) {
