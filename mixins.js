@@ -86,26 +86,21 @@ module.exports = (vars = {}) => {
 		/**
 		 * Display block
 		 *
-		 * @param {Array} args
-		 * @param {string|number|Object} [args[]] - width or object of properties
-		 *	 @param {string|number} [args[].width]
-		 *	 @param {string|number} [args[].height]
-		 * @param {string|number} [args[]] - height
+		 * @param {number|string} [width]
+		 * @param {number|string} [height]
 		 * @returns {Array}
 		 */
-		block(...args) {
+		block(width, height) {
 			let props = [
 				this.display('block')
 			];
 
-			if (isObject(args[0])) {
-				props = props.concat(decl.createManyFromObj(args[0]));
-			} else if (! isEmpty(args)) {
-				props.push(decl('width', args[0]));
+			if (width) {
+				props.push(decl('width', width));
+			}
 
-				if (args[1]) {
-					props.push(decl('height', args[1]));
-				}
+			if (height) {
+				props.push(decl('height', height));
 			}
 
 			return props;
