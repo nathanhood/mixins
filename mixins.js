@@ -477,75 +477,57 @@ module.exports = (vars = {}) => {
 		/**
 		 * Drop shadow
 		 *
-		 * @param {Array|Object} args
-		 * @returns {Array}
+		 * @param {string} color
+		 * @param {string} x
+		 * @param {string} y
+		 * @param {number} blur
+		 * @param {number} opacity
+		 * @returns {object}
 		 */
-		dropShadow(...args) {
-			let keywords = [ 'light', 'dark' ],
-				defaults = {
-					opacity: vars.default.opacity,
-					x: '1px',
-					y: '1px',
-					blur: 0
-				};
+		dropShadow(color, x = '1px', y = '1px', blur = 0, opacity = vars.default.opacity) {
+			let colorResult = color;
 
-			if (isEmpty(args)) {
-				let { opacity, x, y, blur } = defaults;
-
-				return this.filter(`drop-shadow(${x} ${y} ${blur} rgba(0, 0, 0, ${opacity}))`);
+			if (! color) {
+				colorResult = `rgba(0, 0, 0, ${opacity})`;
 			}
 
-			if (isString(args[0])) {
-				if (args.length === 1) {
-					return this.filter(`drop-shadow(${args[0]})`);
-				}
-				
-				// TODO: Can't pass single values with key value pairs
-				// else if (args.length > 1) {
-				// 	let { x, y } = Object.assign(defaults, args[1]);
-				//
-				// 	return this.filter(`drop-shadow(${x} ${y})`);
-				// }
-
-				return false;
+			if (color === 'light') {
+				colorResult = `rgba(255, 255, 255, ${opacity})`;
+			} else if (color === 'dark') {
+				colorResult = `rgba(0, 0, 0, ${opacity})`;
 			}
 
-			if (isObject(args[0]) && args[0].hasOwnProperty('color')) {
-				let { x, y, blur, color } = Object.assign(defaults, args[0]);
-
-				return this.filter(`drop-shadow(${x} ${y} ${blur} ${color})`);
-			}
-
-			return false;
+			return this.filter(`drop-shadow(${x} ${y} ${blur} ${colorResult})`);
 		},
 
 		/**
 		 * Fixed positioning
 		 *
-		 * @param {string|number|Object} [args[]] - top or object of positions
-		 *	 @param {string|number} [args[].top]
-		 *	 @param {string|number} [args[].right]
-		 *	 @param {string|number} [args[].bottom]
-		 *	 @param {string|number} [args[].left]
-		 * @param {string|number} [args[]] - right
-		 * @param {string|number} [args[]] - bottom
-		 * @param {string|number} [args[]] - left
-		 * @return {Array}
+		 * @param {number|string} [top]
+		 * @param {number|string} [right]
+		 * @param {number|string} [bottom]
+		 * @param {number|string} [left]
+		 * @returns {Array}
 		 */
-		fixed(...args) {
-			props = [
+		fixed(top, right, bottom, left) {
+			let props = [
 				decl('position', 'fixed')
 			];
 
-			if (isObject(args[0])) {
-				props = props.concat(decl.createManyFromObj(args[0]));
-			} else if (! isEmpty(args)) {
-				props = props.concat(decl.createMany([
-					'top',
-					'right',
-					'left',
-					'bottom'
-				], args));
+			if (top) {
+				props.push(decl('top', top));
+			}
+
+			if (right) {
+				props.push(decl('right', right));
+			}
+
+			if (bottom) {
+				props.push(decl('bottom', bottom));
+			}
+
+			if (left) {
+				props.push(decl('left', left));
 			}
 
 			return props;
