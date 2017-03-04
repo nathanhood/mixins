@@ -24,7 +24,7 @@ module.exports = (vars = {}) => {
 
 			if (right) {
 				props.push(decl('right', right));
-			}``
+			}
 
 			if (bottom) {
 				props.push(decl('bottom', bottom));
