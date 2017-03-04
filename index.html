@@ -1,0 +1,361 @@
+<html>
+<head>
+	<title>Test</title>
+	<link rel="stylesheet" href="output.css">
+	<style>
+		body {
+			padding: 5rem;
+		}
+		ul {
+			list-style: none;
+		}
+		.container {
+			margin-bottom: 4rem;
+		}
+	</style>
+</head>
+<body>
+
+<div class="container">
+	<h3>Code</h3>
+	<pre><code>.selector {
+	prop: value;
+}</code></pre>
+</div>
+
+<div class="container">
+	<h3>Figures</h3>
+	<figure>
+		<img src="https://placehold.it/1600x800">
+		<figcaption>
+			<b>Fig. 3.2</b>
+			Lorem ipsum dolor sit amet by
+			<a href="#">eiusmod tempor</a>
+		</figcaption>
+	</figure>
+</div>
+
+<div class="responsive-table">
+	<h3>Tables</h3>
+	<table class="table">
+		<caption>Basic table</caption>
+		<thead>
+			<tr>
+				<th>Heading</th>
+				<th>Heading</th>
+				<th>Heading</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Lorem ipsum dolor</td>
+				<td>Lorem ipsum dolor</td>
+				<td>Lorem ipsum dolor sit amet</td>
+			</tr>
+			<tr>
+				<td>Lorem ipsum dolor</td>
+				<td>Lorem ipsum dolor</td>
+				<td>Lorem ipsum dolor sit amet</td>
+			</tr>
+			<tr>
+				<td>Lorem ipsum dolor</td>
+				<td>Lorem ipsum dolor</td>
+				<td>Lorem ipsum dolor sit amet</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="responsive-table">
+	<table class="table -bordered">
+		<caption>Bordered table</caption>
+		<thead>
+		<tr>
+			<th>Heading</th>
+			<th>Heading</th>
+			<th>Heading</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor sit amet</td>
+		</tr>
+		<tr>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor sit amet</td>
+		</tr>
+		<tr>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor sit amet</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="responsive-table">
+	<table class="table -striped">
+		<caption>Striped table</caption>
+		<thead>
+		<tr>
+			<th>Heading</th>
+			<th>Heading</th>
+			<th>Heading</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor sit amet</td>
+		</tr>
+		<tr>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor sit amet</td>
+		</tr>
+		<tr>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor sit amet</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="responsive-table">
+	<table class="table -bordered -striped">
+		<caption>Bordered and striped table</caption>
+		<thead>
+		<tr>
+			<th>Heading</th>
+			<th>Heading</th>
+			<th>Heading</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor sit amet</td>
+		</tr>
+		<tr>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor sit amet</td>
+		</tr>
+		<tr>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor</td>
+			<td>Lorem ipsum dolor sit amet</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="container">
+	<h3>Buttons</h3>
+	<button class="button">Default button</button>
+	<button class="colored-button">Colored button</button>
+	<button class="button" disabled>Disabled button</button>
+	<button class="button -disabled">Disabled button (class)</button>
+</div>
+
+<form class="form">
+	<h3>Forms</h3>
+	<fieldset class="fieldset">
+		<legend class="legend">This is the legend of a fieldset</legend>
+
+		<label for="requiredInput" class="label">Required input</label>
+		<input type="text" class="input" id="requiredInput" required>
+
+		<label for="searchInput">Search input</label>
+		<input placeholder="Search for &hellip;" type="search" class="input -search" id="searchInput">
+
+		<label for="disabledInput">Disabled input</label>
+		<input type="text" placeholder="This is disabled" class="input" id="disabledInput" disabled>
+
+		<label for="disabledInput2">Disabled input (class)</label>
+		<input type="text" placeholder="This is using the -disabled modifer" class="input -disabled" id="disabledInput2">
+	</fieldset>
+
+	<label for="checkbox">Checkbox input</label>
+	<input type="checkbox" class="input -checkbox" id="checkbox">
+
+	<label for="radio1">Radio input #1</label>
+	<input name="radio" type="radio" class="input -radio" id="radio1">
+	<label for="radio2">Radio input #2</label>
+	<input name="radio" type="radio" class="input -radio" id="radio2">
+
+	<label for="submit">Submit input</label>
+	<input type="submit" value="Submit" class="input -submit">
+
+	<label for="reset">Reset input</label>
+	<input type="reset" value="Reset" class="input -reset" id="reset">
+
+	<label for="select">Select</label>
+	<select class="select" id="select">
+		<option value="One">One</option>
+		<option value="Two">Two</option>
+	</select>
+
+	<label for="multi-select">Multi-select</label>
+	<select class="select" id="multi-select" multiple>
+		<optgroup label="Grouping">
+			<option value="1">One</option>
+			<option value="2">Two</option>
+		</optgroup>
+	</select>
+
+	<label for="textarea">Textarea</label>
+	<textarea class="textarea" id="textarea"></textarea>
+</form>
+
+<div class="container">
+	<h3>Definition list</h3>
+	<dl>
+		<dt>Lorem ipsum dolor</dt>
+		<dd>Sit amet, consectetur adipiscing elit.</dd>
+		<dt>Lorem ipsum dolor</dt>
+		<dd>Sit amet, consectetur adipiscing elit.</dd>
+	</dl>
+</div>
+
+<div class="container">
+	<h3>Ordered list</h3>
+	<ol>
+		<li>Lorem</li>
+		<li>
+			ipsum
+			<ol>
+				<li>dolor</li>
+				<li>sit</li>
+			</ol>
+		</li>
+		<li>amet</li>
+	</ol>
+</div>
+
+<div class="container">
+	<h3>Unordered list</h3>
+	<ul>
+		<li>Lorem</li>
+		<li>
+			ipsum
+			<ul>
+				<li>dolor</li>
+				<li>sit</li>
+			</ul>
+		</li>
+		<li>amet</li>
+	</ul>
+</div>
+
+<div class="container">
+	<h1>Heading</h1>
+	<h2>Heading</h2>
+	<h3>Heading</h3>
+	<h4>Heading</h4>
+	<h5>Heading</h5>
+	<h6>Heading</h6>
+</div>
+
+<div class="container">
+	<p>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquid
+		aperiam aut blanditiis cum, distinctio dolore earum eius enim ex
+		exercitationem facere fugit, hic in iure laborum magni maiores nesciunt
+		nisi nostrum numquam omnis optio perspiciatis praesentium quia quibusdam
+		reprehenderit, saepe similique totam voluptates. Animi aperiam cumque
+		cupiditate dolore, ducimus iure iusto necessitatibus non pariatur
+		perferendis soluta ut veniam! Nemo?
+	</p>
+</div>
+
+<div class="container">
+	<h3>Inline</h3>
+	<ul>
+		<li>
+			<a href="#">This is a simple link</a>
+		</li>
+		<li>
+			<strong>Strong defines important text</strong>
+		</li>
+		<li>
+			<em>The em tag renders as emphasized text</em>
+		</li>
+		<li>
+			The <b>b tag</b> visually weighs text without added importance
+		</li>
+		<li>
+			The <i>i tag</i> visually differentiates text without emphasis
+		</li>
+		<li>
+			The <u>u tag</u> renders text with an underline
+		</li>
+		<li>
+			<s>This text has a strikethrough</s>
+		</li>
+		<li>
+			<del>This is deleted text</del> and <ins>this text is inserted</ins>
+		</li>
+		<li>
+			Superscript <sup>&trade;</sup>
+		</li>
+		<li>
+			Subscript for things like H<sub>2</sub>O
+		</li>
+		<li>
+			<small>Small text is small for fine print</small>
+		</li>
+		<li>
+			<abbr title="Cascading Style Sheets">CSS</abbr> is a style sheet language
+		</li>
+		<li>
+			<q cite="https://www.weepower.com">
+				This inline quote has a cite reference
+			</q>
+		</li>
+		<li>
+			<cite>This is a citation</cite>
+		</li>
+		<li>
+			The <dfn>dfn tag</dfn> renders a definition
+		</li>
+		<li>
+			The <mark>mark tag</mark> highlights specific text
+		</li>
+		<li>
+			Styling <code>inline code</code> is easy
+		</li>
+		<li>
+			<samp>This is sample output</samp>
+		</li>
+		<li>
+			The variable element, such as <var>x</var> / <var>y</var> = <var>z</var>
+		</li>
+		<li>
+			The relative time is <time datetime="2017-02-27T10:00">2 weeks</time>
+		</li>
+	</ul>
+</div>
+
+<div class="container">
+	<h3>Blockquote</h3>
+	<blockquote>
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis
+			dignissimos dolor eos illo, ipsam laudantium pariatur rem
+			reprehenderit vitae voluptatem.
+		</p>
+		<cite>
+			<a href="#">John Doe</a>
+		</cite>
+	</blockquote>
+</div>
+
+</body>
+</html>

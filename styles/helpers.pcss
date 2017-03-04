@@ -1,0 +1,21 @@
+.container {
+	box-sizing: content-box;
+	max-width: $width.max;
+	min-width: $width.min;
+	block();
+	margin(horizontal, auto);
+	_containerPadding();
+}
+.js-hide {
+	display: none !important;
+}
+$(image.class.left) {
+	margin-right: $image.margin.size;
+	left();
+	margin(vertical, .32em, $image.margin.bottom);
+}
+$(image.class.right) {
+	margin-left: $image.margin.size;
+	margin(vertical, .32em, $image.margin.bottom);
+	right();
+}

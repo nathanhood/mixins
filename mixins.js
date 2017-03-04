@@ -1,6 +1,7 @@
-const Decl = require('postcss-js-mixins/lib/Declaration');
-const Rule = require('postcss-js-mixins/lib/Rule');
+const decl = require('postcss-js-mixins/lib/declaration');
+const rule = require('postcss-js-mixins/lib/rule');
 const { isObject, isEmpty, isPercentage, isColor, prefix, isNumber, hexToRgba, calcOpacity, isString, unit } = require('postcss-js-mixins/lib/helpers');
+
 
 module.exports = (vars = {}) => {
 	return {
@@ -19,13 +20,13 @@ module.exports = (vars = {}) => {
 		 */
 		absolute(...args) {
 			let props = [
-				new Decl('position', 'absolute')
+				decl('position', 'absolute')
 			];
 
 			if (isObject(args[0])) {
-				props = props.concat(Decl.createManyFromObj(args[0]));
+				props = props.concat(decl.createManyFromObj(args[0]));
 			} else if (! isEmpty(args)) {
-				props = props.concat(Decl.createMany([
+				props = props.concat(decl.createMany([
 					'top',
 					'right',
 					'left',
@@ -50,7 +51,7 @@ module.exports = (vars = {}) => {
 		 */
 		background(...args) {
 			let props = [
-					new Decl('background', '')
+					decl('background', '')
 				],
 				color = args[0];
 
@@ -89,12 +90,12 @@ module.exports = (vars = {}) => {
 			];
 
 			if (isObject(args[0])) {
-				props = props.concat(Decl.createManyFromObj(args[0]));
+				props = props.concat(decl.createManyFromObj(args[0]));
 			} else if (! isEmpty(args)) {
-				props.push(new Decl('width', args[0]));
+				props.push(decl('width', args[0]));
 
 				if (args[1]) {
-					props.push(new Decl('height', args[1]));
+					props.push(decl('height', args[1]));
 				}
 			}
 
@@ -107,7 +108,7 @@ module.exports = (vars = {}) => {
 		 * @returns {Object}
 		 */
 		bold() {
-			return new Decl('font-weight', vars.font.weight.bold);
+			return decl('font-weight', vars.font.weight.bold);
 		},
 
 		/**
@@ -134,13 +135,13 @@ module.exports = (vars = {}) => {
 				keyword = null,
 				values = [];
 
-			if (args[0] === 'false' || args[0] === 0 || args[0] === 'none') {
-				return new Decl('border', 'none');
+			if (args[0] === false || args[0] === 0 || args[0] === 'none') {
+				return decl('border', 'none');
 			}
 
 			// Default border
 			if (isEmpty(args)) {
-				return new Decl('border', defaultValues.join(' '));
+				return decl('border', defaultValues.join(' '));
 			}
 
 			if (keywords.includes(args[0])) {
@@ -148,14 +149,9 @@ module.exports = (vars = {}) => {
 				args.splice(0, 1);
 			}
 
-			// Allow user to add only color without including width and style
-			if (isColor(args[0])) {
-				args[2] = args.splice(0, 1);
-			}
-
-			values.push(unit(args[0] || defaultValues[0], 'border-width'));
-			values.push(unit(args[1] || defaultValues[1], 'border-style'));
-			values.push(unit(args[2] || defaultValues[2], 'border-color'));
+			values.push(unit(args[1] || defaultValues[0], 'border-width'));
+			values.push(unit(args[2] || defaultValues[1], 'border-style'));
+			values.push(unit(args[0] || defaultValues[2], 'border-color'));
 
 			if (keyword == 'vertical') {
 				borders = [
@@ -172,10 +168,10 @@ module.exports = (vars = {}) => {
 			}
 
 			if (borders.length) {
-				return Decl.createMany(borders, values.join(' '));
+				return decl.createMany(borders, values.join(' '));
 			}
 
-			return new Decl('border', values.join(' '));
+			return decl('border', values.join(' '));
 		},
 
 		/**
@@ -185,7 +181,7 @@ module.exports = (vars = {}) => {
 		 * @returns {Declaration}
 		 */
 		boxSizing(value = 'border-box') {
-			return new Decl('box-sizing', value);
+			return decl('box-sizing', value);
 		},
 
 		/**
@@ -211,7 +207,7 @@ module.exports = (vars = {}) => {
 		 * @returns {Object}
 		 */
 		clear(value = 'both') {
-			return new Decl('clear', value);
+			return decl('clear', value);
 		},
 
 		/**
@@ -220,7 +216,7 @@ module.exports = (vars = {}) => {
 		 * @return {Object}
 		 */
 		clearfix() {
-			return new Rule('&:after', [
+			return rule('&:after', [
 				this.clear(),
 				this.content(),
 				this.display('block')
@@ -234,7 +230,7 @@ module.exports = (vars = {}) => {
 		 * @return {Object}
 		 */
 		color(value) {
-			return new Decl('color', value);
+			return decl('color', value);
 		},
 
 		/**
@@ -248,26 +244,26 @@ module.exports = (vars = {}) => {
 		 */
 		column(...args) {
 			let props = [
-				new Decl('float', 'left')
+				decl('float', 'left')
 			];
 
 			if (! isEmpty(args)) {
 				if (isPercentage(args[0])) {
-					props.push(new Decl('width', args[0]));
+					props.push(decl('width', args[0]));
 				} else if (args[0] === 'spaced') {
 					let columns = isEmpty(args[2]) ? vars.grid.columns : args[2],
 						margin = isEmpty(args[3]) ? vars.grid.margin : args[3];
 
-					props.push(new Decl('width', (100 / columns) * args[1] + '%'));
+					props.push(decl('width', (100 / columns) * args[1] + '%'));
 
 					props = props.concat(this.margin({ left: margin }));
 				} else {
 					let columns = isEmpty(args[1]) ? vars.grid.columns : args[1];
 
-					props.push(new Decl('width', (100 / columns) * args[0] + '%'));
+					props.push(decl('width', (100 / columns) * args[0] + '%'));
 				}
 			} else {
-				props.push(new Decl('width', '100%'));
+				props.push(decl('width', '100%'));
 			}
 
 			return props;
@@ -282,8 +278,8 @@ module.exports = (vars = {}) => {
 			let minWidth = vars.width.min;
 
 			if (minWidth !== 0) {
-				return new Rule('html, body', [
-					new Decl('min-width', minWidth)
+				return rule('html, body', [
+					decl('min-width', minWidth)
 				]);
 			}
 
@@ -296,7 +292,7 @@ module.exports = (vars = {}) => {
 		 * @returns {Declaration}
 		 */
 		content() {
-			return new Decl('content', '\'\'');
+			return decl('content', '\'\'');
 		},
 
 		/**
@@ -306,7 +302,7 @@ module.exports = (vars = {}) => {
 		 * @return {Object}
 		 */
 		display(value) {
-			return new Decl('display', value);
+			return decl('display', value);
 		},
 
 		/**
@@ -324,13 +320,13 @@ module.exports = (vars = {}) => {
 		 */
 		fixed(...args) {
 			props = [
-				new Decl('position', 'fixed')
+				decl('position', 'fixed')
 			];
 
 			if (isObject(args[0])) {
-				props = props.concat(Decl.createManyFromObj(args[0]));
+				props = props.concat(decl.createManyFromObj(args[0]));
 			} else if (! isEmpty(args)) {
-				props = props.concat(Decl.createMany([
+				props = props.concat(decl.createMany([
 					'top',
 					'right',
 					'left',
@@ -361,24 +357,24 @@ module.exports = (vars = {}) => {
 			props = [];
 
 			if (isObject(args[0])) {
-				props = props.concat(Decl.createManyFromObj(args[0], 'font', ['lineHeight']));
+				props = props.concat(decl.createManyFromObj(args[0], 'font', ['lineHeight']));
 			} else if (! isEmpty(args)) {
-				props.push(new Decl('font-family', args[0]));
+				props.push(decl('font-family', args[0]));
 
 				if (args[1]) {
-					props.push(new Decl('font-size', args[1]));
+					props.push(decl('font-size', args[1]));
 				}
 
 				if (args[2]) {
-					props.push(new Decl('font-weight', args[2]));
+					props.push(decl('font-weight', args[2]));
 				}
 
 				if (args[3]) {
-					props.push(new Decl('line-height', args[3]));
+					props.push(decl('line-height', args[3]));
 				}
 
 				if (args[4]) {
-					props.push(new Decl('font-style', args[4]));
+					props.push(decl('font-style', args[4]));
 				}
 			}
 
@@ -392,13 +388,13 @@ module.exports = (vars = {}) => {
 		 */
 		heading() {
 			return [
-				new Decl('color', vars.heading.color),
-				new Decl('font-family', vars.heading.family),
-				new Decl('font-weight', vars.heading.weight),
-				new Decl('line-height', vars.heading.lineHeight),
-				new Decl('margin-bottom', vars.heading.margin.bottom),
-				new Rule('small', [
-					new Decl('font-weight', 'normal')
+				decl('color', vars.heading.color),
+				decl('font-family', vars.heading.family),
+				decl('font-weight', vars.heading.weight),
+				decl('line-height', vars.heading.lineHeight),
+				decl('margin-bottom', vars.heading.margin.bottom),
+				rule('small', [
+					decl('font-weight', 'normal')
 				])
 			];
 		},
@@ -425,12 +421,12 @@ module.exports = (vars = {}) => {
 			];
 
 			if (isObject(args[0])) {
-				props = props.concat(Decl.createManyFromObj(args[0]));
+				props = props.concat(decl.createManyFromObj(args[0]));
 			} else if (! isEmpty(args)) {
-				props.push(new Decl('width', args[0]));
+				props.push(decl('width', args[0]));
 
 				if (args[1]) {
-					props.push(new Decl('height', args[1]));
+					props.push(decl('height', args[1]));
 				}
 			}
 
@@ -443,7 +439,7 @@ module.exports = (vars = {}) => {
 		 * @return {Object}
 		 */
 		italic() {
-			return new Decl('font-style', 'italic');
+			return decl('font-style', 'italic');
 		},
 
 		/**
@@ -454,10 +450,10 @@ module.exports = (vars = {}) => {
 		 */
 		left(value) {
 			if (isEmpty(value)) {
-				return new Decl('float', 'left');
+				return decl('float', 'left');
 			}
 
-			return new Decl('left', value);
+			return decl('left', value);
 		},
 
 		/**
@@ -489,7 +485,7 @@ module.exports = (vars = {}) => {
 				result = false;
 
 			if (isObject(args[0])) {
-				return Decl.createManyFromObj(args[0], 'margin');
+				return decl.createManyFromObj(args[0], 'margin');
 			}
 
 			if (keywords.includes(args[0])) {
@@ -500,9 +496,9 @@ module.exports = (vars = {}) => {
 				}
 
 				if (keyword === 'horizontal') {
-					result = Decl.createMany(['left', 'right'], args, 'margin');
+					result = decl.createMany(['left', 'right'], args, 'margin');
 				} else if (keyword === 'vertical') {
-					result = Decl.createMany(['top', 'bottom'], args, 'margin');
+					result = decl.createMany(['top', 'bottom'], args, 'margin');
 				}
 			}
 
@@ -518,13 +514,13 @@ module.exports = (vars = {}) => {
 		 */
 		minSize(width, height) {
 			let props = [
-				new Decl('min-width', width)
+				decl('min-width', width)
 			];
 
 			if (! height) {
-				props.push(new Decl('min-height', width));
+				props.push(decl('min-height', width));
 			} else {
-				props.push(new Decl('min-height', height));
+				props.push(decl('min-height', height));
 			}
 
 			return props;
@@ -537,7 +533,7 @@ module.exports = (vars = {}) => {
 		 * @return {Object}
 		 */
 		opacity(value) {
-			return new Decl('opacity', calcOpacity(value));
+			return decl('opacity', calcOpacity(value));
 		},
 
 		/**
@@ -560,7 +556,7 @@ module.exports = (vars = {}) => {
 				result = false;
 
 			if (isObject(args[0])) {
-				return Decl.createManyFromObj(args[0], 'padding');
+				return decl.createManyFromObj(args[0], 'padding');
 			}
 
 			if (keywords.includes(args[0])) {
@@ -571,13 +567,32 @@ module.exports = (vars = {}) => {
 				}
 
 				if (keyword === 'horizontal') {
-					result = Decl.createMany(['left', 'right'], args, 'padding');
+					result = decl.createMany(['left', 'right'], args, 'padding');
 				} else if (keyword === 'vertical') {
-					result = Decl.createMany(['top', 'bottom'], args, 'padding');
+					result = decl.createMany(['top', 'bottom'], args, 'padding');
 				}
 			}
 
 			return result;
+		},
+
+		/**
+		 * Placeholder
+		 *
+		 * @param color
+		 * @returns {*[]}
+		 */
+		placeholder(color = vars.input.placeholder.color) {
+			let props = [
+				decl('color', color)
+			];
+
+			return [
+				rule('&:-moz-placeholder', props),
+				rule('&::-moz-placeholder', props),
+				rule('&:-ms-input-placeholder', props),
+				rule('&::-webkit-input-placeholder', props)
+			];
 		},
 
 		/**
@@ -587,8 +602,8 @@ module.exports = (vars = {}) => {
 		 */
 		resizable(value = 'both') {
 			return [
-				new Decl('overflow', 'hidden'),
-				new Decl('resize', value)
+				decl('overflow', 'hidden'),
+				decl('resize', value)
 			];
 		},
 
@@ -600,10 +615,10 @@ module.exports = (vars = {}) => {
 		 */
 		right(value) {
 			if (isEmpty(value)) {
-				return new Decl('float', 'right');
+				return decl('float', 'right');
 			}
 
-			return new Decl('right', value);
+			return decl('right', value);
 		},
 
 		/**
@@ -613,7 +628,7 @@ module.exports = (vars = {}) => {
 		 */
 		rounded(...args) {
 			let props = [
-					new Decl('background-clip', 'border-box')
+					decl('background-clip', 'border-box')
 				],
 				keywords = ['top', 'right', 'bottom', 'left'],
 				radius = vars.default.radius,
@@ -621,11 +636,11 @@ module.exports = (vars = {}) => {
 				corners = [];
 
 			if (isEmpty(args)) {
-				props.push(new Decl('border-radius', radius));
-			} else if (args[0] === 'false') {
+				props.push(decl('border-radius', radius));
+			} else if (args[0] === false) {
 				return false;
 			} else if (! keywords.includes(args[0])) {
-				props.push(new Decl('border-radius', args[0]));
+				props.push(decl('border-radius', args[0]));
 			} else {
 				if (keyword === 'top') {
 					corners = ['top-left-radius', 'top-right-radius'];
@@ -637,7 +652,7 @@ module.exports = (vars = {}) => {
 					corners = ['top-left-radius', 'bottom-left-radius'];
 				}
 
-				props = props.concat(Decl.createMany(corners, args[1] || radius, 'border'));
+				props = props.concat(decl.createMany(corners, args[1] || radius, 'border'));
 			}
 
 			return props;
@@ -655,7 +670,7 @@ module.exports = (vars = {}) => {
 
 			return [
 				this.margin({ left: (margin * -1) + '%' })[0],
-				new Decl('max-width', (100 + margin) + '%'),
+				decl('max-width', (100 + margin) + '%'),
 				this.clearfix()
 			]
 		},
@@ -671,7 +686,7 @@ module.exports = (vars = {}) => {
 			margin = parseInt(margin);
 
 			return this.margin({ left: (margin * -1) + '%' })
-				.concat(new Decl('max-width', (100 + margin) + '%'));
+				.concat(decl('max-width', (100 + margin) + '%'));
 		},
 
 		/**
@@ -681,7 +696,7 @@ module.exports = (vars = {}) => {
 		 */
 		rowReset() {
 			return this.margin({ left: 0 })
-				.concat(new Decl('max-width', 'none'));
+				.concat(decl('max-width', 'none'));
 		},
 
 		/**
@@ -693,13 +708,13 @@ module.exports = (vars = {}) => {
 		 */
 		size(width, height) {
 			let props = [
-				new Decl('width', width)
+				decl('width', width)
 			];
 
 			if (! height) {
-				props.push(new Decl('height', width));
+				props.push(decl('height', width));
 			} else {
-				props.push(new Decl('height', height));
+				props.push(decl('height', height));
 			}
 
 			return props;
@@ -742,7 +757,7 @@ module.exports = (vars = {}) => {
 			let props = this.spaced(...args);
 
 			if (isObject(args[0])) {
-				props = props.concat(Decl.createManyFromObj(args[0]));
+				props = props.concat(decl.createManyFromObj(args[0]));
 				props = props.concat(this.block());
 			} else if (args.length > 1) {
 				args.shift();
@@ -777,18 +792,18 @@ module.exports = (vars = {}) => {
 				},
 				property, duration, timing, delay;
 
-			if (args[0] === 'false') {
+			if (args[0] === false) {
 				return false;
 			}
 
 			if (args[0] === 'none') {
-				return new Decl('transition', 'none');
+				return decl('transition', 'none');
 			}
 
 			if (isObject(args[0])) {
 				let config = Object.assign(defaults, args[0]);
 
-				return new Decl('transition', `${config.property} ${config.duration} ${config.timing} ${config.delay}`);
+				return decl('transition', `${config.property} ${config.duration} ${config.timing} ${config.delay}`);
 			}
 
 			property = args[0] || defaults.property;
@@ -796,7 +811,7 @@ module.exports = (vars = {}) => {
 			timing = args[2] || defaults.timing;
 			delay = args[3] || defaults.delay;
 
-			return new Decl('transition', `${property} ${duration} ${timing} ${delay}`);
+			return decl('transition', `${property} ${duration} ${timing} ${delay}`);
 		},
 
 		/**
@@ -814,7 +829,7 @@ module.exports = (vars = {}) => {
 		 * @return {Object}
 		 */
 		unstyled() {
-			return new Decl('list-style', 'none');
+			return decl('list-style', 'none');
 		},
 
 		/**
@@ -833,7 +848,21 @@ module.exports = (vars = {}) => {
 		 * @return {Object}
 		 */
 		visibility(value) {
-			return new Decl('visibility', value);
+			return decl('visibility', value);
+		},
+
+		/**
+		 * Container padding
+		 *
+		 * @returns {Array|boolean}
+		 * @private
+		 */
+		_containerPadding() {
+			if (vars.bumper.enabled) {
+				return this.padding('horizontal', vars.bumper.padding);
+			}
+
+			return false;
 		},
 
 		/**
@@ -847,16 +876,16 @@ module.exports = (vars = {}) => {
 		_codeBlockDefaults(borderColor, blockWrap) {
 			let props = [];
 
-			if (borderColor) {
+			if (borderColor && borderColor !== false) {
 				props.push(this.border('none'));
 			}
 
 			if (blockWrap) {
-				props.push(new Decl('white-space', 'pre-wrap'));
-				props.push(new Decl('word-wrap', 'break-word'));
+				props.push(decl('white-space', 'pre-wrap'));
+				props.push(decl('word-wrap', 'break-word'));
 			} else {
-				props.push(new Decl('overflow', 'auto'));
-				props.push(new Decl('white-space', 'pre'));
+				props.push(decl('overflow', 'auto'));
+				props.push(decl('white-space', 'pre'));
 			}
 
 			return props;

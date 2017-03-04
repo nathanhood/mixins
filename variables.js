@@ -1,4 +1,4 @@
-const { darken } = require('postcss-js-mixins/lib/colorHelpers');
+const { darken, lighten } = require('postcss-js-mixins/lib/colorHelpers');
 const { defer } = require('postcss-variables/lib/helpers');
 const register = require('postcss-variables/lib/register');
 
@@ -52,16 +52,15 @@ variables.colors = {
 	success: '#008000',
 	warning: '#f00',
 	white: '#fff',
+	lightestGray: defer(darken, ['$colors.white', 4]),
+	lighterGray: defer(darken, ['$colors.white', 10]),
+	lightGray: defer(darken, ['$colors.white', 25]),
+	gray: defer(darken, ['$colors.white', 35]),
+	darkGray: defer(darken, ['$colors.white', 55]),
+	darkerGray: defer(darken, ['$colors.white', 65]),
+	darkestGray: defer(darken, ['$colors.white', 75]),
 	black: '#000'
 };
-
-variables.colors.lightestGray = defer(darken, ['$colors.white', 4]);
-variables.colors.lighterGray = defer(darken, ['$colors.white', 10]);
-variables.colors.lightGray = defer(darken, ['$colors.white', 25]);
-variables.colors.gray = defer(darken, ['$colors.white', 35]);
-variables.colors.darkGray = defer(darken, ['$colors.white', 55]);
-variables.colors.darkerGray = defer(darken, ['$colors.white', 65]);
-variables.colors.darkestGray = defer(darken, ['$colors.white', 75]);
 
 variables.colors.body = {
 	background: '$colors.white'
@@ -70,16 +69,17 @@ variables.colors.body = {
 variables.font = {
 	color: '$colors.darkestGray',
 	family: 'Arial, Helvetica, sans-serif',
+	lineHeight: '1em',
+	path: '../fonts/',
 	size: '1.6rem',
 	weight: {
 		normal: 'normal',
 		bold: 'bold'
-	},
-	lineHeight: '1em'
+	}
 };
 
 variables.heading = {
-	color: '$font.color',
+	color: 'inherit',
 	family: 'Tahoma, Geneva, sans-serif',
 	weight: '$font.weight.bold',
 	lineHeight: '1.4em',
@@ -94,6 +94,18 @@ variables.h3 = '2.8rem';
 variables.h4 = '2.4rem';
 variables.h5 = '2rem';
 variables.h6 = '1.6rem';
+
+variables.image = {
+	path: '../images/',
+	class: {
+		left: 'img-left',
+		right: 'img-right'
+	},
+	margin: {
+		bottom: '2rem',
+		side: '2rem'
+	}
+};
 
 variables.mark = {
 	color: '$font.color',
@@ -139,12 +151,12 @@ variables.link = {
 };
 
 variables.link.hover = {
-	color: defer(darken, [variables.link.color, 10]),
+	color: defer(darken, ['$link.color', 10]),
 	decoration: 'none'
 };
 
 variables.link.active = {
-	color: defer(darken, [variables.link.color, 20])
+	color: defer(darken, ['$link.color', 20])
 };
 
 variables.selection = {
@@ -280,11 +292,11 @@ variables.button = {
 };
 
 variables.button.hover = {
-	background: defer(darken, [variables.button.background, 5])
+	background: defer(darken, ['$button.background', 5])
 };
 
 variables.button.active = {
-	background: defer(darken, [variables.button.background, 10]),
+	background: defer(darken, ['$button.background', 10]),
 	transition: {
 		property: 'none'
 	}
@@ -302,15 +314,15 @@ variables.coloredButton = {
 };
 
 variables.coloredButton.hover = {
-	background: defer(darken, [variables.coloredButton.background, 5])
+	background: defer(darken, ['$coloredButton.background', 5])
 };
 
 variables.coloredButton.active = {
-	background: defer(darken, [variables.coloredButton.background, 10])
+	background: defer(darken, ['$coloredButton.background', 10])
 };
 
 variables.button.disabled = {
-	modifier: '.-is-disabled',
+	modifier: '.-disabled',
 	color: '$colors.darkGray',
 	background: '$colors.lightGray',
 	border: {
@@ -360,53 +372,111 @@ variables.input = {
 	background: '$colors.white',
 	color: '$colors.darkerGray',
 	family: '$font.family',
+	minHeight: '3rem', // false to disable
+	minWidth: '20rem', // false to disable
 	size: '$font.size',
 	weight: '$font.weight',
+	border: {
+		color: '$colors.lighterGray',
+		radius: '$default.radius', // false to disable
+		width: '1px'
+	},
 	margin: {
 		bottom: '2rem'
 	},
 	padding: {
 		horizontal: '1.6rem',
 		vertical: '1rem'
+	},
+	placeholder: {
+		color: defer(lighten, ['$input.color', 40])
 	}
 };
 
-variables.input.disabled = {
-	background: '$colors.lightestGray',
-	color: '$colors.darkerGray',
-	cursor: 'not-allowed'
+variables.input.hover = {
+	border: {
+		color: defer(darken, ['$input.border.color', 10])
+	}
+};
+
+variables.input.focus = {
+	border: {
+		color: defer(darken, ['$input.border.color', 20])
+	}
 };
 
 variables.input.invalid = {
 	background: '$colors.white',
+	color: defer(darken, ['$input.invalid.border.color', 10]),
 	border: {
 		color: '#a41818',
 		width: '1px' // false to disable
 	}
 };
 
-variables.input.invalid.color = defer(darken, [variables.input.invalid.border.color, 10]);
-
-variables.input.invalid.focus = {
+variables.input.invalid.hover = {
 	border: {
-		color: defer(darken, [variables.input.invalid.border.color, 10])
+		color: defer(darken, ['$input.invalid.border.color', 10])
 	}
 };
 
-variables.input.invalid.hover = {
+variables.input.invalid.focus = {
 	border: {
-		color: defer(darken, [variables.input.invalid.border.color, 20])
+		color: defer(darken, ['$input.invalid.border.color', 20])
 	}
 };
 
 variables.input.required = {
+	background: '$colors.white',
+	color: defer(darken, ['$input.required.border.color', 10]),
 	border: {
-		color: '$colors.darkerGray',
+		color: '$colors.darkGray',
 		width: '1px' // false to disable
 	}
 };
 
-variables.input.required.color = defer(darken, [variables.input.required.border.color, 10]);
+variables.input.required.hover = {
+	border: {
+		color: defer(darken, ['$input.required.border.color', 10])
+	}
+};
+
+variables.input.required.focus = {
+	border: {
+		color: defer(darken, ['$input.required.border.color', 20])
+	}
+};
+
+variables.input.disabled = {
+	background: '$colors.lightestGray',
+	color: '$colors.darkGray',
+	cursor: 'not-allowed',
+	modifier: '.-disabled',
+	border: {
+		width: false // false to disable
+	}
+};
+
+variables.multiSelect = {
+	minHeight: '8rem'
+};
+
+variables.checkbox = {
+	margin: {
+		bottom: '1rem',
+		right: '0.5rem'
+	}
+};
+
+variables.textarea = {
+	lineHeight: '1.3em',
+	minHeight: '8rem',
+	resize: 'vertical',
+	padding: {
+		horizontal: '1.6rem',
+		vertical: '1rem'
+	}
+};
 
 variables.legend = {
 	color: '$colors.darkerGray',
@@ -421,36 +491,23 @@ variables.label = {
 	weight: 'normal',
 	lineHeight: '1.3em',
 	margin: {
-		bottom: '.4rem',
+		bottom: '0.4rem',
 		right: '1rem'
-	}
-};
-
-variables.checkbox = {
-	margin: {
-		bottom: '1rem',
-		right: '.5rem'
-	}
-};
-
-variables.multiSelect = {
-	minHeight: '8rem'
-};
-
-variables.textarea = {
-	lineHeight: '1.3em',
-	minHeight: '8rem',
-	resize: 'vertical',
-	padding: {
-		horizontal: '1.6rem',
-		vertical: '1rem'
 	}
 };
 
 variables.table = {
 	size: '$font.size',
 	bordered : {
-		modifier: '.-is-bordered'
+		modifier: '.-bordered'
+	},
+	caption: {
+		background: '$colors.lightestGray',
+		style: 'italic',
+		padding: {
+			horizontal: '$table.cell.padding.horizontal',
+			vertical: '1.2rem'
+		}
 	},
 	cell: {
 		border: {
@@ -459,22 +516,13 @@ variables.table = {
 		lineHeight: '$paragraph.lineHeight',
 		padding: {
 			horizontal: '1.6rem',
-			vertical: '.6rem'
+			vertical: '0.6rem'
 		}
 	},
 	striped: {
 		background: '$colors.lightestGray',
-		modifier: '.-is-striped',
+		modifier: '.-striped',
 		position: 'odd'
-	}
-};
-
-variables.table.caption = {
-	background: '$colors.lightestGray',
-	style: 'italic',
-	padding: {
-		horizontal: '$table.cell.padding.horizontal',
-		vertical: '1.2rem'
 	}
 };
 
