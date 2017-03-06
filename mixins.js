@@ -351,7 +351,7 @@ module.exports = (vars = {}) => {
 		/**
 		 * Conditionally add min-width property to both html and body elements
 		 *
-		 * @returns {*}
+		 * @returns {Array|boolean}
 		 */
 		containerMinWidth() {
 			let minWidth = vars.width.min;
