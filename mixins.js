@@ -976,29 +976,28 @@ module.exports = (vars = {}) => {
 		},
 
 		/**
-		 * Shadow
+		 * Box shadow
 		 *
-		 * @param args
-		 * @returns {*}
+		 * @param {number|string} [keyword]
+		 * @param {number} [opacity]
+		 * @returns {Object}
 		 */
-		shadow(...args) {
+		shadow(keyword, opacity = vars.default.opacity) {
 			let keywords = ['dark', 'light'];
 
-			if (isEmpty(args)) {
-				return decl('box-shadow', `1px 1px 0 0 rgba(0, 0, 0, ${vars.default.opacity})`);
-			}
-
-			if (keywords.includes(args[0])) {
-				let keyword = args.shift(),
-					rgb = keyword === 'dark' ?
-						'0, 0, 0' :
-						'255, 255, 255',
-					opacity = args[0] || vars.default.opacity;
+			if (keywords.includes(keyword)) {
+				let rgb = keyword === 'dark' ?
+					'0, 0, 0' :
+					'255, 255, 255';
 
 				return decl('box-shadow', `1px 1px 0 0 rgba(${rgb}, ${opacity})`)
 			}
 
-			return false;
+			if (isNumber(keyword)) {
+				opacity = keyword;
+			}
+
+			return decl('box-shadow', `1px 1px 0 0 rgba(0, 0, 0, ${opacity})`);
 		},
 
 		/**
