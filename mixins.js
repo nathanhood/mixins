@@ -551,25 +551,21 @@ module.exports = (vars = {}) => {
 		/**
 		 * Flex container
 		 *
-		 * @param {Array|Object} [args]
-		 * 	 @param {string} [args[].direction]
-		 * 	 @param {string} [args[].wrap]
-		 * 	 @param {string} [args[].justify-content]
-		 * 	 @param {string} [args[].align-items]
-		 * 	 @param {string} [args[].align-content]
+		 * @param {string} [direction]
+		 * @param {string} [wrap]
+		 * @param {string} [justify]
+		 * @param {string} [align]
+		 * @param {string} [alignContent]
 		 * @returns {Array}
 		 */
-		flexContainer(...args) {
-			// TODO: Need to figure out how to handle passing parameters as
-			// object with defaults
-
+		flexContainer(direction = 'row', wrap = 'nowrap', justify = 'flex-start', align = 'stretch', alignContent = 'stretch') {
 			return [
-				this.display(args[0] || 'flex'),
-				decl('flex-direction', args[1] || 'row'),
-				decl('flex-wrap', args[2] || 'nowrap'),
-				decl('justify-content', args[3] || 'flex-start'),
-				decl('align-items', args[4] || 'stretch'),
-				decl('align-content', args[5] || 'stretch')
+				this.display('flex'),
+				decl('flex-direction', direction),
+				decl('flex-wrap', wrap),
+				decl('justify-content', justify),
+				decl('align-items', align),
+				decl('align-content', alignContent)
 			];
 		},
 
