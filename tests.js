@@ -1685,17 +1685,6 @@ describe('rounded', () => {
 			{ mixins: mixins }
 		);
 	});
-
-	it('should not add any declarations', () => {
-		return process(
-			`.block {
-				rounded(false);
-			}`,
-			`.block {
-			}`,
-			{ mixins: mixins }
-		);
-	});
 });
 
 describe('padding', () => {
