@@ -897,36 +897,35 @@ module.exports = (vars = {}) => {
 		/**
 		 * Border radius
 		 *
-		 * @param args
+		 * @param {number|string} [keyword]
+		 * @param {number|string} [radius]
+		 * @returns {Array}
 		 */
-		rounded(...args) {
+		rounded(keyword, radius = vars.default.radius) {
 			let props = [
 					decl('background-clip', 'border-box')
 				],
-				keywords = ['top', 'right', 'bottom', 'left'],
-				radius = vars.default.radius,
-				keyword = args[0],
-				corners = [];
+				keywords = ['top', 'right', 'bottom', 'left'];
 
-			if (isEmpty(args)) {
-				props.push(decl('border-radius', radius));
-			} else if (args[0] === false) {
-				return false;
-			} else if (! keywords.includes(args[0])) {
-				props.push(decl('border-radius', args[0]));
-			} else {
-				if (keyword === 'top') {
-					corners = ['top-left-radius', 'top-right-radius'];
-				} else if (keyword === 'right') {
-					corners = ['top-right-radius', 'bottom-right-radius'];
-				} else if (keyword === 'bottom') {
-					corners = ['bottom-left-radius', 'bottom-right-radius'];
-				} else if (keyword === 'left') {
-					corners = ['top-left-radius', 'bottom-left-radius'];
+			if (keywords.includes(keyword)) {
+				let corners = [];
+
+				if (keyword === 'left' || keyword === 'right') {
+					corners = [`top-${keyword}-radius`, `bottom-${keyword}-radius`];
+				} else if (keyword === 'top' || keyword === 'bottom') {
+					corners = [`${keyword}-left-radius`, `${keyword}-right-radius`];
 				}
 
-				props = props.concat(decl.createMany(corners, args[1] || radius, 'border'));
+				props = props.concat(decl.createMany(corners, radius, 'border'));
+
+				return props;
 			}
+
+			if (isNumber(keyword) || isUnit(keyword)) {
+				radius = keyword;
+			}
+
+			props.push(decl('border-radius', radius));
 
 			return props;
 		},
