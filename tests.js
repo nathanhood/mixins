@@ -1253,18 +1253,17 @@ describe('border', () => {
 		);
 	});
 
-	// TODO: Update the mixin in order to pass this test
-	// it('should handle width, style, and color arguments', () => {
-	// 	return process(
-	// 		`.block {
-	// 			border(black, 1px, solid);
-	// 		}`,
-	// 		`.block {
-	// 			border: 1px solid black;
-	// 		}`,
-	// 		{ mixins: mixins }
-	// 	);
-	// });
+	it('should handle width, style, and color arguments', () => {
+		return process(
+			`.block {
+				border(black, 1px, solid);
+			}`,
+			`.block {
+				border: 1px solid black;
+			}`,
+			{ mixins: mixins }
+		);
+	});
 
 	it('should output top border with default properties', () => {
 		return process(
@@ -1378,20 +1377,31 @@ describe('border', () => {
 		);
 	});
 
-	// TODO: Won't pass with current implementation of mixin
-	// it('should output default params not provided', () => {
-	// 	return process(
-	// 		`.block {
-	// 			border(1px);
-	// 			border($border.width, dotted);
-	// 		}`,
-	// 		`.block {
-	// 			border: 1px solid #bfbfbf;
-	// 			border: 1px dotted #bfbfbf;
-	// 		}`,
-	// 		{ mixins: mixins }
-	// 	);
-	// });
+	it('should output top and bottom border with supplied parameters', () => {
+		return process(
+			`.block {
+				border(black, style: dotted);
+			}`,
+			`.block {
+				border: 1px dotted black;
+			}`,
+			{ mixins: mixins }
+		);
+	});
+
+	it('should output default params when not provided', () => {
+		return process(
+			`.block {
+				border(blue);
+				border(width: $border.width, style: dotted);
+			}`,
+			`.block {
+				border: 1px solid blue;
+				border: 1px dotted #bfbfbf;
+			}`,
+			{ mixins: mixins }
+		);
+	});
 
 	it('should return border: none if first param is false, 0, none', () => {
 		return process(
@@ -2034,6 +2044,60 @@ describe('columns', () => {
 			}`,
 			{ mixins: mixins }
 		);
+	});
+});
+
+describe('columnOffset', () => {
+	describe('with keyword', () => {
+		it('should handle space keyword and share amount', () => {
+			return process(
+				`.block {
+				columnOffset(spaced, 1);
+			}`,
+				`.block {
+				margin-left: 17.5%;
+			}`,
+				{ mixins: mixins }
+			);
+		});
+
+		it('should handle key value pairs', () => {
+			return process(
+				`.block {
+					columnOffset(spaced, columns: 3, share: 1);
+				}`,
+				`.block {
+					margin-left: 38.33333333333333%;
+				}`,
+				{ mixins: mixins }
+			);
+		});
+	});
+
+	describe('without keyword', () => {
+		it('should handle share and column', () => {
+			return process(
+				`.block {
+				columnOffset(3, 4);
+			}`,
+				`.block {
+				margin-left: 75%;
+			}`,
+				{ mixins: mixins }
+			);
+		});
+
+		it('should handle key value pairs', () => {
+			return process(
+				`.block {
+					columnOffset(columns: 3, share: 1);
+				}`,
+					`.block {
+					margin-left: 33.33333333333333%;
+				}`,
+				{ mixins: mixins }
+			);
+		});
 	});
 });
 
